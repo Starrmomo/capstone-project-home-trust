@@ -1,0 +1,135 @@
+.wrapper {
+  background: rgb(156, 149, 149);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+}
+
+.backArrow {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.step {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+.completed {
+  color: #666;
+}
+
+.progressBar {
+  height: 4px;
+  background: #eee; 
+  border-radius: 4px;
+  margin: 10px 0 20px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font: Plus Jakarta Sans;
+  font-style: Bold;
+}
+
+.subtitle {
+  color: rgba(30, 23, 41, 1);
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-style: Regular;
+}
+
+.option {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.option:hover {
+  border-color: #3b82f6;
+}
+
+.active {
+  border: 2px solid #3b82f6;
+  background: #f5f9ff;
+}
+
+.iconCircle {
+  width: 50px;
+  height: 50px;
+  background: #f1f1f1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 25px;
+  font-size: 22px;
+}
+
+.option h3 {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.option p {
+  font-size: 13px;
+  color: #777;
+}
+
+.continueBtn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #d1d1d1;
+  color: white;
+  font-weight: 600;
+  margin-top: 10px;
+  cursor: not-allowed;
+}
+
+.continueBtn:enabled {
+  background: #3f6ad8;
+  cursor: pointer;
+}
+
+.terms {
+  font-size: 12px;
+  text-align: center;
+  color: #777;
+  margin-top: 15px;
+  margin-bottom: 50px;
+}
+
+.terms span {
+  color: rgba(30, 94, 255, 1);
+  cursor: pointer;
+}

@@ -1,0 +1,120 @@
+.wrapper {
+  background: #f5f6f8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px 15px;
+  font-family: "Inter", sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 390px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.backIcon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.shieldIcon {
+  font-size: 60px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.paragraph {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-bottom: 25px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.numberBox {
+  width: 28px;
+  height: 28px;
+  background: #2f6df6;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.section h4 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #555;
+}
+
+.checkboxRow input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  background: #cbd5f5;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: not-allowed;
+  transition: 0.3s ease;
+}
+
+.activeButton {
+  background: linear-gradient(135deg, #4f7df3, #2f6df6);
+  cursor: pointer;
+}

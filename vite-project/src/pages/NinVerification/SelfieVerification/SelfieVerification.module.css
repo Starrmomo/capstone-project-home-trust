@@ -1,0 +1,211 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f5f7fc 0%, #ffffff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter", sans-serif;
+}
+
+.card {
+  width: 375px;
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: relative;
+}
+
+.backBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.progressWrapper {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.progressTop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: rgba(30, 94, 255, 1);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.progressSegments {
+  display: flex;
+  gap: 6px;
+}
+
+.segment {
+  flex: 1;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.filled {
+  background: rgba(30, 94, 255, 1);
+}
+
+.badge {
+  align-self: center;
+  background: #eef2ff;
+  color:  rgba(30, 94, 255, 1); ;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.badgeIcon {
+  width: 18px;
+  height: 18px;
+}
+
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  color: #1f2937;
+}
+
+
+.cameraWrapper {
+  position: relative;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.cameraWrapper::before {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(79, 70, 229, 0.18) 0%,
+    rgba(79, 70, 229, 0.10) 40%,
+    rgba(79, 70, 229, 0.05) 60%,
+    transparent 75%
+  );
+  filter: blur(30px);
+  z-index: 0;
+}
+
+.cameraFrame {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.selfieImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay::before,
+.overlay::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.overlay::before {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+}
+
+.overlay::after {
+  height: 1px;
+  width: 100%;
+  top: 50%;
+  left: 0;
+}
+
+
+.instruction {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1f2937;
+}
+
+
+.infoBox {
+  background: #f3f4f6;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.infoIcon {
+  width: 18px;
+  height: 18px;
+  background: rgba(84, 128, 239, 1);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.captureBtn {
+  margin-top: auto;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background:rgba(84, 128, 239, 1);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s ease;
+  font-weight: 600;
+}
+
+.captureBtn:hover {
+  background: rgba(84, 128, 239, 1);
+}
+
+.cameraIcon {
+  width: 18px;
+  height: 18px;
+}

@@ -1,0 +1,162 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px;
+  background: #f6f7fb;
+  font-family: "Inter", sans-serif;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.backIcon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Step */
+.stepRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.stepText {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.breakdown {
+  color: #666;
+}
+
+.progress {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.progress div {
+  height: 6px;
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.progressActive {
+  background: #2563eb !important;
+}
+
+.description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Inputs */
+.inputGroup {
+  margin-bottom: 18px;
+}
+
+.inputGroup label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.infoIcon {
+  font-size: 14px;
+  color: #999;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.inputWrapper span {
+  margin-right: 6px;
+  font-weight: 500;
+}
+
+.inputWrapper input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 16px;
+}
+
+/* Two column row */
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.half {
+  flex: 1;
+}
+
+/* Preview Card */
+.previewCard {
+  background: #eaf1ff;
+  padding: 16px;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.previewTitle {
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.previewSub {
+  font-size: 14px;
+  color: #666;
+}
+
+.total {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.previewBottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+/* Notice */
+.notice {
+  background: #d1fae5;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #065f46;
+  margin-bottom: 20px;
+}
+
+/* Button */
+.button {
+  width: 100%;
+  padding: 14px;
+  background: #2563eb;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

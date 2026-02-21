@@ -1,0 +1,265 @@
+.page {
+    width: 100%;
+    min-height: 100vh;
+    background: #f6f8fb;
+    padding-bottom: 80px;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+.header {
+    width: 100%;
+    background: #fff;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.welcome {
+    font-size: 12px;
+    color: #777;
+}
+
+.headerIcons {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.profileCircle {
+    width: 32px;
+    height: 32px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 16px;
+}
+
+.statCard {
+    
+    
+    background: #fff;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.statCard p {
+    font-size: 12px;
+    color: #777;
+}
+
+.statCard h2 {
+    margin-top: 6px;
+    font-size: 18px;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* SECTIONS */
+.section {
+    padding: 0 16px 20px 16px;
+}
+
+.section h4 {
+    margin-bottom: 12px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.link {
+    color: #2563eb;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+/* ACTIONS */
+.actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.actionBtn {
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.primary {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* ACTIVITY */
+.activityList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activityItem {
+    background: #fff;
+    padding: 14px;
+    border-radius: 12px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.iconBlue,
+.iconGreen {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconBlue {
+    background: #dbeafe;
+}
+
+.iconGreen {
+    background: #dcfce7;
+}
+
+.actionRequired {
+    color: #2563eb;
+    font-size: 12px;
+}
+
+.amount {
+    color: #16a34a;
+    font-size: 12px;
+}
+
+/* BOTTOM NAV */
+.bottomNav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottomNav button {
+    background: none;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.activeNav {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+    .stats {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 24px;
+    }
+
+    .section {
+        padding: 0 24px 24px 24px;
+    }
+
+    .actions {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .bottomNav {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+.section {
+  padding: 0 16px 20px 16px;
+}
+
+.actions {
+  display: flex;            /* keep buttons side by side */
+  gap: 12px;                /* space between buttons */
+  overflow-x: auto;         /* allow horizontal scroll */
+  padding-bottom: 8px;      /* extra space for scroll bar */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on mobile */
+}
+
+.actionBtn {
+  flex: 0 0 auto;           /* prevent buttons from shrinking */
+  padding: 50px 0px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;         /* ensures buttons have a consistent width */
+}
+
+.primary {
+  background-color: #2e6ef7; /* blue background for primary */
+  color: #fff;
+  border: none;
+}
+
+
+.bottomdiv{
+    display: flex;
+    justify-content:center ;
+    flex-direction: column;
+    align-items: center;
+}

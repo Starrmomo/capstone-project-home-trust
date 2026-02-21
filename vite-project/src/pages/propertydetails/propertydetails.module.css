@@ -1,0 +1,228 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
+  padding-bottom: 90px;
+}
+
+/* Image */
+.image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* Card Section */
+.card {
+  width: 100%;
+  background: white;
+  margin-top: -20px;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.location {
+  color: gray;
+  font-size: 14px;
+}
+
+.verified {
+  display: inline-block;
+  margin-top: 8px;
+  background: #e6f7ee;
+  color: #1c8f4d;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-right: 50px;
+}
+
+.trustScore{
+     margin-top: 8px;
+  background: #e6f7ee;
+  color: #1c8f4d;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.breakdown {
+  background: #f1f5f9;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.totalRow span:last-child {
+  color: #2563eb; /* blue total like design */
+}
+
+.about {
+  margin-top: 20px;
+}
+
+.readMore {
+  border: none;
+  background: none;
+  color: #2563eb;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* Sticky Bottom Bar */
+.bottomActions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+.messageBtn {
+  
+  margin-right: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2563eb;
+  background: white;
+  cursor: pointer;
+}
+.lockicon{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+
+.payBtn {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Top icons overlay */
+.topIcons {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Back button */
+.backBtn {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Right icons container */
+.rightIcons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Share and love buttons */
+.shareBtn,
+.loveBtn {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.textbreak{
+display: flex;
+justify-content: space-between;
+}
+
+
+.propertyInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column; /* stack icon over text */
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;        /* spacing between items */
+       /* for separator */
+}
+
+/* Add vertical separator to all but the last item */
+
+.icon {
+  margin-bottom: 4px;
+  color: #4B4B59;
+}
+
+.text {
+  font-size: 14px;
+  color: #0b0ba1;
+}
+
+
+
+
+/* Larger screens */
+@media (min-width: 768px) {
+  .image {
+    height: 450px;
+  }
+}

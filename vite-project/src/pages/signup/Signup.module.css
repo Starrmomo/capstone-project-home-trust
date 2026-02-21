@@ -1,0 +1,235 @@
+/* GLOBAL FIX: ensures inputs and all elements stay inside their container */
+*, *::before, *::after {
+  box-sizing: border-box; /* <-- prevents input from overflowing the card */
+}
+
+.wrapper {
+  background: rgb(156, 149, 149);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff;
+  width: 430px;
+  height: 932px;
+  border-radius: 20px;
+  padding: 32px 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.backArrow {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.step {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+.completed {
+  color: #666;
+}
+
+.progressBar {
+  height: 4px;
+  width: 100%;
+  background: #eee;
+  border-radius: 4px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.progressBar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 25%; 
+  background: #3b82f6;
+  border-radius: 4px;
+}
+
+.title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 140%;
+  color: #1E1729;
+  margin-bottom: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.checkboxWrapper {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+}
+
+.checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s ease;
+}
+
+.checkbox:checked {
+  background: #3f6ad8;
+  border-color: #3f6ad8;
+}
+
+.linkText {
+  color: #1E5EFF;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.button {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  border: none;
+  background: #3f6ad8;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button:disabled {
+  background: #c5cbdc;
+  cursor: not-allowed;
+}
+
+.link {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #1E1729;
+}
+
+.link a {
+  color: #3f6ad8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.disabled {
+  background-color: #d1d5db;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+.active {
+  background-color: #3f6ad8;
+  color: white;
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 100%;
+    height: auto;
+    padding: 24px 16px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .button {
+    height: 48px;
+  }
+}
+
+/* INPUT GROUPS */
+.group {
+  margin-bottom: 18px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%; /* <-- ensures input stays inside the card */
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box; /* <-- key fix for staying inside the box */
+}
+
+.input:focus {
+  border-color: #3f6ad8;
+}
+
+.toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 13px;
+  color: #6b7280;
+}

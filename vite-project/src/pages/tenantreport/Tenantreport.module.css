@@ -1,0 +1,213 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px 16px 40px 16px;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  background: #f4f6f8;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.back {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.save {
+  font-size: 14px;
+  color: #4a6cf7;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Progress */
+.progressSection {
+  margin-bottom: 20px;
+}
+
+.progressTop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progressFill {
+  width: 50%;
+  height: 100%;
+  background: #4a6cf7;
+  border-radius: 10px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: #eaeaea;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.activeTab {
+  background: white;
+  font-weight: 600;
+}
+
+.inactiveTab {
+  background: transparent;
+  color: #666;
+}
+
+/* Info Card */
+.infoCard {
+  background: #e9f0ff;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.infoCard h4 {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.infoCard p {
+  font-size: 12px;
+  color: #555;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+/* Uploaded Card */
+.uploadedCard {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid #4a6cf7;
+}
+
+.uploadedCard img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 8px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  color: white;
+  font-size: 13px;
+}
+
+.overlay small {
+  display: block;
+  font-size: 11px;
+  opacity: 0.9;
+}
+
+.close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Empty Upload Box */
+.uploadBox {
+  border: 2px dashed #d5d5d5;
+  border-radius: 14px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  text-align: center;
+}
+
+.cameraIcon {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.uploadBox p {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.uploadBox small {
+  font-size: 11px;
+  color: #777;
+}
+
+/* Add Room */
+.addRoom {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid #4a6cf7;
+  background: white;
+  color: #4a6cf7;
+  font-weight: 600;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+/* Submit Button */
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  background: #4a6cf7;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
