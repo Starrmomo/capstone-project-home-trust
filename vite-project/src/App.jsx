@@ -28,7 +28,6 @@ import Termsandcondition from "./pages/termsandcondition/Termsandcondition";
 import Uploadid from "./pages/uploadid/Uploadid";
 import Home from "./pages/home/Home";
 
-Force redeploy
 
 
 
