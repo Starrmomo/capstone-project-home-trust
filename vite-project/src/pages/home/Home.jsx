@@ -7,9 +7,13 @@ export default function Home() {
   const navigate = useNavigate();
 
   const handleContinue = () => {
-    if (selectedRole) {
-      navigate(`/signup?role=${selectedRole}`);
-    }
+    if (!selectedRole) return;
+
+    // ✅ Save role permanently
+    localStorage.setItem("role", selectedRole);
+
+    // Move to signup
+    navigate("/signup");
   };
 
   return (
@@ -33,7 +37,7 @@ export default function Home() {
 
         <p className={styles.subtitle}>
           Choose your role to get started
-          <br></br> 
+          <br />
           with verified listings.
         </p>
 
@@ -63,15 +67,13 @@ export default function Home() {
           className={styles.continueBtn}
           disabled={!selectedRole}
           onClick={handleContinue}
-
-          
         >
           Continue
         </button>
 
         <p className={styles.terms}>
           By continuing, you agree to our{" "}
-          <span>Terms of Service &</span> {" "}
+          <span>Terms of Service &</span>{" "}
           <span>Privacy Policy</span>.
         </p>
       </div>

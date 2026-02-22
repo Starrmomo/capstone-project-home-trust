@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import styles from "./Signup.module.css";
 
+// ✅ PUT YOUR SIGNUP API URL HERE
+const SIGNUP_API = "https://hometrust-backend.duckdns.org/api/auth/signup";
+
 export default function Signup() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -19,10 +22,6 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-  // Backend info
-  const BASE_URL = "https://hometrust-backend.duckdns.org/api/verification";
-const SIGNUP_ENDPOINT = "http://13.60.70.137/api/auth/signup";
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -59,22 +58,21 @@ const SIGNUP_ENDPOINT = "http://13.60.70.137/api/auth/signup";
     setLoading(true);
 
     try {
-  const response = await fetch("http://13.60.70.137/api/auth/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      full_name: formData.fullName,
-      email: formData.email,
-      phone: formData.phone,
-      password: formData.password,
-      role: role,
-    }),
-  });
+      const response = await fetch("https://hometrust-backend.duckdns.org/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+          role: role,
+        }),
+      });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Navigate to phone verification after signup
         navigate("/verify-phone", { state: { phone: formData.phone } });
       } else {
         setErrorMessage(data.message || "Signup failed. Please try again.");
@@ -105,20 +103,17 @@ const SIGNUP_ENDPOINT = "http://13.60.70.137/api/auth/signup";
         <h3 className={styles.title}>Create Your Account</h3>
 
         <form onSubmit={handleSubmit}>
-          {/* Full Name */}
           <div className={styles.group}>
             <label className={styles.label}>Full Name</label>
             <input
               type="text"
               name="fullName"
-              placeholder=""
               value={formData.fullName}
               onChange={handleChange}
               className={styles.input}
             />
           </div>
 
-          {/* Email */}
           <div className={styles.group}>
             <label className={styles.label}>Email</label>
             <input
@@ -131,27 +126,23 @@ const SIGNUP_ENDPOINT = "http://13.60.70.137/api/auth/signup";
             />
           </div>
 
-          {/* Phone */}
           <div className={styles.group}>
             <label className={styles.label}>Phone Number</label>
             <input
               type="tel"
               name="phone"
-              placeholder=""
               value={formData.phone}
               onChange={handleChange}
               className={styles.input}
             />
           </div>
 
-          {/* Password */}
           <div className={styles.group}>
             <label className={styles.label}>Password</label>
             <div className={styles.inputWrapper}>
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder=""
                 value={formData.password}
                 onChange={handleChange}
                 className={styles.input}
@@ -173,7 +164,6 @@ const SIGNUP_ENDPOINT = "http://13.60.70.137/api/auth/signup";
             <p className={styles.errorMessage}>{errorMessage}</p>
           )}
 
-          {/* Terms checkbox */}
           <div className={styles.checkboxWrapper}>
             <label className={styles.checkboxLabel}>
               <input
@@ -214,6 +204,3 @@ const SIGNUP_ENDPOINT = "http://13.60.70.137/api/auth/signup";
     </div>
   );
 }
-
-
-

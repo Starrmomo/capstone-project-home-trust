@@ -7,24 +7,13 @@ export default function TransparentFees() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Receive all previous steps data
-  const {
-    title,
-    type,
-    locationText,
-    latitude,
-    longitude,
-    bedrooms,
-    bathrooms,
-    amenities,
-    description
-  } = location.state || {};
+  const { formData: prevData } = location.state || {};
 
   // Step 3 states
-  const [annualRent, setAnnualRent] = useState(2500000);
-  const [cautionFee, setCautionFee] = useState(250000);
-  const [legalFee, setLegalFee] = useState(125000);
-  const [agencyFee, setAgencyFee] = useState(125000);
+  const [annualRent, setAnnualRent] = useState(prevData?.annualRent || 2500000);
+  const [cautionFee, setCautionFee] = useState(prevData?.cautionFee || 250000);
+  const [legalFee, setLegalFee] = useState(prevData?.legalFee || 125000);
+  const [agencyFee, setAgencyFee] = useState(prevData?.agencyFee || 125000);
 
   const total = useMemo(() => {
     return (
@@ -37,56 +26,29 @@ export default function TransparentFees() {
 
   const monthlyEstimate = useMemo(() => Math.round(total / 12), [total]);
 
-  const formatCurrency = (num) =>
-    new Intl.NumberFormat("en-NG").format(num);
+  const formatCurrency = (num) => new Intl.NumberFormat("en-NG").format(num);
 
-  // Form validation: all fields must have a value
   const isFormValid =
-    annualRent > 0 &&
-    cautionFee >= 0 &&
-    legalFee >= 0 &&
-    agencyFee >= 0;
+    annualRent > 0 && cautionFee >= 0 && legalFee >= 0 && agencyFee >= 0;
 
   const handleBack = () => {
-    // Go back to Detail & Amenities with all previous data
-    navigate("/detail-amenities", {
-      state: {
-        title,
-        type,
-        locationText,
-        latitude,
-        longitude,
-        bedrooms,
-        bathrooms,
-        amenities,
-        description
-      }
-    });
+    navigate("/detailamenities", { state: { formData: prevData } });
   };
 
   const handleContinue = () => {
     if (!isFormValid) return;
 
-    // Send all data to next page (Photos)
-    navigate("/addproperty", {
-      state: {
-        title,
-        type,
-        locationText,
-        latitude,
-        longitude,
-        bedrooms,
-        bathrooms,
-        amenities,
-        description,
-        annualRent,
-        cautionFee,
-        legalFee,
-        agencyFee,
-        total,
-        monthlyEstimate
-      }
-    });
+    const updatedFormData = {
+      ...prevData,
+      annualRent,
+      cautionFee,
+      legalFee,
+      agencyFee,
+      total,
+      monthlyEstimate,
+    };
+
+    navigate("/addproperty-upload", { state: { formData: updatedFormData } });
   };
 
   return (
@@ -114,59 +76,40 @@ export default function TransparentFees() {
         Be transparent about costs to help tenants decide faster and build trust.
       </p>
 
-      {/* Annual Rent */}
+      {/* Fees Inputs */}
       <div className={styles.inputGroup}>
         <label>
           Annual Rent <FiInfo className={styles.infoIcon} />
         </label>
         <div className={styles.inputWrapper}>
           <span>₦</span>
-          <input
-            type="number"
-            value={annualRent}
-            onChange={(e) => setAnnualRent(e.target.value)}
-          />
+          <input type="number" value={annualRent} onChange={(e) => setAnnualRent(e.target.value)} />
         </div>
       </div>
 
-      {/* Caution Fee */}
       <div className={styles.inputGroup}>
         <label>
           Caution Fee Deposit (Refundable) <FiInfo className={styles.infoIcon} />
         </label>
         <div className={styles.inputWrapper}>
           <span>₦</span>
-          <input
-            type="number"
-            value={cautionFee}
-            onChange={(e) => setCautionFee(e.target.value)}
-          />
+          <input type="number" value={cautionFee} onChange={(e) => setCautionFee(e.target.value)} />
         </div>
       </div>
 
-      {/* Legal + Agency */}
       <div className={styles.row}>
         <div className={styles.half}>
           <label>Legal Fee</label>
           <div className={styles.inputWrapper}>
             <span>₦</span>
-            <input
-              type="number"
-              value={legalFee}
-              onChange={(e) => setLegalFee(e.target.value)}
-            />
+            <input type="number" value={legalFee} onChange={(e) => setLegalFee(e.target.value)} />
           </div>
         </div>
-
         <div className={styles.half}>
           <label>Agency Fee</label>
           <div className={styles.inputWrapper}>
             <span>₦</span>
-            <input
-              type="number"
-              value={agencyFee}
-              onChange={(e) => setAgencyFee(e.target.value)}
-            />
+            <input type="number" value={agencyFee} onChange={(e) => setAgencyFee(e.target.value)} />
           </div>
         </div>
       </div>
@@ -175,9 +118,7 @@ export default function TransparentFees() {
       <div className={styles.previewCard}>
         <p className={styles.previewTitle}>Total Preview</p>
         <p className={styles.previewSub}>Tenant’s Initial Total</p>
-
         <h1 className={styles.total}>₦ {formatCurrency(total)}</h1>
-
         <div className={styles.previewBottom}>
           <div>
             <p>Move-In Cost</p>
@@ -190,12 +131,10 @@ export default function TransparentFees() {
         </div>
       </div>
 
-      {/* Info Notice */}
       <div className={styles.notice}>
         HomeTrust ensures these fees are clearly explained to tenants.
       </div>
 
-      {/* Button */}
       <button
         className={`${styles.button} ${isFormValid ? styles.activeBtn : ""}`}
         disabled={!isFormValid}

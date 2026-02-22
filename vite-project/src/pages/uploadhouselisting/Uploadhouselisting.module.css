@@ -1,0 +1,311 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px;
+  background: #f7f7f7;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.backArrow {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.header h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Step */
+.stepRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #2563eb;
+}
+
+.stepRight {
+  color: #666;
+}
+
+/* Progress */
+.progressWrapper {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0 20px;
+}
+
+.progressLine {
+  flex: 1;
+  height: 4px;
+  background: #dcdcdc;
+  border-radius: 5px;
+}
+
+.active {
+  background: #2563eb;
+}
+
+/* Section */
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.sectionSub {
+  font-size: 13px;
+  color: #666;
+  margin: 6px 0 16px;
+}
+
+/* Cover */
+.coverFrame {
+  width: 100%;
+  height: 220px;
+  background: #eaeaea;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.coverFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coverContent {
+  text-align: center;
+}
+
+.cameraCircle {
+  width: 60px;
+  height: 60px;
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+}
+
+.coverText {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.coverSub {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Grid */
+.imageGrid {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.imageBox {
+  position: relative;
+  height: 90px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.imageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.removeBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: white;
+  border-radius: 50%;
+  border: none;
+  padding: 4px;
+}
+
+.emptyBox {
+  height: 90px;
+  border: 2px dashed #dcdcdc;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* Utility */
+.utilityFrame {
+  margin-top: 12px;
+  height: 140px;
+  border: 2px dashed #dcdcdc;
+  border-radius: 12px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.utilityFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .coverFrame {
+    height: 300px;
+  }
+
+  .imageGrid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .imageBox,
+  .emptyBox {
+    height: 120px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+  width: 100%;
+  max-width: 1200px; /* full width on desktop */
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.uploadFrame {
+  width: 100%;
+  min-height: 220px;
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.uploadedImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.cameraIcon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.uploadText {
+  font-weight: 600;
+}
+
+.uploadSubText {
+  font-size: 12px;
+  color: #666;
+}
+
+.fileInput {
+  display: none;
+}
+
+.note {
+  background-color: #e0f7e0;
+  color: #1a7f1a;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Mobile first */
+@media (min-width: 768px) {
+  .title {
+    font-size: 28px;
+  }
+  .uploadFrame {
+    min-height: 300px;
+  }
+  .cameraIcon {
+    font-size: 48px;
+  }
+  .submitButton {
+    font-size: 18px;
+  }
+}

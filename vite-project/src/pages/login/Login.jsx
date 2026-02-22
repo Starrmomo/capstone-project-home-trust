@@ -3,9 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.css";
 import eyeIcon from "../../assets/Icon/eyeicon.svg";
 
-// ✅ Set your backend URLs here
-const BASE_URL = "https://your-backend.com"; // ← replace with your base URL
-const LOGIN_ENDPOINT = "/api/auth/login"; // ← replace with your login endpoint
+// ✅ PUT YOUR LOGIN API URL HERE
+const LOGIN_API = "https://hometrust-backend.duckdns.org/api/auth/login";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -19,14 +18,12 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Update form values
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const togglePassword = () => setShowPassword(!showPassword);
 
-  // ✅ Password validation rules
   const passwordRules = {
     minLength: 6,
     hasUpperCase: /[A-Z]/,
@@ -45,7 +42,6 @@ export default function Login() {
     );
   };
 
-  // ✅ Button enabled only if email exists and password is valid
   const isFormValid = formData.email && isPasswordValid(formData.password);
 
   const handleSubmit = async (e) => {
@@ -62,22 +58,21 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // ✅ API CALL
-      const response = await fetch(`${BASE_URL}${LOGIN_ENDPOINT}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+  const response = await fetch("https://hometrust-backend.duckdns.org/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: formData.email,
+      password: formData.password,
+    }),
+  });
 
+  
       const data = await response.json();
 
       if (response.ok && data.token) {
-        // Save token for protected routes
         localStorage.setItem("token", data.token);
-        navigate("/selfie-verification"); // Navigate to next page
+        navigate("/selfie-verification");
       } else {
         setErrorMessage(data.message || "Invalid credentials");
       }
@@ -101,7 +96,6 @@ export default function Login() {
         <h2 className={styles.title}>Log In</h2>
 
         <form onSubmit={handleSubmit}>
-          {/* Email */}
           <div className={styles.inputGroup}>
             <label className={styles.label}>Email</label>
             <input
@@ -114,7 +108,6 @@ export default function Login() {
             />
           </div>
 
-          {/* Password */}
           <div className={styles.inputGroup}>
             <label className={styles.label}>Password</label>
             <div className={styles.passwordWrapper}>
@@ -134,14 +127,12 @@ export default function Login() {
               />
             </div>
 
-            {/* Password criteria info */}
             <small className={styles.passwordCriteria}>
               Password must be at least 6 characters, include uppercase,
               lowercase, number, and special character.
             </small>
           </div>
 
-          {/* Error message */}
           {errorMessage && (
             <p className={styles.errorMessage}>{errorMessage}</p>
           )}
@@ -155,7 +146,6 @@ export default function Login() {
           </button>
         </form>
 
-        {/* Forgot Password link */}
         <p className={styles.linkText}>
           <Link to="/reset-password">Forgot your password?</Link>
         </p>

@@ -9,23 +9,12 @@ export default function Navbar() {
                 <h1 className={Styles.back}>LOGO</h1>
 
                 <ul>
-                    <li><Link to="securerental">SecureRental</Link></li>
+                    <li><Link to="/">SecureRental</Link></li>
                     <li><Link to="/trust-verification">TrustVerification</Link></li>
                     <li><Link to="/Home">Home</Link></li>
                     <li><Link to="/login">Login</Link></li>
                     <li><Link to="/signup">Signup</Link></li>
-
-
-
-
-
-
-
-
-
-
-                    <li><Link to="landingpage">Landingpage</Link></li>
-
+                    <li><Link to="/landingpage">Landingpage</Link></li>
                     <li><Link to="/search">Search</Link></li>
                     <li><Link to="/propertydetails">Property</Link></li>
                     <li><Link to="/addproperty">Addproperty</Link></li>
@@ -44,8 +33,6 @@ export default function Navbar() {
                     <li><Link to="/selfie-verification">SelfieVerification</Link></li>
                     <li><Link to="/verify-phone">VerifyPhone</Link></li>
                     <li><Link to="/reset-password">ResetPassword</Link></li>
-
-
                     <li><Link to="termsandcondition">Termsandcondition</Link></li>
                     <li><Link to="uploadid">Uploadid</Link></li>
 

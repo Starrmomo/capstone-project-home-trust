@@ -7,13 +7,13 @@ const AddProperty = () => {
   const location = useLocation();
 
   // Receive previous step data
-  const { title, type, locationText, latitude, longitude } = location.state || {};
+  const { formData: prevData } = location.state || {};
 
   // Step 2 states
-  const [bedrooms, setBedrooms] = useState(2);
-  const [bathrooms, setBathrooms] = useState(2);
-  const [description, setDescription] = useState("");
-  const [amenities, setAmenities] = useState({
+  const [bedrooms, setBedrooms] = useState(prevData?.bedrooms || 2);
+  const [bathrooms, setBathrooms] = useState(prevData?.bathrooms || 2);
+  const [description, setDescription] = useState(prevData?.description || "");
+  const [amenities, setAmenities] = useState(prevData?.amenities || {
     power: true,
     water: true,
     wifi: false,
@@ -31,25 +31,23 @@ const AddProperty = () => {
   const handleContinue = () => {
     if (!isFormValid) return;
 
-    // Pass all collected data forward
+    // Merge previous step data with current step
+    const updatedFormData = {
+      ...prevData,
+      bedrooms,
+      bathrooms,
+      description,
+      amenities,
+    };
+
     navigate("/feebreakdown", {
-      state: {
-        title,
-        type,
-        locationText,
-        latitude,
-        longitude,
-        bedrooms,
-        bathrooms,
-        amenities,
-        description,
-      },
+      state: { formData: updatedFormData },
     });
   };
 
   // Back button handler
   const handleBack = () => {
-    navigate("/basicinfo", { state: { title, type, locationText, latitude, longitude } });
+    navigate("/basicinfo", { state: { formData: prevData } });
   };
 
   return (

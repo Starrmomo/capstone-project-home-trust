@@ -18,9 +18,33 @@ import Lockicon from '../../assets/Icon/lock icon.svg?react';
 export default function Landingpage() {
   const scrollRef = useRef(null);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("home");
-  const [listings, setListings] = useState([]); // Store fetched properties
+  const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  /* ================================
+     ROLE + VERIFICATION PROTECTION
+  ================================= */
+  useEffect(() => {
+    const role = localStorage.getItem("userRole");
+    const isVerified = localStorage.getItem("isVerified");
+
+    // If no role → back to login
+    if (!role) {
+      navigate("/login");
+      return;
+    }
+
+    // If landlord → go to landlord dashboard
+    if (role === "landlord") {
+      navigate("/landlorddashboard");
+      return;
+    }
+
+    // If tenant but not verified → upload ID
+    if (role === "tenant" && isVerified !== "true") {
+      navigate("/uploadid");
+    }
+  }, [navigate]);
 
   const scrollRight = () => {
     scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
@@ -41,15 +65,21 @@ export default function Landingpage() {
     { name: "Gwarinpa", img: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg" },
   ];
 
-  // Fetch listings from backend
+  /* ================================
+     FETCH PROPERTIES FROM YOUR REAL BACKEND
+  ================================= */
   const fetchListings = async () => {
     setLoading(true);
     try {
-      // ✅ REPLACE THIS URL WITH YOUR REAL API ENDPOINT
-      const response = await fetch("https://your-backend.com/api/properties");
+      const response = await fetch(
+        "https://hometrust-backend.duckdns.org/api/properties"
+      );
+
       if (!response.ok) throw new Error("Failed to fetch listings");
+
       const data = await response.json();
-      setListings(data.properties || []); // assuming API returns { properties: [...] }
+      setListings(data.properties || []);
+
       navigate("/search", { state: { listings: data.properties || [] } });
     } catch (err) {
       console.error(err);
@@ -59,18 +89,20 @@ export default function Landingpage() {
     }
   };
 
-  const handleNavClick = (tab, route) => {
-    setActiveTab(tab);
-    navigate(route);
-  };
-
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <div className={styles.logo}><Logo /></div>
         <div className={styles.headerButtons}>
-          
-          <button className={styles.signup}>Log out</button>
+          <button
+            className={styles.signup}
+            onClick={() => {
+              localStorage.clear();
+              navigate("/login");
+            }}
+          >
+            Log out
+          </button>
         </div>
       </header>
 
@@ -91,52 +123,55 @@ export default function Landingpage() {
       <div className={styles.mainButtons}>
         <button
           className={styles.primary}
-          onClick={fetchListings} // fetch & navigate to search
+          onClick={fetchListings}
           disabled={loading}
         >
           {loading ? "Loading..." : <><Searchicon /> Find a Home</>}
         </button>
-        <button className={styles.secondary} onClick={() => navigate("/search")}>
-          <Houseicon /> List a Property
+
+        <button
+          className={styles.secondary}
+          onClick={() => navigate("/search")}
+        >
+          <Houseicon /> Browse Listings
         </button>
       </div>
 
       <h3 className={styles.sectionTitle}>Why trust us?</h3>
 
-      {/* ICON NAV */}
-<div className={styles.iconNav}>
-  <div onClick={() => navigate("/landingpage")}>
-    <Houseicon />
-    <span>Home</span>
-  </div>
+      <div className={styles.iconNav}>
+        <div onClick={() => navigate("/landingpage")}>
+          <Houseicon />
+          <span>Home</span>
+        </div>
 
-  <div onClick={() => navigate("/search")}>
-    <Searchicon2 />
-    <span>Search</span>
-  </div>
+        <div onClick={() => navigate("/search")}>
+          <Searchicon2 />
+          <span>Search</span>
+        </div>
 
-  <div onClick={() => navigate("/saved")}>
-    <Savedicon />
-    <span>Saved</span>
-  </div>
+        <div onClick={() => navigate("/saved")}>
+          <Savedicon />
+          <span>Saved</span>
+        </div>
 
-  <div onClick={() => navigate("/chat")}>
-    <Chat />
-    <span>Chat</span>
-  </div>
+        <div onClick={() => navigate("/chat")}>
+          <Chat />
+          <span>Chat</span>
+        </div>
 
-  <div onClick={() => navigate("/tenantprofile")}>
-    <Profile />
-    <span>Profile</span>
-  </div>
-</div>
+        <div onClick={() => navigate("/tenantprofile")}>
+          <Profile />
+          <span>Profile</span>
+        </div>
+      </div>
 
       <div className={styles.cards}>
         <div className={styles.card}>
           <div className={styles.cardIcon}><Dollaricon /></div>
           <div>
             <h4>Transparent Fees</h4>
-            <p>See exactly what you're paying for. No hidden charges or surprise costs.</p>
+            <p>No hidden charges or surprise costs.</p>
           </div>
         </div>
 
@@ -144,18 +179,23 @@ export default function Landingpage() {
           <div className={styles.cardIcon}><Lockicon /></div>
           <div>
             <h4>Secure Deposits</h4>
-            <p>Your money is carefully held in escrow until you successfully move in.</p>
+            <p>Your money is held safely until move-in is confirmed.</p>
           </div>
         </div>
       </div>
 
       <div className={styles.popularHeader}>
         <h3>Popular Areas</h3>
-        <button className={styles.seeAll} onClick={scrollRight}>See All →</button>
+        <button className={styles.seeAll} onClick={scrollRight}>
+          See All →
+        </button>
       </div>
 
       <div className={styles.scrollWrapper}>
-        <button className={`${styles.scrollBtn} ${styles.left}`} onClick={scrollLeft}>◀</button>
+        <button className={`${styles.scrollBtn} ${styles.left}`} onClick={scrollLeft}>
+          ◀
+        </button>
+
         <div className={styles.areaContainer} ref={scrollRef}>
           {areas.map((area, index) => (
             <div className={styles.areaCard} key={index}>
@@ -164,7 +204,10 @@ export default function Landingpage() {
             </div>
           ))}
         </div>
-        <button className={`${styles.scrollBtn} ${styles.right}`} onClick={scrollRight}>▶</button>
+
+        <button className={`${styles.scrollBtn} ${styles.right}`} onClick={scrollRight}>
+          ▶
+        </button>
       </div>
     </div>
   );

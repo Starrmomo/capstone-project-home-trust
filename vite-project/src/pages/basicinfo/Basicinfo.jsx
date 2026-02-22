@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 
 const AddProperty = () => {
-
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -16,10 +15,7 @@ const AddProperty = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setPosition([
-          pos.coords.latitude,
-          pos.coords.longitude,
-        ]);
+        setPosition([pos.coords.latitude, pos.coords.longitude]);
       },
       (err) => {
         console.log(err);
@@ -47,15 +43,16 @@ const AddProperty = () => {
   const handleContinue = () => {
     if (!isFormValid) return;
 
-    navigate("/detailamenities", {
-      state: {
-        title,
-        type,
-        locationText,
-        latitude: position[0],
-        longitude: position[1],
-      },
-    });
+    // Wrap data in formData for consistency
+    const formData = {
+      title,
+      type,
+      locationText,
+      latitude: position[0],
+      longitude: position[1],
+    };
+
+    navigate("/detailamenities", { state: { formData } });
   };
 
   return (
@@ -94,19 +91,14 @@ const AddProperty = () => {
         {/* Property Type */}
         <div className={styles.inputGroup}>
           <label>Property Type</label>
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          >
+          <select value={type} onChange={(e) => setType(e.target.value)}>
             <option value="">Select a type</option>
             <option>Apartment</option>
-            <option>Duplex </option>
-            <option>Terrance House</option>
+            <option>Duplex</option>
+            <option>Terrace House</option>
             <option>Detached House</option>
-            
           </select>
         </div>
-
 
         {/* Location */}
         <div className={styles.inputGroup}>
@@ -127,9 +119,7 @@ const AddProperty = () => {
               zoom={13}
               style={{ height: "100%", width: "100%" }}
             >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
               <LocationMarker />
             </MapContainer>
           )}
@@ -146,14 +136,14 @@ const AddProperty = () => {
             </p>
           </div>
         </div>
-<button
-  className={`${styles.continueBtn} ${isFormValid ? styles.activeBtn : ""}`}
-  disabled={!isFormValid}       // stays disabled until valid
-  onClick={handleContinue}
->
-  Continue to Details →
-</button>
-       
+
+        <button
+          className={`${styles.continueBtn} ${isFormValid ? styles.activeBtn : ""}`}
+          disabled={!isFormValid}
+          onClick={handleContinue}
+        >
+          Continue to Details →
+        </button>
       </div>
     </div>
   );
