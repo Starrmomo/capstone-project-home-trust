@@ -28,7 +28,7 @@ import Uploadid from "./pages/uploadid/Uploadid";
 
 
 
-import Home from "./pages/home/Home";
+import Home from "./pages/Home/Home";
 function App() {
   return (
     <>
