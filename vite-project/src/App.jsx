@@ -26,7 +26,7 @@ import TrustVerification from "./pages/TrustVerification/TrustVerification";
 import SecureRental from "./pages/SecureRental/SecureRental";
 import Termsandcondition from "./pages/termsandcondition/Termsandcondition";
 import Uploadid from "./pages/uploadid/Uploadid";
-import Home from "./pages/Home/Home";
+import Home from "./pages/home/home";
 
 
 
