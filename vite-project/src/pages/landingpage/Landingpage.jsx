@@ -1,7 +1,7 @@
 import styles from "./Landingpage.module.css";
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navhome from '../../assets/Icon/Navhome.png';
+import Navhome from '../../assets/Icon/navhome.png';
 import Logo from "../../assets/Icon/logo.svg?react";
 
 import Greendot from '../../assets/Icon/greendot.svg?react';
