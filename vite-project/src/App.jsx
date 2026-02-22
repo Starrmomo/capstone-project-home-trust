@@ -29,7 +29,6 @@ import Uploadid from "./pages/uploadid/Uploadid";
 
 
 import Home from "./pages/Home/Home";
-
 function App() {
   return (
     <>
@@ -37,7 +36,6 @@ function App() {
       <Routes>
         {/* Default route "/" now redirects to SecureRental */}
         <Route path="/" element={<Navigate to="/secureRental" replace />} />
-
         <Route path="/secureRental" element={<SecureRental />} />
         <Route path="/trust-verification" element={<TrustVerification />} />
         <Route path="/home" element={<Home />} />
