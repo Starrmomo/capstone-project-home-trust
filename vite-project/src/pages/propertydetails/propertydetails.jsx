@@ -201,7 +201,7 @@ export default function PropertyDetails() {
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./PropertyDetails.module.css";
+import styles from "./Propertydetails.module.css";
 import Check from "../../assets/Icon/checkicon.svg?react";
 import Lockicon from "../../assets/Icon/lock icon.svg?react";
 

@@ -1,6 +1,6 @@
 import styles from "./Tenantreport.module.css";
 
-export default function ConditionReport() {
+export default function Tenantreport() {
   return (
     <div className={styles.container}>
       {/* Header */}

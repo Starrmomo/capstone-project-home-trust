@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./SecureCheckout.module.css";
+import styles from "./Securecheckout.module.css";
 
 const SecureCheckout = () => {
   const [selectedMethod, setSelectedMethod] = useState("bank");

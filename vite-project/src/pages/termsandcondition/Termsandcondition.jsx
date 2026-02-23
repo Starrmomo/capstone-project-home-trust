@@ -1,7 +1,7 @@
 import { useState } from "react";
-import styles from "./TermsandCondition.module.css";
+import styles from "./Termsandcondition.module.css";
 
-export default function TermsandCondition() {
+export default function Termsandcondition() {
   const [checked, setChecked] = useState(false);
 
   return (

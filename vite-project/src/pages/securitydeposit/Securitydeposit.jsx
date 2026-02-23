@@ -1,6 +1,6 @@
 import styles from "./Securitydeposit.module.css";
 
-export default function SecurityDeposit() {
+export default function Securitydeposit() {
   return (
     <div className={styles.container}>
       {/* Header */}
