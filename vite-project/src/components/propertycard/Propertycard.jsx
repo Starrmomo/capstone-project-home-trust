@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./propertycard.module.css";
+import styles from "./Propertycard.module.css";
 import Star from "../../assets/Icon/star.svg?react";
 import Location from "../../assets/Icon/location.svg?react";
 
