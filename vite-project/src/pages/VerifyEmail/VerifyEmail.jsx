@@ -17,7 +17,77 @@ export default function VerifyEmail() {
   const [canResend, setCanResend] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSendingCode, setIsSendingCode] = useState(false);
   const inputsRef = useRef([]);
+
+  // Automatically request verification code when component mounts
+  useEffect(() => {
+    const requestVerificationCode = async () => {
+      if (!email) {
+        setErrorMessage("Email is required. Please go back and sign up again.");
+        return;
+      }
+
+      // Check if API is configured
+      if (!API) {
+        console.error("API base URL is not configured. Please set VITE_API_BASE_URL in your .env file.");
+        setErrorMessage("Configuration error. Please contact support.");
+        return;
+      }
+
+      setIsSendingCode(true);
+      try {
+        // Try the send endpoint first
+        const sendUrl = `${API}/phone-verification/send`;
+        console.log("Requesting verification code from:", sendUrl);
+        
+        const response = await fetch(sendUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          // If send endpoint doesn't exist (404), try resend endpoint as fallback
+          if (response.status === 404) {
+            console.log("Send endpoint not found, trying resend endpoint...");
+            const resendUrl = `${API}/phone-verification/resend`;
+            const resendResponse = await fetch(resendUrl, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email }),
+            });
+            
+            if (!resendResponse.ok) {
+              const resendData = await resendResponse.json();
+              setErrorMessage(resendData.message || "Failed to send verification code. Please try resending.");
+            } else {
+              console.log("Verification code sent successfully via resend endpoint");
+            }
+          } else {
+            setErrorMessage(data.message || "Failed to send verification code. Please try resending.");
+          }
+        } else {
+          console.log("Verification code sent successfully");
+        }
+      } catch (err) {
+        console.error("Send code error:", err);
+        console.error("Error details:", {
+          message: err.message,
+          API: API,
+          email: email
+        });
+        // Don't show error immediately - code might have been sent during signup
+        // User can use resend button if needed
+      } finally {
+        setIsSendingCode(false);
+      }
+    };
+
+    requestVerificationCode();
+  }, [email]);
 
   useEffect(() => {
     setIsComplete(otp.every((digit) => digit !== ""));
@@ -50,21 +120,33 @@ export default function VerifyEmail() {
 
   const handleResend = async () => {
     if (!canResend) return;
+    
+    setErrorMessage("");
+    setIsSendingCode(true);
+    
     try {
-      await fetch(`${API}/phone-verification/resend`, {
+      const response = await fetch(`${API}/phone-verification/resend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      setOtp(Array(OTP_LENGTH).fill(""));
-      setTimer(COUNTDOWN_SECONDS);
-      setCanResend(false);
-      setIsExpired(false);
-      setErrorMessage("");
+      const data = await response.json();
+
+      if (response.ok) {
+        setOtp(Array(OTP_LENGTH).fill(""));
+        setTimer(COUNTDOWN_SECONDS);
+        setCanResend(false);
+        setIsExpired(false);
+        setErrorMessage("");
+      } else {
+        setErrorMessage(data.message || "Failed to resend OTP. Please try again.");
+      }
     } catch (err) {
       console.error("Resend error:", err);
-      setErrorMessage("Failed to resend OTP. Try again.");
+      setErrorMessage("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSendingCode(false);
     }
   };
 
@@ -72,8 +154,18 @@ export default function VerifyEmail() {
     if (!isComplete || isExpired) return;
     const code = otp.join("");
 
+    if (!API) {
+      setErrorMessage("Configuration error. Please contact support.");
+      return;
+    }
+
+    setErrorMessage("");
+    
     try {
-      const response = await fetch(`${API}/phone-verification/verify`, {
+      const verifyUrl = `${API}/phone-verification/verify`;
+      console.log("Verifying code with:", verifyUrl);
+      
+      const response = await fetch(verifyUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
@@ -89,7 +181,12 @@ export default function VerifyEmail() {
       }
     } catch (err) {
       console.error("Verify error:", err);
-      setErrorMessage("Something went wrong. Please try again.");
+      console.error("Error details:", {
+        message: err.message,
+        API: API,
+        email: email
+      });
+      setErrorMessage("Network error. Please check your connection and try again.");
     }
   };
 
@@ -117,6 +214,11 @@ export default function VerifyEmail() {
         <p className={styles.subtitle}>
           Enter the 6-digit code sent to <strong>{email}</strong>
         </p>
+        {isSendingCode && (
+          <p style={{ color: "#666", fontSize: "14px", marginTop: "10px" }}>
+            Sending verification code...
+          </p>
+        )}
 
         <div className={styles.otpWrapper}>
           {otp.map((digit, index) => (
@@ -145,9 +247,9 @@ export default function VerifyEmail() {
         <button
           className={styles.resendBtn}
           onClick={handleResend}
-          disabled={!canResend}
+          disabled={!canResend || isSendingCode}
         >
-          {canResend ? "Resend Code" : "Wait..."}
+          {isSendingCode ? "Sending..." : canResend ? "Resend Code" : "Wait..."}
         </button>
 
         <button
