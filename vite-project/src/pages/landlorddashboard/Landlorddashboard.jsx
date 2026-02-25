@@ -266,7 +266,6 @@
 
 
 
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Landlorddashboard.module.css";
@@ -289,20 +288,31 @@ export default function Dashboard() {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
-    // ✅ Get token & role from localStorage
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("userRole");
+    const storedUser = localStorage.getItem("user");
 
-    if (!token || role !== "landlord") {
+    // 🚫 Not logged in
+    if (!token) {
       navigate("/login");
       return;
     }
 
-    // -------------------------
-    // MOCK DASHBOARD DATA
-    // -------------------------
-    setLandlord({ name: "John Doe" });
+    // 🚫 Not landlord
+    if (!role || role !== "landlord") {
+      navigate("/login");
+      return;
+    }
 
+    // ✅ Load landlord from localStorage
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setLandlord(parsedUser);
+    }
+
+    // -------------------------
+    // MOCK DASHBOARD DATA (until backend ready)
+    // -------------------------
     setProperties([
       { id: 1, name: "3 Bedroom House", location: "Ikoyi" },
       { id: 2, name: "2 Bedroom Apartment", location: "Lekki" },
@@ -325,13 +335,21 @@ export default function Dashboard() {
 
   const totalRent = payments.reduce((acc, item) => acc + item.amount, 0);
 
+  // 🔥 PROFILE IMAGE LOGIC
+  const profileImage =
+    landlord?.profilePicture
+      ? landlord.profilePicture // If Google image exists
+      : `https://ui-avatars.com/api/?name=${encodeURIComponent(
+          landlord?.name || "Landlord"
+        )}&background=0D8ABC&color=fff`;
+
   return (
     <div className={styles.page}>
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.userInfo}>
           <img
-            src={`https://ui-avatars.com/api/?name=${landlord?.name}`}
+            src={profileImage}
             alt="user"
             className={styles.avatar}
           />
@@ -380,12 +398,14 @@ export default function Dashboard() {
           >
             Inspect Property
           </button>
+
           <button
             className={styles.actionBtn}
-            onClick={() => navigate("/post-listing")}
+            onClick={() => navigate("/basicinfo")}   // 🔥 Goes to first listing step
           >
             Post New Listing
           </button>
+
           <button
             className={styles.actionBtn}
             onClick={() => navigate("/properties")}
@@ -415,18 +435,21 @@ export default function Dashboard() {
 
       {/* Bottom Nav */}
       <nav className={styles.bottomNav}>
-        <div className={styles.bottomdiv} onClick={() => navigate("/landlord-dashboard")}>
+        <div className={styles.bottomdiv} onClick={() => navigate("/landlorddashboard")}>
           <Home />
           <button className={styles.activeNav}>Dashboard</button>
         </div>
+
         <div className={styles.bottomdiv} onClick={() => navigate("/properties")}>
           <Properties />
           <button>Properties</button>
         </div>
+
         <div className={styles.bottomdiv} onClick={() => navigate("/chat")}>
           <Chat />
           <button>Chat</button>
         </div>
+
         <div className={styles.bottomdiv} onClick={() => navigate("/profile")}>
           <Profile />
           <button>Profile</button>

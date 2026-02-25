@@ -1,14 +1,11 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import styles from "./Signup.module.css";
-
-// ✅ PUT YOUR SIGNUP API URL HERE
-const SIGNUP_API = "https://hometrust-backend.duckdns.org/api/auth/signup";
+import { API } from "../../config"; // <-- Using your config.js
 
 export default function Signup() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const role = searchParams.get("role") || "tenant";
 
   const [formData, setFormData] = useState({
@@ -26,15 +23,12 @@ export default function Signup() {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const isPasswordValid = (password) => {
-    return (
-      password.length >= 6 &&
-      /[A-Z]/.test(password) &&
-      /[a-z]/.test(password) &&
-      /[0-9]/.test(password) &&
-      /[!@#$%^&*]/.test(password)
-    );
-  };
+  const isPasswordValid = (password) =>
+    password.length >= 6 &&
+    /[A-Z]/.test(password) &&
+    /[a-z]/.test(password) &&
+    /[0-9]/.test(password) &&
+    /[!@#$%^&*]/.test(password);
 
   const isFormValid =
     formData.fullName &&
@@ -46,7 +40,6 @@ export default function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!isFormValid) {
       setErrorMessage(
         "Please complete all fields correctly. Password must have uppercase, lowercase, number, special character, and at least 6 characters."
@@ -58,7 +51,7 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const response = await fetch("https://hometrust-backend.duckdns.org/api/auth/signup", {
+      const response = await fetch(`${API}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -73,7 +66,7 @@ export default function Signup() {
       const data = await response.json();
 
       if (response.ok) {
-        navigate("/verify-phone", { state: { phone: formData.phone } });
+        navigate("/verify-email", { state: { email: formData.email } });
       } else {
         setErrorMessage(data.message || "Signup failed. Please try again.");
       }
@@ -89,9 +82,7 @@ export default function Signup() {
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <div className={styles.topRow}>
-          <span className={styles.backArrow} onClick={() => navigate(-1)}>
-            ←
-          </span>
+          <span className={styles.backArrow} onClick={() => navigate(-1)}>←</span>
         </div>
 
         <div className={styles.progressRow}>
@@ -119,7 +110,7 @@ export default function Signup() {
             <input
               type="email"
               name="email"
-              placeholder="example@gmail.com"
+              placeholder="your email"
               value={formData.email}
               onChange={handleChange}
               className={styles.input}
@@ -155,14 +146,11 @@ export default function Signup() {
               </span>
             </div>
             <small className={styles.passwordCriteria}>
-              Password must be at least 6 characters, include uppercase,
-              lowercase, number, and special character.
+              Password must be at least 6 characters, include uppercase, lowercase, number, and special character.
             </small>
           </div>
 
-          {errorMessage && (
-            <p className={styles.errorMessage}>{errorMessage}</p>
-          )}
+          {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
 
           <div className={styles.checkboxWrapper}>
             <label className={styles.checkboxLabel}>
@@ -179,8 +167,7 @@ export default function Signup() {
               >
                 Terms of Service
               </span>{" "}
-              and{" "}
-              <span className={styles.linkText}>Privacy Policy</span>
+              and <span className={styles.linkText}>Privacy Policy</span>
             </label>
           </div>
 

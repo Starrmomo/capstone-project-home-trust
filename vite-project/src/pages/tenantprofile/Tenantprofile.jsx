@@ -1,6 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./Tenantprofile.module.css";
 
 export default function Profile() {
+  const navigate = useNavigate();
+
+  // 🔥 CHANGE THESE ROUTES TO MATCH YOUR ROUTER
+  const routes = {
+    securityDeposit: "/securitydeposit",
+    rentalHistory: "/rental-history",
+    savedListings: "/saved-listings",
+    home: "/", 
+    search: "/search",
+    saved: "/saved",
+    chat: "/chat",
+    profile: "/profile",
+  };
+
   return (
     <div className={styles.container}>
       {/* Profile Section */}
@@ -17,9 +32,7 @@ export default function Profile() {
         <h2 className={styles.name}>Grace Momo</h2>
         <p className={styles.location}>Lagos, Nigeria</p>
 
-        <div className={styles.verified}>
-          🛡 Identity Verified via NIN
-        </div>
+        <div className={styles.verified}>🛡 Identity Verified via NIN</div>
       </div>
 
       {/* Current Status */}
@@ -36,9 +49,7 @@ export default function Profile() {
               <h2 className={styles.amount}>₦1,200,000</h2>
             </div>
 
-            <div className={styles.escrow}>
-              🔒 Secure Escrow
-            </div>
+            <div className={styles.escrow}>🔒 Secure Escrow</div>
           </div>
 
           <div className={styles.divider}></div>
@@ -50,25 +61,33 @@ export default function Profile() {
       </div>
 
       {/* Download Button */}
-      <button className={styles.downloadBtn}>
-        ⬇ Download Standard Agreement
-      </button>
+      <button className={styles.downloadBtn}>⬇ Download Standard Agreement</button>
 
       {/* Rental Portfolio */}
       <div className={styles.section}>
         <h4 className={styles.portfolioTitle}>RENTAL PORTFOLIO</h4>
 
-        <div className={styles.menuItem}>
+        {/* Each item navigates forward */}
+        <div
+          className={styles.menuItem}
+          onClick={() => navigate(routes.securityDeposit)}
+        >
           <span>🛡 Security Deposit & Inspection</span>
           <span className={styles.arrow}>›</span>
         </div>
 
-        <div className={styles.menuItem}>
+        <div
+          className={styles.menuItem}
+          onClick={() => navigate(routes.rentalHistory)}
+        >
           <span>🕒 My Rental History</span>
           <span className={styles.arrow}>›</span>
         </div>
 
-        <div className={styles.menuItem}>
+        <div
+          className={styles.menuItem}
+          onClick={() => navigate(routes.savedListings)}
+        >
           <span>♡ Saved Listings</span>
           <span className={styles.arrow}>›</span>
         </div>
@@ -76,23 +95,38 @@ export default function Profile() {
 
       {/* Bottom Navigation */}
       <div className={styles.bottomNav}>
-        <div className={styles.navItem}>
+        <div
+          className={styles.navItem}
+          onClick={() => navigate(routes.home)}
+        >
           <span>🏠</span>
           <p>Home</p>
         </div>
-        <div className={styles.navItem}>
+        <div
+          className={styles.navItem}
+          onClick={() => navigate(routes.search)}
+        >
           <span>🔍</span>
           <p>Search</p>
         </div>
-        <div className={styles.navItem}>
+        <div
+          className={styles.navItem}
+          onClick={() => navigate(routes.saved)}
+        >
           <span>♡</span>
           <p>Saved</p>
         </div>
-        <div className={styles.navItem}>
+        <div
+          className={styles.navItem}
+          onClick={() => navigate(routes.chat)}
+        >
           <span>💬</span>
           <p>Chat</p>
         </div>
-        <div className={`${styles.navItem} ${styles.active}`}>
+        <div
+          className={`${styles.navItem} ${styles.active}`}
+          onClick={() => navigate(routes.profile)}
+        >
           <span>👤</span>
           <p>Profile</p>
         </div>

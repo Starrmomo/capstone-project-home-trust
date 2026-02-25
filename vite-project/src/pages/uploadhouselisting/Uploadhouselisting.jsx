@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Uploadhouselisting.module.css";
 import { FiCamera, FiX } from "react-icons/fi";
+import { API } from "../../config"; // ✅ added API import from config
 
 export default function AddPropertyCombined() {
   const imageInputRef = useRef(null);

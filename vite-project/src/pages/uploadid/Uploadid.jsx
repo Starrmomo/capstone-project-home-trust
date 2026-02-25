@@ -1,6 +1,7 @@
 import styles from "./Uploadid.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../config"; // ✅ Using API from config.js
 
 export default function Uploadid() {
   const navigate = useNavigate();
@@ -31,15 +32,12 @@ export default function Uploadid() {
       formData.append("idType", idType);
       formData.append("file", selectedFile);
 
-      const response = await fetch(
-        "https://hometrust-backend.duckdns.org/api/verification/verify",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      // ✅ Using API from config.js
+      const response = await fetch(`${API}/verify`, {
+        method: "POST",
+        body: formData,
+      });
 
-      // Handle non-JSON safely
       if (!response.ok) {
         let errorMessage = "Verification failed.";
         try {
@@ -54,20 +52,13 @@ export default function Uploadid() {
       if (data.status === "success") {
         setMessage("Verification Successful ✅");
 
-        // ✅ Read role from localStorage
         const role = localStorage.getItem("role");
 
         setTimeout(() => {
-          if (role === "tenant") {
-            navigate("/tenant/dashboard");
-          } else if (role === "landlord") {
-            navigate("/landlord/dashboard");
-          } else {
-            // fallback safety
-            navigate("/");
-          }
+          if (role === "tenant") navigate("/tenant/dashboard");
+          else if (role === "landlord") navigate("/landlord/dashboard");
+          else navigate("/");
         }, 1500);
-
       } else {
         setMessage(data.message || "Verification Failed ❌");
       }
@@ -98,18 +89,13 @@ export default function Uploadid() {
 
       <div className={styles.titleSection}>
         <h1>Upload Government ID</h1>
-        <p>
-          We need to verify your identity to keep your account secure.
-        </p>
+        <p>We need to verify your identity to keep your account secure.</p>
       </div>
 
       <div className={styles.formGroup}>
         <label>SELECT ID TYPE</label>
         <div className={styles.selectWrapper}>
-          <select
-            value={idType}
-            onChange={(e) => setIdType(e.target.value)}
-          >
+          <select value={idType} onChange={(e) => setIdType(e.target.value)}>
             <option>National Identity Number (NIN)</option>
             <option>Driver’s License</option>
             <option>International Passport</option>
@@ -119,13 +105,8 @@ export default function Uploadid() {
 
       <div className={styles.formGroup}>
         <label>DOCUMENT SCAN</label>
-
         <div className={styles.uploadBox}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-          />
+          <input type="file" accept="image/*" onChange={handleFileChange} />
         </div>
       </div>
 
@@ -133,14 +114,10 @@ export default function Uploadid() {
 
       <div className={styles.infoCard}>
         <span className={styles.infoIcon}>!</span>
-        <p>
-          Ensure all details are clear and readable.
-        </p>
+        <p>Ensure all details are clear and readable.</p>
       </div>
 
-      <div className={styles.encrypted}>
-        🔒 END - TO - END ENCRYPTED
-      </div>
+      <div className={styles.encrypted}>🔒 END - TO - END ENCRYPTED</div>
 
       <button
         className={styles.continueBtn}

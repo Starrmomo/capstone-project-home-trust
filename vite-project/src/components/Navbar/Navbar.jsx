@@ -31,10 +31,18 @@ export default function Navbar() {
                     <li><Link to="/tenantprofile">Tenantprofile</Link></li>
                     <li><Link to="/securitydeposit">Securitydeposit</Link></li>
                     <li><Link to="/selfie-verification">SelfieVerification</Link></li>
-                    <li><Link to="/verify-phone">VerifyPhone</Link></li>
+                    <li><Link to="/verify-Email">VerifyEmail</Link></li>
                     <li><Link to="/reset-password">ResetPassword</Link></li>
-                    <li><Link to="termsandcondition">Termsandcondition</Link></li>
-                    <li><Link to="uploadid">Uploadid</Link></li>
+                    <li><Link to="/termsandcondition">Termsandcondition</Link></li>
+                    <li><Link to="/uploadid">Uploadid</Link></li>
+                    <li><Link to="/chatbox">Chatbox</Link></li>
+                    <li><Link to="/kycverifycation">Kycverifycation</Link></li>
+                    <li><Link to="/paymentdetail">Paymentdetail</Link></li>
+                    <li><Link to="/banktransfer">Banktransferdetail</Link></li>
+                    
+
+
+
 
 
 

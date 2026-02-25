@@ -2,9 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.css";
 import eyeIcon from "../../assets/Icon/eyeicon.svg";
-
-// ✅ PUT YOUR LOGIN API URL HERE
-const LOGIN_API = "https://hometrust-backend.duckdns.org/api/auth/login";
+import { API } from "../../config"; // <-- Using your config.js
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,10 +16,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const togglePassword = () => setShowPassword(!showPassword);
 
   const passwordRules = {
@@ -32,21 +27,17 @@ export default function Login() {
     hasSpecialChar: /[!@#$%^&*]/,
   };
 
-  const isPasswordValid = (password) => {
-    return (
-      password.length >= passwordRules.minLength &&
-      passwordRules.hasUpperCase.test(password) &&
-      passwordRules.hasLowerCase.test(password) &&
-      passwordRules.hasNumber.test(password) &&
-      passwordRules.hasSpecialChar.test(password)
-    );
-  };
+  const isPasswordValid = (password) =>
+    password.length >= passwordRules.minLength &&
+    passwordRules.hasUpperCase.test(password) &&
+    passwordRules.hasLowerCase.test(password) &&
+    passwordRules.hasNumber.test(password) &&
+    passwordRules.hasSpecialChar.test(password);
 
   const isFormValid = formData.email && isPasswordValid(formData.password);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!isFormValid) {
       setErrorMessage(
         "Please enter a valid email and password. Password must have uppercase, lowercase, number, and at least 6 characters."
@@ -58,16 +49,13 @@ export default function Login() {
     setLoading(true);
 
     try {
-  const response = await fetch("https://hometrust-backend.duckdns.org/api/auth/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      email: formData.email,
-      password: formData.password,
-    }),
-  });
+      // ✅ Using API from config.js — your public backend is already set inside API
+      const response = await fetch(`${API}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-  
       const data = await response.json();
 
       if (response.ok && data.token) {
@@ -88,9 +76,7 @@ export default function Login() {
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <div className={styles.topRow}>
-          <span className={styles.backArrow} onClick={() => navigate(-1)}>
-            ←
-          </span>
+          <span className={styles.backArrow} onClick={() => navigate(-1)}>←</span>
         </div>
 
         <h2 className={styles.title}>Log In</h2>
@@ -128,14 +114,11 @@ export default function Login() {
             </div>
 
             <small className={styles.passwordCriteria}>
-              Password must be at least 6 characters, include uppercase,
-              lowercase, number, and special character.
+              Password must be at least 6 characters, include uppercase, lowercase, number, and special character.
             </small>
           </div>
 
-          {errorMessage && (
-            <p className={styles.errorMessage}>{errorMessage}</p>
-          )}
+          {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
 
           <button
             type="submit"

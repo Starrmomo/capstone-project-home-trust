@@ -1,0 +1,249 @@
+
+
+
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.wrapper {
+  background: #f5f6fa;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.card {
+  width: 430px;
+  height: 932px;
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 12px;
+}
+
+.iconBtn {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.profile {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatarRow {
+  position: relative;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.greenBadge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Name section */
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  font-weight: 600;
+}
+
+.verifiedWrap {
+  background: #ecfdf5;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.verifiedText {
+  font-size: 12px;
+  color: #16a34a;
+  font-weight: 500;
+}
+
+.subtext {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* SAFETY */
+.safety {
+  margin: 12px 18px;
+  padding: 10px 14px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: #c2410c;
+}
+
+/* MESSAGES */
+.messages {
+  flex: 1;
+  padding: 10px 18px;
+  overflow-y: auto;
+}
+
+.dateDivider {
+  text-align: center;
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 16px 0 24px;
+}
+
+.receivedRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.sentRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
+.smallAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.msgGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.msgGroupRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.bubbleReceived {
+  background: #f3f4f6;
+  padding: 12px 14px;
+  border-radius: 16px 16px 16px 4px;
+  max-width: 280px;
+}
+
+.bubbleSent {
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 16px 16px 4px 16px;
+  max-width: 280px;
+}
+
+.time,
+.timeSent {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.timeSent {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* PDF CARD */
+.pdfCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+}
+
+.pdfIconWrap {
+  width: 42px;
+  height: 42px;
+  background: #f3f4f6;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pdfIcon {
+  width: 22px;
+}
+
+.pdfMeta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.fileName {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.fileSize {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* INPUT */
+.inputBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.inputField {
+  flex: 1;
+  background: #f3f4f6;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  outline: none;
+}
+
+.sendBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #2563eb;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

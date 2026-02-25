@@ -1,25 +1,24 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import styles from "./VerifyPhone.module.css";
+import styles from "./VerifyEmail.module.css";
+import { API } from "../../config"; // ✅ uses API from config.js
 
 const OTP_LENGTH = 6;
-const COUNTDOWN_SECONDS = 30; // code expiry
+const COUNTDOWN_SECONDS = 300; // 5 minutes
 
-export default function VerifyPhone() {
+export default function VerifyEmail() {
   const navigate = useNavigate();
   const location = useLocation();
-  const phone = location.state?.phone || "+234 000••••00"; // dynamic phone from signup
+  const email = location.state?.email || "";
+
   const [otp, setOtp] = useState(Array(OTP_LENGTH).fill(""));
   const [isComplete, setIsComplete] = useState(false);
   const [timer, setTimer] = useState(COUNTDOWN_SECONDS);
   const [canResend, setCanResend] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const inputsRef = useRef([]);
 
-  // Replace with your backend info
-  const BASE_URL = "https://your-backend.com";
-  const VERIFY_ENDPOINT = "/api/auth/verify-phone";
-
-  // Focus and verify logic
   useEffect(() => {
     setIsComplete(otp.every((digit) => digit !== ""));
   }, [otp]);
@@ -27,6 +26,8 @@ export default function VerifyPhone() {
   useEffect(() => {
     if (timer === 0) {
       setCanResend(true);
+      setIsExpired(true);
+      setErrorMessage("OTP has expired. Please request a new one.");
       return;
     }
     const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
@@ -47,37 +48,53 @@ export default function VerifyPhone() {
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
     if (!canResend) return;
-    setOtp(Array(OTP_LENGTH).fill(""));
-    setTimer(COUNTDOWN_SECONDS);
-    setCanResend(false);
-    // TODO: Call backend to resend OTP
-    console.log("Resend code to", phone);
-  };
-
-  const handleVerify = async () => {
-    if (!isComplete) return;
-    const code = otp.join("");
     try {
-      const response = await fetch(`${BASE_URL}${VERIFY_ENDPOINT}`, {
+      await fetch(`${API}/phone-verification/resend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, code }),
+        body: JSON.stringify({ email }),
       });
-      const data = await response.json();
-      if (response.ok) {
-        navigate("/selfie-verification"); // next step after successful verification
-      } else {
-        alert(data.message || "Invalid code. Please try again.");
-      }
+
+      setOtp(Array(OTP_LENGTH).fill(""));
+      setTimer(COUNTDOWN_SECONDS);
+      setCanResend(false);
+      setIsExpired(false);
+      setErrorMessage("");
     } catch (err) {
-      console.error("Verify error:", err);
+      console.error("Resend error:", err);
+      setErrorMessage("Failed to resend OTP. Try again.");
     }
   };
 
-  // Mask phone: +234 812••••98
-  const maskedPhone = phone.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, "+$1 $2••••$4");
+  const handleVerify = async () => {
+    if (!isComplete || isExpired) return;
+    const code = otp.join("");
+
+    try {
+      const response = await fetch(`${API}/phone-verification/verify`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, code }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.token) localStorage.setItem("token", data.token);
+        navigate("/selfie-verification");
+      } else {
+        setErrorMessage(data.message || "Invalid or expired code.");
+      }
+    } catch (err) {
+      console.error("Verify error:", err);
+      setErrorMessage("Something went wrong. Please try again.");
+    }
+  };
+
+  const minutes = Math.floor(timer / 60);
+  const seconds = timer % 60;
 
   return (
     <div className={styles.wrapper}>
@@ -96,9 +113,9 @@ export default function VerifyPhone() {
           </div>
         </div>
 
-        <h2 className={styles.title}>Verify Your Phone Number</h2>
+        <h2 className={styles.title}>Verify Your Email</h2>
         <p className={styles.subtitle}>
-          Enter the 6-digit code we sent to {maskedPhone}
+          Enter the 6-digit code sent to <strong>{email}</strong>
         </p>
 
         <div className={styles.otpWrapper}>
@@ -112,24 +129,33 @@ export default function VerifyPhone() {
               onChange={(e) => handleChange(e.target.value, index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               className={`${styles.otpInput} ${digit ? styles.activeInput : ""}`}
+              disabled={isExpired}
             />
           ))}
         </div>
 
+        {errorMessage && <p style={{ color: "red", marginTop: "10px" }}>{errorMessage}</p>}
+
         <p className={styles.resendText}>
-          Didn’t receive the code? {canResend ? "" : `Resend in 00:${timer.toString().padStart(2,"0")}s`}
+          {isExpired
+            ? "Code expired."
+            : `Resend in ${minutes}:${seconds.toString().padStart(2, "0")}`}
         </p>
 
-        <button className={styles.resendBtn} onClick={handleResend} disabled={!canResend}>
+        <button
+          className={styles.resendBtn}
+          onClick={handleResend}
+          disabled={!canResend}
+        >
           {canResend ? "Resend Code" : "Wait..."}
         </button>
 
         <button
-          disabled={!isComplete}
+          disabled={!isComplete || isExpired}
           onClick={handleVerify}
-          className={`${styles.verifyBtn} ${isComplete ? styles.enabled : ""}`}
+          className={`${styles.verifyBtn} ${isComplete && !isExpired ? styles.enabled : ""}`}
         >
-          Verify Phone Number
+          Verify Email
         </button>
       </div>
     </div>

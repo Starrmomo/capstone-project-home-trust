@@ -19,16 +19,21 @@ import Tenantreport from "./pages/tenantreport/Tenantreport";
 import Tenantprofile from "./pages/tenantprofile/Tenantprofile";
 import Securitydeposit from "./pages/securitydeposit/Securitydeposit";
 import SelfieVerification from "./pages/NinVerification/SelfieVerification/SelfieVerification";
-import VerifyPhone from "./pages/VerifyPhone/VerifyPhone";
+import VerifyEmail from "./pages/VerifyEmail/VerifyEmail";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import TrustVerification from "./pages/TrustVerification/TrustVerification";
 import SecureRental from "./pages/SecureRental/SecureRental";
 import Termsandcondition from "./pages/termsandcondition/Termsandcondition";
 import Uploadid from "./pages/uploadid/Uploadid";
+import Chatbox from "./pages/chatbox/Chatbox";
+import Kycverifycation from "./pages/verifyidentity/Kycverifycation";
+import Paymentdetail from "./pages/Paymentdetail/Paymentdetail";
+import Banktransferdetail from "./pages/Banktransferdetail/Banktransferdetail";
 
 
 
 import Home from "./pages/Home/Home";
+
 function App() {
   return (
     <>
@@ -58,10 +63,17 @@ function App() {
         <Route path="/tenantreport" element={<Tenantreport />} />
         <Route path="/securitydeposit" element={<Securitydeposit />} />
         <Route path="/selfie-verification" element={<SelfieVerification />} />
-        <Route path="/verify-phone" element={<VerifyPhone />} />
+        <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/termsandcondition" element={<Termsandcondition />} />
         <Route path="/uploadid" element={<Uploadid />} />
+        <Route path="/chatbox" element={<Chatbox />} />
+        <Route path="/kycverifycation" element={<Kycverifycation />} />
+        <Route path="/paymentdetail" element={< Paymentdetail/>} />
+<Route path="/banktransfer" element={< Banktransferdetail/>} />
+
+
+
       </Routes>
     </>
   );
@@ -69,4 +81,3 @@ function App() {
 
 
 export default App;
- 
