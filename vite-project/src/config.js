@@ -1,3 +1,7 @@
 // src/config.js
 // Fallback to default API URL if environment variable is not set
-export const API = import.meta.env.VITE_API_BASE_URL || "https://hometrust-backend.duckdns.org/api";
+// Ensure we always use the full backend URL, not a relative path
+const envApiUrl = import.meta.env.VITE_API_BASE_URL;
+export const API = envApiUrl && envApiUrl.startsWith('http') 
+  ? envApiUrl 
+  : "https://hometrust-backend.duckdns.org/api";

@@ -37,40 +37,41 @@ export default function VerifyEmail() {
 
       setIsSendingCode(true);
       try {
-        // Try the send endpoint first
-        const sendUrl = `${API}/phone-verification/send`;
-        console.log("Requesting verification code from:", sendUrl);
+        // Use resend endpoint directly (send endpoint may not exist)
+        // The code is typically sent automatically during signup
+        const resendUrl = `${API}/phone-verification/resend`;
+        console.log("Requesting verification code from:", resendUrl);
+        console.log("API base URL:", API);
         
-        const response = await fetch(sendUrl, {
+        const response = await fetch(resendUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email }),
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
-          // If send endpoint doesn't exist (404), try resend endpoint as fallback
-          if (response.status === 404) {
-            console.log("Send endpoint not found, trying resend endpoint...");
-            const resendUrl = `${API}/phone-verification/resend`;
-            const resendResponse = await fetch(resendUrl, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email }),
-            });
-            
-            if (!resendResponse.ok) {
-              const resendData = await resendResponse.json();
-              setErrorMessage(resendData.message || "Failed to send verification code. Please try resending.");
-            } else {
-              console.log("Verification code sent successfully via resend endpoint");
+        // Check if response has content before parsing JSON
+        const contentType = response.headers.get("content-type");
+        let data = null;
+        
+        if (contentType && contentType.includes("application/json")) {
+          const text = await response.text();
+          if (text) {
+            try {
+              data = JSON.parse(text);
+            } catch (parseErr) {
+              console.error("JSON parse error:", parseErr);
+              data = { message: "Invalid response from server" };
             }
-          } else {
-            setErrorMessage(data.message || "Failed to send verification code. Please try resending.");
           }
-        } else {
+        }
+
+        if (response.ok) {
           console.log("Verification code sent successfully");
+          // Don't show error - code was sent
+        } else {
+          // If resend fails, the code might have already been sent during signup
+          // Don't show error immediately - user can try resend button manually
+          console.log("Resend endpoint returned:", response.status, data?.message || "No message");
         }
       } catch (err) {
         console.error("Send code error:", err);
@@ -125,13 +126,33 @@ export default function VerifyEmail() {
     setIsSendingCode(true);
     
     try {
-      const response = await fetch(`${API}/phone-verification/resend`, {
+      const resendUrl = `${API}/phone-verification/resend`;
+      console.log("Resending code to:", resendUrl);
+      
+      const response = await fetch(resendUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      const data = await response.json();
+      // Check if response has content before parsing JSON
+      const contentType = response.headers.get("content-type");
+      let data = null;
+      
+      if (contentType && contentType.includes("application/json")) {
+        const text = await response.text();
+        if (text) {
+          try {
+            data = JSON.parse(text);
+          } catch (parseErr) {
+            console.error("JSON parse error:", parseErr);
+            data = { message: "Invalid response from server" };
+          }
+        }
+      } else if (response.ok) {
+        // Response might be empty but successful
+        data = { message: "Code sent successfully" };
+      }
 
       if (response.ok) {
         setOtp(Array(OTP_LENGTH).fill(""));
@@ -140,7 +161,7 @@ export default function VerifyEmail() {
         setIsExpired(false);
         setErrorMessage("");
       } else {
-        setErrorMessage(data.message || "Failed to resend OTP. Please try again.");
+        setErrorMessage(data?.message || `Failed to resend OTP. Server returned ${response.status}. Please try again.`);
       }
     } catch (err) {
       console.error("Resend error:", err);
@@ -164,6 +185,7 @@ export default function VerifyEmail() {
     try {
       const verifyUrl = `${API}/phone-verification/verify`;
       console.log("Verifying code with:", verifyUrl);
+      console.log("API base URL:", API);
       
       const response = await fetch(verifyUrl, {
         method: "POST",
@@ -171,13 +193,28 @@ export default function VerifyEmail() {
         body: JSON.stringify({ email, code }),
       });
 
-      const data = await response.json();
+      // Check if response has content before parsing JSON
+      const contentType = response.headers.get("content-type");
+      let data = null;
+      
+      if (contentType && contentType.includes("application/json")) {
+        const text = await response.text();
+        if (text) {
+          try {
+            data = JSON.parse(text);
+          } catch (parseErr) {
+            console.error("JSON parse error:", parseErr);
+            setErrorMessage("Invalid response from server. Please try again.");
+            return;
+          }
+        }
+      }
 
       if (response.ok) {
-        if (data.token) localStorage.setItem("token", data.token);
+        if (data?.token) localStorage.setItem("token", data.token);
         navigate("/selfie-verification");
       } else {
-        setErrorMessage(data.message || "Invalid or expired code.");
+        setErrorMessage(data?.message || "Invalid or expired code.");
       }
     } catch (err) {
       console.error("Verify error:", err);
