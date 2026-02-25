@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { loginAsync, clearError } from "../../store/slices/authSlice";
 import styles from "./Login.module.css";
 import eyeIcon from "../../assets/Icon/eyeicon.svg";
-import { API } from "../../config"; // <-- Using your config.js
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  
+  // Get auth state from Redux
+  const { loading, error, isAuthenticated } = useAppSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -13,10 +18,30 @@ export default function Login() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [localError, setLocalError] = useState("");
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  // Clear errors when component mounts or form changes
+  useEffect(() => {
+    dispatch(clearError());
+    setLocalError("");
+  }, [dispatch]);
+
+  // Navigate on successful login
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/selfie-verification");
+    }
+  }, [isAuthenticated, navigate]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Clear errors when user starts typing
+    if (localError || error) {
+      setLocalError("");
+      dispatch(clearError());
+    }
+  };
+  
   const togglePassword = () => setShowPassword(!showPassword);
 
   const passwordRules = {
@@ -38,39 +63,31 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (!isFormValid) {
-      setErrorMessage(
+      setLocalError(
         "Please enter a valid email and password. Password must have uppercase, lowercase, number, and at least 6 characters."
       );
       return;
     }
 
-    setErrorMessage("");
-    setLoading(true);
+    setLocalError("");
+    dispatch(clearError());
 
-    try {
-      // ✅ Using API from config.js — your public backend is already set inside API
-      const response = await fetch(`${API}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.token) {
-        localStorage.setItem("token", data.token);
-        navigate("/selfie-verification");
-      } else {
-        setErrorMessage(data.message || "Invalid credentials");
-      }
-    } catch (err) {
-      console.error("Login error:", err);
-      setErrorMessage("Something went wrong. Please try again later.");
-    } finally {
-      setLoading(false);
+    // Dispatch login action
+    const result = await dispatch(loginAsync(formData));
+    
+    // Check if login was successful
+    if (loginAsync.fulfilled.match(result)) {
+      // Navigation will happen automatically via useEffect when isAuthenticated becomes true
+    } else if (loginAsync.rejected.match(result)) {
+      // Error is already set in Redux state, no need to set local error
+      setLocalError(result.payload || "Login failed. Please try again.");
     }
   };
+
+  // Combine Redux error and local error for display
+  const errorMessage = error || localError;
 
   return (
     <div className={styles.wrapper}>
