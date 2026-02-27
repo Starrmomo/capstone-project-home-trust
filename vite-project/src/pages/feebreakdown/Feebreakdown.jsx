@@ -48,7 +48,7 @@ export default function TransparentFees() {
       monthlyEstimate,
     };
 
-    navigate("/addproperty-upload", { state: { formData: updatedFormData } });
+    navigate("/addproperty", { state: { formData: updatedFormData } });
   };
 
   return (

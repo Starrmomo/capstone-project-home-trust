@@ -1,16 +1,18 @@
-   
+/* FULL WIDTH RESPONSIVE VERSION */
+
 .wrapper {
   min-height: 100vh;
+  width: 100%;
   background: #f8fafc;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+  padding: 40px 60px;
+  box-sizing: border-box;
   font-family: sans-serif;
 }
 
+/* Remove max-width limit */
 .cardContainer {
   width: 100%;
-  max-width: 420px;
+  max-width: 100%;
 }
 
 /* Header */
@@ -19,18 +21,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .backArrow {
   position: absolute;
   left: 0;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
 }
 
 .header h2 {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
 }
 
@@ -38,20 +40,20 @@
 .amountBox {
   background: #e5edff;
   border-radius: 22px;
-  padding: 28px 20px;
+  padding: 40px 20px;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
 }
 
 .amountBox p {
   margin: 0;
   color: #6b7280;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .amountBox h1 {
-  margin: 10px 0 16px;
-  font-size: 30px;
+  margin: 14px 0 20px;
+  font-size: 36px;
   font-weight: 700;
 }
 
@@ -61,9 +63,9 @@
   align-items: center;
   gap: 8px;
   background: white;
-  padding: 6px 16px;
+  padding: 8px 18px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 13px;
   color: #15803d;
   font-weight: 500;
 }
@@ -90,13 +92,13 @@
 
 /* Fields */
 .field {
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
 label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 13px;
+  margin-bottom: 8px;
+  font-size: 14px;
   color: #374151;
   font-weight: 500;
 }
@@ -104,7 +106,7 @@ label {
 .inputWrapper {
   border: 1px solid #d1d5db;
   border-radius: 14px;
-  padding: 14px;
+  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -116,7 +118,7 @@ label {
   border: none;
   outline: none;
   width: 100%;
-  font-size: 15px;
+  font-size: 16px;
   background: transparent;
 }
 
@@ -139,7 +141,7 @@ label {
 /* Row */
 .row {
   display: flex;
-  gap: 15px;
+  gap: 20px;
 }
 
 .row .field {
@@ -151,20 +153,20 @@ label {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 15px 0 25px;
-  font-size: 13px;
+  margin: 20px 0 30px;
+  font-size: 14px;
   color: #4b5563;
 }
 
 /* Pay Button */
 .payButton {
   width: 100%;
-  padding: 16px;
+  padding: 18px;
   border-radius: 14px;
   border: none;
   background: #d1d5db;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -177,6 +179,10 @@ label {
 .payButton.enabled {
   background: #2563eb;
   cursor: pointer;
+}
+
+.payButton.enabled:hover {
+  background: #1d4ed8;
 }
 
 /* White Lock for Button */
@@ -198,4 +204,32 @@ label {
   border-radius: 6px 6px 0 0;
   top: -6px;
   left: 2px;
+}
+
+/* ============================= */
+/* 📱 MOBILE RESPONSIVE SECTION  */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 20px;
+  }
+
+  .amountBox {
+    padding: 28px 20px;
+  }
+
+  .amountBox h1 {
+    font-size: 28px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .payButton {
+    font-size: 16px;
+    padding: 16px;
+  }
 }

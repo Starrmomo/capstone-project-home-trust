@@ -9,10 +9,10 @@ export default function Profile() {
     securityDeposit: "/securitydeposit",
     rentalHistory: "/rental-history",
     savedListings: "/saved-listings",
-    home: "/", 
+    home: "/landingpage", 
     search: "/search",
     saved: "/saved",
-    chat: "/chat",
+    chat: "/chatbox",
     profile: "/profile",
   };
 

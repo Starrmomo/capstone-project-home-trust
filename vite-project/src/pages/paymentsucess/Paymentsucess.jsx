@@ -1,14 +1,27 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Paymentsucess.module.css";
 
 const PaymentSuccess = () => {
+  const navigate = useNavigate();
+
+  // 🔹 Navigate to Home
+  const handleDone = () => {
+    navigate("/landingpage"); // <-- PUT your home page route here
+  };
+
+  // 🔹 Navigate to Payment Receipt
+  const handleViewReceipt = () => {
+    navigate("/paymentreceipt"); // <-- PUT your payment receipt page route here
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
         
         {/* Header */}
         <div className={styles.header}>
-          <span className={styles.closeIcon}>✕</span>
+          <span className={styles.closeIcon} onClick={handleDone}>✕</span>
           <h2>Payment Success</h2>
         </div>
 
@@ -38,9 +51,7 @@ const PaymentSuccess = () => {
 
           <div className={styles.propertyInfo}>
             <h4>Greenview Estate, Lekki</h4>
-            <p className={styles.location}>
-              📍 Lekki Phase 1, Lagos
-            </p>
+            <p className={styles.location}>📍 Lekki Phase 1, Lagos</p>
           </div>
 
           <div className={styles.protectionBox}>
@@ -76,18 +87,22 @@ const PaymentSuccess = () => {
 
           <div className={`${styles.row} ${styles.totalRow}`}>
             <span>Total Amount</span>
-            <span className={styles.totalAmount}>
-              ₦2,550,000
-            </span>
+            <span className={styles.totalAmount}>₦2,550,000</span>
           </div>
         </div>
 
         {/* Buttons */}
-        <button className={styles.primaryButton}>
-          Manage Tenancy
+        <button 
+          className={styles.primaryButton} 
+          onClick={handleDone}
+        >
+          Done / Manage Tenancy
         </button>
 
-        <button className={styles.secondaryButton}>
+        <button 
+          className={styles.secondaryButton} 
+          onClick={handleViewReceipt}
+        >
           View Receipt
         </button>
 

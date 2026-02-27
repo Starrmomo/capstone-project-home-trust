@@ -1,16 +1,46 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Securecheckout.module.css";
 
 const SecureCheckout = () => {
-  const [selectedMethod, setSelectedMethod] = useState("bank");
-
+  const navigate = useNavigate();
+  const [selectedMethod, setSelectedMethod] = useState(null);
   const amount = "₦2,550,000";
+
+  // 🔙 Back Arrow (goes to Property Details)
+  const handleBack = () => {
+    navigate("/propertydetails"); // Change if needed
+  };
+
+  // 💳 Pay Button Navigation (DEPENDS ON SELECTION)
+  const handlePay = () => {
+    if (!selectedMethod) return;
+
+    if (selectedMethod === "bank") {
+      navigate("/banktransfer", {
+        state: { amount },
+      });
+    }
+
+    if (selectedMethod === "card") {
+      navigate("/paymentdetail", {
+        state: { amount },
+      });
+    }
+  };
+
+  // 📄 Terms of Service Navigation
+  const handleTerms = () => {
+    navigate("/terms"); // Replace "/terms" with your actual Terms of Service route
+  };
 
   return (
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <span className={styles.back}>←</span>
+        <span className={styles.back} onClick={handleBack}>
+          ←
+        </span>
         <h2>Secure Checkout</h2>
         <span className={styles.close}>✕</span>
       </div>
@@ -28,6 +58,7 @@ const SecureCheckout = () => {
       {/* Payment Methods */}
       <h4 className={styles.sectionTitle}>Select Payment Method</h4>
 
+      {/* Bank Transfer */}
       <div
         className={`${styles.paymentCard} ${
           selectedMethod === "bank" ? styles.active : ""
@@ -52,6 +83,7 @@ const SecureCheckout = () => {
         </div>
       </div>
 
+      {/* Card Payment */}
       <div
         className={`${styles.paymentCard} ${
           selectedMethod === "card" ? styles.active : ""
@@ -89,12 +121,22 @@ const SecureCheckout = () => {
       </div>
 
       {/* Pay Button */}
-      <button className={styles.payButton}>
+      <button
+        className={`${styles.payButton} ${
+          selectedMethod ? styles.payActive : ""
+        }`}
+        disabled={!selectedMethod}
+        onClick={handlePay}
+      >
         🔒 Pay {amount}
       </button>
 
+      {/* Terms of Service */}
       <p className={styles.terms}>
-        By clicking pay, you agree to HomeTrust's <span>Terms of Service</span>
+        By clicking pay, you agree to HomeTrust's{" "}
+        <span className={styles.termsLink} onClick={handleTerms}>
+          Terms of Service
+        </span>
       </p>
     </div>
   );

@@ -1,14 +1,32 @@
-
+import { useNavigate } from "react-router-dom";
 import styles from "./Banktransferdetail.module.css";
 
 export default function BankTransferDetails() {
+  const navigate = useNavigate();
+
+  // 🔙 Back → Secure Checkout
+  const handleBack = () => {
+    navigate("/securecheckout"); // ✅ change if your route name is different
+  };
+
+  // ✅ I’ve Made Payment → Payment Success / View Receipt
+  const handlePaymentDone = () => {
+    navigate("/paymentsucess"); // ✅ put your payment success route here
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
         
         {/* Header */}
         <div className={styles.header}>
-          <span className={styles.backArrow}>←</span>
+          <span 
+            className={styles.backArrow}
+            onClick={handleBack}
+            style={{ cursor: "pointer" }}
+          >
+            ←
+          </span>
           <h2>Payment Details</h2>
         </div>
 
@@ -63,14 +81,22 @@ export default function BankTransferDetails() {
         </div>
 
         {/* Button */}
-        <button className={styles.primaryButton}>
+        <button 
+          className={styles.primaryButton}
+          onClick={handlePaymentDone}
+        >
           I’ve Made Payment
         </button>
 
-        <p className={styles.cancel}>Cancel Payment</p>
+        <p 
+          className={styles.cancel}
+          onClick={handleBack}
+          style={{ cursor: "pointer" }}
+        >
+          Cancel Payment
+        </p>
 
       </div>
     </div>
   );
 }
-

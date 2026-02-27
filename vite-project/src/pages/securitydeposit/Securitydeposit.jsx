@@ -1,11 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./Securitydeposit.module.css";
 
 export default function Securitydeposit() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <span className={styles.back}>←</span>
+        <span
+          className={styles.back}
+          onClick={() => navigate("/tenantprofile")} // <-- Go to profile page
+          style={{ cursor: "pointer" }}
+        >
+          ←
+        </span>
         <h2>Security Deposit & Inspection</h2>
       </div>
 
@@ -81,7 +90,10 @@ export default function Securitydeposit() {
       </div>
 
       {/* Request Refund Button */}
-      <button className={styles.requestBtn}>
+      <button
+        className={styles.requestBtn}
+        onClick={() => navigate("/request-refund")} // <-- Navigate to refund page
+      >
         Request Refund →
       </button>
 

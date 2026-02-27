@@ -163,3 +163,141 @@
   font-size: 14px;
   cursor: pointer;
 }
+
+
+.houseImageWrapper {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.houseImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+
+.bannerImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 15px;
+}
+
+.propertyHeader h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.location {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.protectedBox {
+  display: flex;
+  gap: 10px;
+  background: #e0edff;
+  padding: 15px;
+  border-radius: 14px;
+  margin: 20px 0;
+}
+
+.shield {
+  font-size: 20px;
+}
+
+.propertyCard {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.propertyThumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.details {
+  margin-bottom: 20px;
+}
+
+.rowBetween {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.value {
+  margin: 0;
+  font-weight: 500;
+}
+
+.paidBadge {
+  background: #dcfce7;
+  color: #16a34a;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.breakdown {
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.escrowTag {
+  background: #fee2e2;
+  color: #ef4444;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.totalBox {
+  background: #e0edff;
+  padding: 15px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.primaryButton {
+  width: 100%;
+  padding: 14px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.secondaryButton {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  border: 2px solid #4f46e5;
+  color: #4f46e5;
+  border-radius: 12px;
+  cursor: pointer;
+}

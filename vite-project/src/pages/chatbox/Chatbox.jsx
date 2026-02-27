@@ -1,7 +1,10 @@
 
 
 
-import { useState, useRef } from "react";
+
+
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ added
 import styles from "./Chatbox.module.css";
 
 import backIcon from "../../assets/Icon/backarrow.svg";
@@ -20,8 +23,73 @@ import avatar2 from "../../assets/Icon/LandlordAvatar.jpg";
 import avatar3 from "../../assets/Icon/Landlord-Avatar.jpg";
 
 export default function SecureMessaging() {
+  const navigate = useNavigate(); // ✅ added navigate
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      type: "received",
+      text: "Hello! Thanks for your interest. The apartment is still available for viewing this weekend.",
+      time: "10:23 AM",
+      avatar: avatar2,
+    },
+    {
+      id: 2,
+      type: "sent",
+      text: "Great! I'm very interested. Before I come, could I see the utility bill history for the last few months? I want to confirm the NEPA situation.",
+      time: "10:45 AM",
+      avatar: null,
+      status: "sent",
+    },
+    {
+      id: 3,
+      type: "received",
+      text: "Sure, transparency is key. Here is the bill from last month.",
+      time: "09:15 AM",
+      avatar: avatar3,
+      pdf: {
+        name: "NEPA_Bill_Oct_2023.pdf",
+        size: "245 KB • PDF",
+      },
+    },
+  ]);
+
   const fileInputRef = useRef();
+  const messagesEndRef = useRef();
+
+  // 🔹 Scroll to bottom when new messages are added
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  // 🔹 Handle sending message
+  const handleSendMessage = () => {
+    if (!message.trim()) return; // Don't send empty messages
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        type: "sent",
+        text: message,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        status: "sent",
+      },
+    ]);
+
+    setMessage(""); // clear input
+  };
+
+  // 🔹 Send on Enter key
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") handleSendMessage();
+  };
+
+  // 🔹 Back button handler
+  // 🔹 Back button handler
+const handleBack = () => {
+  navigate("/propertydetails", { state: { /* pass property info if needed */ } });
+};
 
   return (
     <div className={styles.wrapper}>
@@ -29,40 +97,27 @@ export default function SecureMessaging() {
 
         {/* HEADER */}
         <header className={styles.header}>
-          <img src={backIcon} alt="" className={styles.iconBtn} />
+          <img
+            src={backIcon}
+            alt="Back"
+            className={styles.iconBtn}
+            onClick={handleBack} // ✅ make back functional
+          />
 
           <div className={styles.profile}>
-           
-            {/* Avatar with GREEN badge */}
             <div className={styles.avatarRow}>
               <img src={avatar1} alt="" className={styles.avatar} />
-              <img
-                src={verifiedGreen}
-                alt="Verified"
-                className={styles.greenBadge}
-              />
+              <img src={verifiedGreen} alt="Verified" className={styles.greenBadge} />
             </div>
-
             <div className={styles.info}>
               <div className={styles.nameRow}>
                 <span className={styles.name}>Grace Momo</span>
-
-                {/* BLUE Verified badge + text */}
                 <div className={styles.verifiedWrap}>
-                  <img
-                    src={verifiedBlue}
-                    alt="Verified"
-                    className={styles.verifiedIcon}
-                  />
-                  <span className={styles.verifiedText}>
-                    Verified
-                  </span>
+                  <img src={verifiedBlue} alt="Verified" className={styles.verifiedIcon} />
+                  <span className={styles.verifiedText}>Verified</span>
                 </div>
               </div>
-
-              <span className={styles.subtext}>
-                Typically replies within 1 hour
-              </span>
+              <span className={styles.subtext}>Typically replies within 1 hour</span>
             </div>
           </div>
 
@@ -80,68 +135,33 @@ export default function SecureMessaging() {
 
         {/* MESSAGES */}
         <main className={styles.messages}>
-
-          <div className={styles.dateDivider}>YESTERDAY</div>
-
-          <div className={styles.receivedRow}>
-            <img src={avatar2} alt="" className={styles.smallAvatar} />
-            <div className={styles.msgGroup}>
-              <div className={styles.bubbleReceived}>
-                Hello! Thanks for your interest.
-                The apartment is still available
-                for viewing this weekend.
-              </div>
-              <span className={styles.time}>10:23 AM</span>
-            </div>
-          </div>
-
-          <div className={styles.sentRow}>
-            <div className={styles.msgGroupRight}>
-              <div className={styles.bubbleSent}>
-                Great! I'm very interested. Before I
-                come, could I see the utility bill history
-                for the last few months? I want to
-                confirm the NEPA situation.
-              </div>
-              <span className={styles.timeSent}>
-                10:45 AM
-                <img src={doubleTickBlue} alt="" />
-              </span>
-            </div>
-          </div>
-
-          <div className={styles.dateDivider}>TODAY</div>
-
-          <div className={styles.receivedRow}>
-            <img src={avatar3} alt="" className={styles.smallAvatar} />
-
-            <div className={styles.msgGroup}>
-              <div className={styles.bubbleReceived}>
-                Sure, transparency is key. Here is
-                the bill from last month.
-
-                <div className={styles.pdfCard}>
-                  <div className={styles.pdfIconWrap}>
-                    <img src={pdfIcon} alt="" className={styles.pdfIcon} />
-                  </div>
-
-                  <div className={styles.pdfMeta}>
-                    <span className={styles.fileName}>
-                      NEPA_Bill_Oct_2023.pdf
-                    </span>
-                    <span className={styles.fileSize}>
-                      245 KB • PDF
-                    </span>
-                  </div>
-
-                  <img src={downloadIcon} alt="" />
+          {messages.map((msg) => (
+            <div key={msg.id} className={msg.type === "sent" ? styles.sentRow : styles.receivedRow}>
+              {msg.type === "received" && <img src={msg.avatar} alt="" className={styles.smallAvatar} />}
+              <div className={msg.type === "sent" ? styles.msgGroupRight : styles.msgGroup}>
+                <div className={msg.type === "sent" ? styles.bubbleSent : styles.bubbleReceived}>
+                  {msg.text}
+                  {msg.pdf && (
+                    <div className={styles.pdfCard}>
+                      <div className={styles.pdfIconWrap}>
+                        <img src={pdfIcon} alt="" className={styles.pdfIcon} />
+                      </div>
+                      <div className={styles.pdfMeta}>
+                        <span className={styles.fileName}>{msg.pdf.name}</span>
+                        <span className={styles.fileSize}>{msg.pdf.size}</span>
+                      </div>
+                      <img src={downloadIcon} alt="" />
+                    </div>
+                  )}
                 </div>
+                <span className={msg.type === "sent" ? styles.timeSent : styles.time}>
+                  {msg.time}
+                  {msg.status === "sent" && <img src={doubleTickBlue} alt="" />}
+                </span>
               </div>
-
-              <span className={styles.time}>09:15 AM</span>
             </div>
-          </div>
-
+          ))}
+          <div ref={messagesEndRef}></div>
         </main>
 
         {/* INPUT */}
@@ -152,19 +172,17 @@ export default function SecureMessaging() {
             className={styles.iconBtn}
             onClick={() => fileInputRef.current?.click()}
           />
-
           <input
             className={styles.inputField}
             placeholder="Type a message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyPress}
           />
-
-          <button className={styles.sendBtn}>
+          <button className={styles.sendBtn} onClick={handleSendMessage}>
             <img src={sendIcon} alt="" />
           </button>
         </footer>
-
       </div>
     </div>
   );

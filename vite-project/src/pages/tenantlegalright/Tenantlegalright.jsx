@@ -1,3 +1,5 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Tenantlegalright.module.css";
 import {
   ShieldCheck,
@@ -10,13 +12,62 @@ import {
 } from "lucide-react";
 
 export default function LegalRights() {
+  const navigate = useNavigate();
+
+  // 🔙 Back button navigation
+  const handleBack = () => {
+    navigate("/search"); // Replace with your desired back link
+  };
+
+  // ⬇️ Download button functionality
+  const handleDownload = () => {
+    // Create a blob with your legal rights content
+    const content = `
+HomeTrust Tenancy Rights Guide
+
+1. Fundamental Protections
+- Exclusive Possession: You have the legal right to exclusive use of the rental premises during your lease period.
+- Quiet Enjoyment: Landlords cannot interfere with your peaceful possession and must give reasonable notice before entry.
+
+2. Statutory Notice Periods
+- Weekly Tenant: 7 days notice
+- Monthly Tenant: 1 month notice
+- Half-Yearly Tenant: 3 months notice
+- Yearly Tenant: 6 months notice
+
+3. Rent & Receipts
+- A landlord is required to issue an official receipt for every rent payment.
+- Rent increases must be reasonable and agreed upon before implementation.
+
+4. Fair Hearing & Eviction
+- Eviction Warning: Your landlord cannot forcefully evict you without a valid court order.
+`;
+
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "HomeTrust_Legal_Rights.txt"; // file name for download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // ➡️ Proceed to Secure Checkout
+  const handleProceedToPayment = () => {
+    navigate("/securecheckout"); // Replace with your SecureCheckout route
+  };
+
   return (
     <div className={styles.container}>
       {/* Header */}
       <header className={styles.header}>
-        <button className={styles.backBtn}>←</button>
+        <button className={styles.backBtn} onClick={handleBack}>
+          ←
+        </button>
         <h3>Your Legal Rights</h3>
-        <button className={styles.downloadBtn}>⤓</button>
+        <button className={styles.downloadBtn} onClick={handleDownload}>
+          ⤓
+        </button>
       </header>
 
       {/* Intro */}
@@ -43,8 +94,8 @@ export default function LegalRights() {
           <div>
             <h4>Exclusive Possession</h4>
             <p>
-              You have the legal right to exclusive use of the rental
-              premises during your lease period.
+              You have the legal right to exclusive use of the rental premises
+              during your lease period.
             </p>
           </div>
         </div>
@@ -54,8 +105,8 @@ export default function LegalRights() {
           <div>
             <h4>Quiet Enjoyment</h4>
             <p>
-              Landlords cannot interfere with your peaceful possession and
-              must give reasonable notice before entry.
+              Landlords cannot interfere with your peaceful possession and must
+              give reasonable notice before entry.
             </p>
           </div>
         </div>
@@ -70,8 +121,8 @@ export default function LegalRights() {
 
         <div className={styles.noticeBox}>
           <p>
-            Under Nigerian Law (Recovery of Premises Act), the following
-            notice periods apply:
+            Under Nigerian Law (Recovery of Premises Act), the following notice
+            periods apply:
           </p>
 
           <ul>
@@ -101,8 +152,8 @@ export default function LegalRights() {
         <div className={styles.simpleItem}>
           <Receipt size={18} />
           <p>
-            A landlord is required to issue an official receipt for every
-            rent payment.
+            A landlord is required to issue an official receipt for every rent
+            payment.
           </p>
         </div>
 
@@ -136,7 +187,10 @@ export default function LegalRights() {
 
       {/* Bottom Button */}
       <div className={styles.bottom}>
-        <button className={styles.paymentBtn}>
+        <button
+          className={styles.paymentBtn}
+          onClick={handleProceedToPayment}
+        >
           <CreditCard size={18} />
           Proceed to Payment
         </button>

@@ -1,7 +1,10 @@
+/* Container - Full Width */
 .container {
   width: 100%;
   min-height: 100vh;
   padding: 16px;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
   background: #f7f7f7;
 }
 
@@ -187,27 +190,7 @@
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-.container {
-  width: 100%;
-  max-width: 1200px; /* full width on desktop */
-  margin: 0 auto;
-  padding: 16px;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-}
-
+/* Titles */
 .title {
   font-size: 24px;
   font-weight: bold;
@@ -220,6 +203,7 @@
   margin-bottom: 16px;
 }
 
+/* Upload Frame */
 .uploadFrame {
   width: 100%;
   min-height: 220px;
