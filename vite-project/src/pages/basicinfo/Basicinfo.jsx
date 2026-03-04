@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Basicinfo.module.css";
 import { useNavigate } from "react-router-dom";
+import { FiX } from "react-icons/fi";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import Location from '../../assets/Icon/location.svg?react';
+import Verify from '../../assets/Icon/VerificationFirst.svg?react';
+
+
 
 const AddProperty = () => {
   const navigate = useNavigate();
@@ -58,6 +63,9 @@ const AddProperty = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
+
+        <FiX size={15} />
+
         <h2>Add New Property</h2>
       </div>
 
@@ -103,12 +111,17 @@ const AddProperty = () => {
         {/* Location */}
         <div className={styles.inputGroup}>
           <label>Location</label>
-          <input
-            type="text"
-            placeholder="Enter street address or area"
-            value={locationText}
-            onChange={(e) => setLocationText(e.target.value)}
-          />
+
+          <div className={styles.inputWrapper}>
+            <Location className={styles.inputIcon} />
+
+            <input
+              type="text"
+              placeholder="Enter street address or area"
+              value={locationText}
+              onChange={(e) => setLocationText(e.target.value)}
+            />
+          </div>
         </div>
 
         {/* Map */}
@@ -127,7 +140,7 @@ const AddProperty = () => {
 
         {/* Verification Info */}
         <div className={styles.infoBox}>
-          <div className={styles.infoIcon}>✓</div>
+          <div className={styles.infoIcon}><Verify />   </div>
           <div>
             <strong>Verification First</strong>
             <p>

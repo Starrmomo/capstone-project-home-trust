@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 import styles from "./Detailamenities.module.css";
+import Bedroom from '../../assets/Icon/Bedroom.svg?react';
+import Bathroom from '../../assets/Icon/Bathroom.svg?react';
+import Powersupply from '../../assets/Icon/PowerSupply.svg?react';
+import Borehole from '../../assets/Icon/BoreholeWater.svg?react';
+import Wifi from '../../assets/Icon/HighSpeed.svg?react';
+import Security from '../../assets/Icon/247.svg?react';
+
+
+
+
 
 const AddProperty = () => {
   const navigate = useNavigate();
@@ -54,7 +65,7 @@ const AddProperty = () => {
     <div className={styles.container}>
       {/* Header */}
       <div className={styles.header}>
-        <span className={styles.backArrow} onClick={handleBack}>←</span>
+        <span className={styles.backArrow} onClick={handleBack}> <FiArrowLeft/></span>
         <h2>Add New Property</h2>
       </div>
 
@@ -70,53 +81,103 @@ const AddProperty = () => {
       {/* Property Basics */}
       <h4 className={styles.sectionTitle}>Property Basics</h4>
       <div className={styles.card}>
+        {/* Bedrooms */}
         <div className={styles.row}>
-          <div className={styles.iconBox}>🛏</div>
-          <span>Bedrooms</span>
+          <div className={styles.row2}>
+            <div className={styles.iconBox}><Bedroom /></div>
+            <span>Bedrooms</span>
+          </div>
           <div className={styles.counter}>
-            <button onClick={() => setBedrooms(Math.max(0, bedrooms - 1))}>−</button>
+            <button
+              className={styles.minus}
+              onClick={() => setBedrooms(Math.max(0, bedrooms - 1))}
+            >
+              −
+            </button>
             <span>{bedrooms}</span>
-            <button onClick={() => setBedrooms(bedrooms + 1)}>+</button>
+            <button
+              className={styles.plus}
+              onClick={() => setBedrooms(bedrooms + 1)}
+            >
+              +
+            </button>
           </div>
         </div>
-        <div className={styles.row}>
-          <div className={styles.iconBox}>🛁</div>
-          <span>Bathrooms</span>
+
+        <div className={styles.space}></div>
+
+        {/* Bathrooms */}
+        <div className={styles.secdrow}>
+          <div className={styles.row2}>
+            <div className={styles.iconBox}><Bathroom /></div>
+            <span>Bathrooms</span>
+          </div>
           <div className={styles.counter}>
-            <button onClick={() => setBathrooms(Math.max(0, bathrooms - 1))}>−</button>
+            <button
+              className={styles.minus}
+              onClick={() => setBathrooms(Math.max(0, bathrooms - 1))}
+            >
+              −
+            </button>
             <span>{bathrooms}</span>
-            <button onClick={() => setBathrooms(bathrooms + 1)}>+</button>
+            <button
+              className={styles.plus}
+              onClick={() => setBathrooms(bathrooms + 1)}
+            >
+              +
+            </button>
           </div>
         </div>
       </div>
 
       {/* Amenities */}
       <h4 className={styles.sectionTitle}>Common Amenities</h4>
-      <div className={styles.card}>
-        {Object.entries({
-          power: { icon: "⚡", name: "24/7 Power Supply", desc: "Generator or Solar Backup" },
-          water: { icon: "💧", name: "Borehole Water", desc: "Treated constant water" },
-          wifi: { icon: "📶", name: "High-speed WiFi", desc: "Fiber optics available" },
-          security: { icon: "🛡", name: "24/7 Gated Security", desc: "CCTV and Uniformed Guards" },
-        }).map(([key, val]) => (
-          <div className={styles.amenityRow} key={key}>
-            <div className={styles.iconBox}>{val.icon}</div>
-            <div>
-              <p>{val.name}</p>
-              <small>{val.desc}</small>
-            </div>
-            <label className={styles.switch}>
-              <input
-                type="checkbox"
-                checked={amenities[key]}
-                onChange={() => toggleAmenity(key)}
-              />
-              <span className={styles.slider}></span>
-            </label>
+<div className={styles.card}>
+  {Object.entries({
+    power: {
+      icon: <Powersupply />,
+      name: "24/7 Power Supply",
+      desc: "Generator or Solar Backup",
+    },
+    water: {
+      icon: <Borehole />,
+      name: "Borehole Water",
+      desc: "Treated constant water",
+    },
+    wifi: {
+      icon: <Wifi />,
+      name: "High-speed WiFi",
+      desc: "Fiber optics available",
+    },
+    security: {
+      icon: <Security />,
+      name: "24/7 Gated Security",
+      desc: "CCTV and Uniformed Guards",
+    },
+  }).map(([key, val]) => (
+    <div className={`${styles.amenityCard} ${styles[key]}`} key={key}>
+      <div className={styles.amenityRow}>
+        <div className={styles.leftGroup}>
+          <div className={styles.iconBox}>{val.icon}</div>
+          <div>
+            <p>{val.name}</p>
+            <small>{val.desc}</small>
           </div>
-        ))}
-      </div>
+        </div>
 
+        <label className={styles.switch}>
+          <input
+            type="checkbox"
+            checked={amenities[key]}
+            onChange={() => toggleAmenity(key)}
+          />
+          <span className={styles.slider}></span>
+        </label>
+      </div>
+    </div>
+  ))}
+</div>
+      
       {/* Location / Description */}
       <h4 className={styles.sectionTitle}>Location</h4>
       <textarea

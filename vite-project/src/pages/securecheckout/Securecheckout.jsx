@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Securecheckout.module.css";
+import Banktransfer from '../../assets/Icon/BankTransfer.svg?react';
+import CardPayment from '../../assets/Icon/CardPayment.svg?react';
+import Fundsheild from '../../assets/Icon/FundsShield.svg?react';
+import Flutterwave from '../../assets/Icon/FlutterWave.svg?react';
+import Padlock from '../../assets/Icon/PadlockWhite.svg?react';
+import Green from '../../assets/Icon/VerifiedGreen.svg?react';
+
+
+
 
 const SecureCheckout = () => {
   const navigate = useNavigate();
@@ -31,7 +40,7 @@ const SecureCheckout = () => {
 
   // 📄 Terms of Service Navigation
   const handleTerms = () => {
-    navigate("/terms"); // Replace "/terms" with your actual Terms of Service route
+    navigate("/tenantlegalright"); // Replace "/terms" with your actual Terms of Service route
   };
 
   return (
@@ -51,7 +60,7 @@ const SecureCheckout = () => {
         <h1>{amount}</h1>
         <div className={styles.verified}>
           <span className={styles.dot}></span>
-          Verified Property
+          <Green></Green>    Verified Property
         </div>
       </div>
 
@@ -60,13 +69,12 @@ const SecureCheckout = () => {
 
       {/* Bank Transfer */}
       <div
-        className={`${styles.paymentCard} ${
-          selectedMethod === "bank" ? styles.active : ""
-        }`}
+        className={`${styles.paymentCard} ${selectedMethod === "bank" ? styles.active : ""
+          }`}
         onClick={() => setSelectedMethod("bank")}
       >
         <div className={styles.paymentLeft}>
-          <div className={styles.iconBox}>🏦</div>
+          <div className={styles.iconBox}><Banktransfer /> </div>
           <div>
             <p>Bank Transfer</p>
             <small>Transfer directly from your bank app</small>
@@ -76,22 +84,20 @@ const SecureCheckout = () => {
         <div className={styles.rightSection}>
           <span className={styles.recommended}>Recommended</span>
           <div
-            className={`${styles.radio} ${
-              selectedMethod === "bank" ? styles.radioActive : ""
-            }`}
+            className={`${styles.radio} ${selectedMethod === "bank" ? styles.radioActive : ""
+              }`}
           ></div>
         </div>
       </div>
 
       {/* Card Payment */}
       <div
-        className={`${styles.paymentCard} ${
-          selectedMethod === "card" ? styles.active : ""
-        }`}
+        className={`${styles.paymentCard} ${selectedMethod === "card" ? styles.active : ""
+          }`}
         onClick={() => setSelectedMethod("card")}
       >
         <div className={styles.paymentLeft}>
-          <div className={styles.iconBoxGreen}>💳</div>
+          <div className={styles.iconBoxGreen}><CardPayment /></div>
           <div>
             <p>Card Payment</p>
             <small>Visa, Mastercard, Verve</small>
@@ -99,15 +105,18 @@ const SecureCheckout = () => {
         </div>
 
         <div
-          className={`${styles.radio} ${
-            selectedMethod === "card" ? styles.radioActive : ""
-          }`}
+          className={`${styles.radio} ${selectedMethod === "card" ? styles.radioActive : ""
+            }`}
         ></div>
       </div>
 
       {/* Escrow Info */}
       <div className={styles.escrowBox}>
-        <h4>🔒 FUNDS HELD IN ESCROW</h4>
+        <div className={styles.escrowimg} >
+          <Fundsheild />
+          <h4> FUNDS HELD IN ESCROW</h4>
+        </div>
+
         <p>
           Your payment is securely held by HomeTrust and only released to the
           landlord after you've moved in.
@@ -117,18 +126,21 @@ const SecureCheckout = () => {
       {/* Secured By */}
       <div className={styles.securedBy}>
         <small>SECURED BY</small>
-        <p>Flutterwave</p>
+        <div className={styles.escrowimg} >
+          <Flutterwave />
+          <p>Flutterwave</p>
+        </div>
+
       </div>
 
       {/* Pay Button */}
       <button
-        className={`${styles.payButton} ${
-          selectedMethod ? styles.payActive : ""
-        }`}
+        className={`${styles.payButton} ${selectedMethod ? styles.payActive : ""
+          }`}
         disabled={!selectedMethod}
         onClick={handlePay}
       >
-        🔒 Pay {amount}
+        <Padlock />Pay {amount}
       </button>
 
       {/* Terms of Service */}

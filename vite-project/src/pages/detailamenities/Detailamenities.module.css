@@ -1,16 +1,18 @@
 .container {
   width: 100%;
   padding: 16px;
-  font-family: sans-serif;
-  background: #f9fafb;
+  font-family:  "Inter" sans-serif;
+  background: #ffffff;
   min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0 auto; /* ensures it's centered */
 }
 
 /* Header */
 .header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 100px;
   margin-bottom: 16px;
 }
 
@@ -53,6 +55,7 @@
 .sectionTitle {
   margin: 20px 0 10px;
   font-weight: 600;
+  color: #A1AEC1;
 }
 
 /* Card */
@@ -61,6 +64,8 @@
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
+  font-weight: bolder;
+  color: black;
 }
 
 /* Row */
@@ -69,6 +74,38 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 12px;
+}
+
+.secdrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.secdrow span{
+font-weight: 550;
+font-size: small;
+}
+
+.row2 span{
+  font-weight: 550;
+font-size: small;
+}
+
+.row2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.space {
+  border-bottom: 1px solid #F3F6FA;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .iconBox {
@@ -94,10 +131,18 @@
   height: 32px;
   border-radius: 50%;
   border: none;
-  background: #2563eb;
-  color: white;
   font-size: 18px;
   cursor: pointer;
+}
+
+.minus {
+  background: #F9FBFD;
+  color: #000000;
+}
+
+.plus {
+  background: #2563eb;
+  color: #ffffff;
 }
 
 /* Amenities */
@@ -108,13 +153,23 @@
   margin-bottom: 14px;
 }
 
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* space between icon and text */
+}
+
 .amenityRow p {
   margin: 0;
-  font-weight: 500;
+  font-weight: 550;
+  color: black;
+  font-size:15px;
 }
 
 .amenityRow small {
-  color: #666;
+  color: #3b3a3a;
+  font-size: small;
+  font-weight: lighter;
 }
 
 /* Toggle Switch */
@@ -161,7 +216,7 @@
 /* Textarea */
 .textarea {
   width: 100%;
-  height: 120px;
+  height: 180px;
   border-radius: 10px;
   padding: 12px;
   border: 1px solid #ddd;
@@ -189,14 +244,14 @@
 }
 
 .backBtn {
-  padding: 12px 24px;
+  padding: 12px 45px;
   border-radius: 10px;
   border: 1px solid #ddd;
   background: white;
 }
 
 .continueBtn {
-  padding: 12px 24px;
+  padding: 12px 45px;
   border-radius: 10px;
   border: none;
   background: #2563eb;
@@ -205,4 +260,36 @@
 
 .continueBtn:disabled {
   background: #cbd5e1;
+}
+
+.amenityCard {
+  padding: 16px;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+/* Individual designs */
+.power {
+  background-color: white;
+}
+
+.water {
+  background-color: white;
+}
+
+.wifi {
+  background-color: white;
+}
+
+.security {
+  background-color: white;
+}
+
+/* Media Query - Center on wider screens */
+@media (min-width: 568px) {
+  .container {
+    max-width: 450px;
+    margin: 0 auto; /* centers the container */
+  }
 }

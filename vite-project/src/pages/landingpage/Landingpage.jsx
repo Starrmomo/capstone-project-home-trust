@@ -316,7 +316,7 @@ export default function Landingpage() {
         </button>
 
         <button className={styles.secondary} onClick={() => navigate("/search")}>
-          <Houseicon /> Browse Listings
+          <Houseicon /> List a Property
         </button>
       </div>
 
@@ -331,20 +331,22 @@ export default function Landingpage() {
 
       <div className={styles.cards}>
         <div className={styles.card}><div className={styles.cardIcon}><Dollaricon /></div>
-          <div><h4>Transparent Fees</h4><p>No hidden charges or surprise costs.</p></div>
+          <div><h4>Transparent Fees</h4><p>See exactly what you're paying for.
+            No hidden agency charges or
+            surprise costs.</p></div>
         </div>
         <div className={styles.card}><div className={styles.cardIcon}><Lockicon /></div>
-          <div><h4>Secure Deposits</h4><p>Your money is held safely until move-in is confirmed.</p></div>
+          <div><h4>Secure Deposits</h4><p>Your money is carefully held in escrow until you successfully move in.</p></div>
         </div>
       </div>
 
       <div className={styles.popularHeader}>
         <h3>Popular Areas</h3>
-        <button className={styles.seeAll} onClick={scrollRight}>See All →</button>
+        <button className={styles.seeAll} onClick={scrollRight}>See All </button>
       </div>
 
       <div className={styles.scrollWrapper}>
-        <button className={`${styles.scrollBtn} ${styles.left}`} onClick={scrollLeft}>◀</button>
+        <button className={`${styles.scrollBtn} ${styles.left}`} onClick={scrollLeft}></button>
         <div className={styles.areaContainer} ref={scrollRef}>
           {areas.map((area, index) => (
             <div className={styles.areaCard} key={index}>
@@ -353,7 +355,7 @@ export default function Landingpage() {
             </div>
           ))}
         </div>
-        <button className={`${styles.scrollBtn} ${styles.right}`} onClick={scrollRight}>▶</button>
+        <button className={`${styles.scrollBtn} ${styles.right}`} onClick={scrollRight}></button>
       </div>
     </div>
   );

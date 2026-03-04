@@ -10,30 +10,32 @@
   background: #f5f6fa;
   min-height: 100vh;
   display: flex;
-  justify-content: stretch; /* Full width desktop */
-  padding: 0;
+  justify-content: center; /* Always center */
+  align-items: center;
+  padding: 20px;
 }
 
-/* CARD */
+/* CARD - MOBILE FIRST */
 .card {
   width: 100%;
-  max-width: 100%;
+  max-width: 430px;   /* Mobile width */
   height: 100vh;
+  max-height: 900px;  /* Prevent too tall on desktop */
   background: #fff;
-  border-radius: 0; /* Full screen on desktop */
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* HEADER */
 .header {
   display: flex;
   align-items: center;
-  padding: 14px 18px;
+  padding: 14px 16px;
   border-bottom: 1px solid #f0f0f0;
-  gap: 12px;
+  gap: 10px;
   background: #fff;
   position: sticky;
   top: 0;
@@ -50,7 +52,7 @@
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .avatarRow {
@@ -58,8 +60,8 @@
 }
 
 .avatar {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -68,71 +70,72 @@
   position: absolute;
   bottom: -2px;
   right: -2px;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
-/* Name section */
 .nameRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .name {
   font-weight: 600;
+  font-size: 14px;
 }
 
 .verifiedWrap {
   background: #ecfdf5;
-  padding: 2px 8px;
+  padding: 2px 6px;
   border-radius: 999px;
 }
 
 .verifiedText {
-  font-size: 12px;
+  font-size: 11px;
   color: #16a34a;
   font-weight: 500;
 }
 
 .subtext {
-  font-size: 12px;
+  font-size: 11px;
   color: #9ca3af;
 }
 
 /* SAFETY TIP */
 .safety {
-  margin: 12px 18px;
-  padding: 10px 14px;
+  margin: 10px 16px;
+  padding: 8px 12px;
   background: #fff7ed;
   border: 1px solid #fed7aa;
   border-radius: 12px;
   display: flex;
-  gap: 10px;
-  font-size: 12px;
+  gap: 8px;
+  font-size: 11px;
   color: #c2410c;
+  flex-wrap: wrap;
 }
 
 /* MESSAGES */
 .messages {
   flex: 1;
-  padding: 10px 18px;
+  padding: 10px 14px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
 
 .dateDivider {
   text-align: center;
-  font-size: 11px;
+  font-size: 10px;
   color: #9ca3af;
-  margin: 16px 0 24px;
+  margin: 14px 0 20px;
 }
 
 .receivedRow,
 .sentRow {
   display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .sentRow {
@@ -140,8 +143,8 @@
 }
 
 .smallAvatar {
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
 }
 
@@ -156,13 +159,14 @@
   align-items: flex-end;
 }
 
-/* BUBBLES FULL WIDTH ADAPTIVE */
+/* BUBBLES */
 .bubbleReceived,
 .bubbleSent {
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-radius: 16px;
-  max-width: 70%; /* Don't let bubbles stretch too far */
+  max-width: 85%;
   word-wrap: break-word;
+  font-size: 13px;
 }
 
 .bubbleReceived {
@@ -178,7 +182,7 @@
 
 .time,
 .timeSent {
-  font-size: 11px;
+  font-size: 10px;
   color: #9ca3af;
   margin-top: 4px;
 }
@@ -193,41 +197,37 @@
 .pdfCard {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 10px;
-  padding: 12px;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 10px;
   border-radius: 12px;
   background: #fff;
   border: 1px solid #e5e7eb;
+  flex-wrap: wrap;
 }
 
 .pdfIconWrap {
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   background: #f3f4f6;
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .pdfIcon {
-  width: 22px;
-}
-
-.pdfMeta {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  width: 18px;
 }
 
 .fileName {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
+  word-break: break-word;
 }
 
 .fileSize {
-  font-size: 12px;
+  font-size: 11px;
   color: #6b7280;
 }
 
@@ -235,26 +235,25 @@
 .inputBar {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 18px;
+  gap: 8px;
+  padding: 12px 14px;
   border-top: 1px solid #f0f0f0;
   background: #fff;
-  position: sticky;
-  bottom: 0;
 }
 
 .inputField {
   flex: 1;
   background: #f3f4f6;
   border: none;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: 20px;
   outline: none;
+  font-size: 13px;
 }
 
 .sendBtn {
-  width: 42px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #2563eb;
   border: none;
@@ -262,60 +261,4 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: background 0.2s;
 }
-
-.sendBtn:hover {
-  background: #1e40af;
-}
-
-
-
-
-
-
-/* RESPONSIVE MOBILE */
-@media (max-width: 1023px) {
-  .wrapper {
-    justify-content: center;
-    padding: 0;
-  }
-
-  .card {
-    max-width: 430px;
-    border-radius: 20px;
-    height: 100vh;
-  }
-}
-
-/* FULL WIDTH DESKTOP */
-@media (min-width: 1024px) {
-  .wrapper {
-    justify-content: stretch;
-    padding: 0;
-  }
-
-  .card {
-    border-radius: 0;
-  }
-
-  .messages {
-    max-width: 100%;
-  }
-
-  .bubbleReceived,
-  .bubbleSent {
-    max-width: 60%; /* Scales nicely with large screens */
-  }
-}
-
-@media (max-width: 1020px) {
-  .card {
-    width: 100%;
-    max-width: 100%;
-    height: 100vh;
-    border-radius: 0;
-  }
-}
-
-

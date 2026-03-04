@@ -1,17 +1,35 @@
-.container {
-  width: 100%;
-  min-height: 100vh;
-  padding: 20px;
+/* MOBILE-FIRST CENTERED PAYMENT SCREEN */
+
+body {
+  margin: 0;
   font-family: sans-serif;
   background: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-/* Header */
+/* MAIN CONTAINER */
+.container {
+  width: 100%;
+  max-width: 430px; /* mobile card width */
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* HEADER */
 .header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 }
 
 .back,
@@ -20,8 +38,9 @@
   cursor: pointer;
 }
 
-/* Amount */
+/* AMOUNT SECTION */
 .amountSection {
+  width: 100%;
   text-align: center;
   margin-bottom: 25px;
 }
@@ -29,11 +48,12 @@
 .amountSection p {
   color: #666;
   margin: 0;
+  font-size: 13px;
 }
 
 .amountSection h1 {
   margin: 8px 0;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: bold;
 }
 
@@ -45,26 +65,28 @@
   color: #15803d;
   padding: 6px 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
-  background: #16a34a;
-  border-radius: 50%;
+  
 }
 
-/* Section Title */
+/* SECTION TITLE */
 .sectionTitle {
+  width: 100%;
+  text-align: left;
   margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-/* Payment Card */
+/* PAYMENT CARD */
 .paymentCard {
+  width: 100%;
   background: white;
   border-radius: 14px;
-  padding: 16px;
+  padding: 14px;
   margin-bottom: 14px;
   display: flex;
   justify-content: space-between;
@@ -81,60 +103,60 @@
 .paymentLeft {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.iconBox,
+.iconBoxGreen {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .iconBox {
-  width: 40px;
-  height: 40px;
   background: #dbeafe;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .iconBoxGreen {
-  width: 40px;
-  height: 40px;
   background: #d1fae5;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* Recommended */
+/* RECOMMENDED */
 .rightSection {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .recommended {
   background: #2563eb;
   color: white;
-  font-size: 10px;
-  padding: 4px 8px;
+  font-size: 9px;
+  padding: 4px 6px;
   border-radius: 10px;
 }
 
-/* Radio */
+/* RADIO */
 .radio {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 2px solid #cbd5e1;
 }
 
 .radioActive {
-  border: 6px solid #2563eb;
+  border: 5px solid #2563eb;
 }
 
-/* Escrow */
+/* ESCROW */
 .escrowBox {
+  width: 100%;
   background: #e0e7ff;
-  padding: 16px;
+  padding: 14px;
   border-radius: 14px;
   text-align: center;
   margin-top: 20px;
@@ -142,29 +164,51 @@
 
 .escrowBox h4 {
   margin: 0 0 6px 0;
+  font-size: 14px;
+  color:#3871FF ;
 }
 
 .escrowBox p {
-  font-size: 12px;
+  font-size: 11px;
   color: #555;
 }
 
-/* Secured */
+.escrowimg{
+  display: flex;
+  justify-content: center;
+align-items: center;
+margin-top: 5px;
+margin-bottom: 15px;
+gap: 8px;
+}
+
+.escrowimg h4 {
+  margin: 0;
+}
+.escrowimg p {
+  margin: 0;
+}
+
+/* SECURED BY */
 .securedBy {
+  margin: 0;
+  width: 100%;
   text-align: center;
   margin: 20px 0;
 }
 
 .securedBy small {
   color: #999;
+  font-size: 11px;
 }
 
 .securedBy p {
   margin: 4px 0 0;
   font-weight: bold;
+  font-size: 13px;
 }
 
-/* Pay Button */
+/* PAY BUTTON */
 .payButton {
   width: 100%;
   padding: 14px;
@@ -172,11 +216,16 @@
   border: none;
   background: #2563eb;
   color: white;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
+/* TERMS */
 .terms {
   font-size: 11px;
   text-align: center;

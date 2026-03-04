@@ -208,3 +208,49 @@
   color: #4a6cf7;
   font-weight: 600;
 }
+
+/* ================= BOTTOM NAV ================= */
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px; /* 👈 keeps it same width as your mobile layout */
+  background: white;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.navItem {
+  text-align: center;
+  font-size: 11px;
+  color: #8a8a8a;
+  cursor: pointer;
+}
+
+.navItem span {
+  font-size: 18px;
+}
+
+.navItem p {
+  margin-top: 3px;
+}
+
+.active {
+  color: #4a6cf7;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+

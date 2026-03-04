@@ -1,12 +1,18 @@
-
 /* Mobile First */
 
 .container {
+  font-family: "Inter", sans-serif;
   width: 100%;
   min-height: 100vh;
-  background: #f6f8fb;
+  background: #FFFFFF;
   padding: 16px;
   box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  gap: 130px;
+  margin-bottom: 12px;
 }
 
 .header h2 {
@@ -18,7 +24,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  margin-bottom: 6px;
+  margin-bottom: 15px;
 }
 
 .stepActive {
@@ -66,6 +72,7 @@ h3 {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  margin-top: 23px;
 }
 
 .inputGroup label {
@@ -78,7 +85,7 @@ h3 {
 .inputGroup select {
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid #1E1729;
   font-size: 14px;
   outline: none;
 }
@@ -120,18 +127,30 @@ h3 {
 
 .infoBox {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 12px;
   background: #eef2ff;
   padding: 12px;
   border-radius: 10px;
   margin-bottom: 20px;
   font-size: 14px;
+  border: 1px solid #D8E2FD;
+  line-height: 21px;
 }
 
+.infoBox p {
+  
+  font-size: small;
+}
+
+
+
+
+
 .infoIcon {
-  background: #2563eb;
   color: #fff;
-  width: 24px;
+  width: 44px;
   height: 24px;
   display: flex;
   align-items: center;
@@ -150,6 +169,7 @@ h3 {
   font-weight: 600;
   cursor: not-allowed;
 }
+
 /* Existing button style */
 .continueBtn {
   background-color: rgb(146, 146, 146);
@@ -164,25 +184,40 @@ h3 {
   cursor: pointer;
 }
 
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
 
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* makes icon not block typing */
+}
 
+.inputWrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border-radius: 8px;
+  border: 1px solid #1E1729;
+}
 
+/* Media Queries - Center & Responsive */
 
-
-
-
-/* Desktop */
-
-@media (min-width: 768px) {
+@media (min-width: 568px) {
   .container {
-    padding: 32px;
+    max-width: 450px;   /* keeps mobile width */
+    margin: 0 auto;     /* centers horizontally */
+    padding: 16px;      /* same padding as mobile */
   }
-
+  
   .content {
-    padding: 24px;
+    padding: 16px;      /* same padding as mobile */
   }
-
+  
   .mapBox {
-    height: 240px;
+    height: 180px;      /* same height as mobile */
   }
 }

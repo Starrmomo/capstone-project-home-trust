@@ -54,7 +54,7 @@ export default function BankTransferDetails() {
 
           <div className={styles.divider}></div>
 
-          <div className={styles.bankRow}>
+          <div className={styles.bankRow1}>
             <div>
               <label>Account Number</label>
               <h2>0123456789</h2>

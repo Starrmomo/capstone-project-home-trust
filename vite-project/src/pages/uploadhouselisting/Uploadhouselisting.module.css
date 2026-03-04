@@ -1,11 +1,21 @@
-/* Container - Full Width */
+/* =========================
+   MOBILE ONLY - CENTERED
+   ========================= */
+body{
+  background-color: #CCC8C8;
+}
+
+
 .container {
   width: 100%;
+  max-width: 480px;   /* keeps it mobile width */
+  margin: 0 auto;     /* center on all screens */
   min-height: 100vh;
   padding: 16px;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  background: #f7f7f7;
+  background: #FFFFFF;
+  border: 1px solid #CCC8C8;
 }
 
 /* Header */
@@ -58,6 +68,7 @@
 
 /* Section */
 .sectionTitle {
+  margin-top: 30px;
   font-size: 18px;
   font-weight: 600;
 }
@@ -68,27 +79,37 @@
   margin: 6px 0 16px;
 }
 
-/* Cover */
+/* Cover Frame */
 .coverFrame {
+  position: relative;
   width: 100%;
-  height: 220px;
-  background: #eaeaea;
+  height: 250px;
   border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   cursor: pointer;
+  border: 2px dashed #EDF3FF ;
 }
 
-.coverFrame img {
+.coverFrame img,
+.coverFrame > *:first-child {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 .coverContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  color: rgb(255, 255, 255);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .cameraCircle {
@@ -100,20 +121,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 10px;
+  margin-bottom: 10px;
 }
 
 .coverText {
-  color: #2563eb;
   font-weight: 600;
+  color:#366EFB ;
 }
 
 .coverSub {
   font-size: 12px;
-  color: #666;
+  color:#76737D ;
 }
 
-/* Grid */
+/* Image Grid */
 .imageGrid {
   margin-top: 16px;
   display: grid;
@@ -153,54 +174,7 @@
   align-items: center;
   color: #aaa;
   cursor: pointer;
-}
-
-/* Utility */
-.utilityFrame {
-  margin-top: 12px;
-  height: 140px;
-  border: 2px dashed #dcdcdc;
-  border-radius: 12px;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.utilityFrame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Desktop */
-@media (min-width: 768px) {
-  .coverFrame {
-    height: 300px;
-  }
-
-  .imageGrid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .imageBox,
-  .emptyBox {
-    height: 120px;
-  }
-}
-
-/* Titles */
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 16px;
+  background-color: #F9FBFD;
 }
 
 /* Upload Frame */
@@ -215,19 +189,19 @@
   justify-content: center;
   cursor: pointer;
   margin-bottom: 16px;
-  position: relative;
-}
-
-.uploadedImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 12px;
+  background-color: #EDF2FF;
 }
 
 .cameraIcon {
-  font-size: 36px;
-  margin-bottom: 8px;
+  width: 60px;
+  height: 60px;
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .uploadText {
@@ -239,57 +213,71 @@
   color: #666;
 }
 
-.fileInput {
-  display: none;
-}
-
 .note {
-  background-color: #e0f7e0;
-  color: #1a7f1a;
+  background-color: #D7F5E8;
+  color: #54D59D;
   font-size: 12px;
-  padding: 8px;
+  padding: 15px;
   border-radius: 8px;
   margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
 }
 
-.checklist {
+.utilityhead {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Checklist */
+.checklistContainer {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 24px;
+  border: 1px solid #F6F6F6;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+ margin-bottom: 20px;
 }
 
-.checklist label {
+.border{
+  border-bottom: 1px solid #F6F6F6;
+  
+}
+
+
+
+.checklistItem {
   display: flex;
-  align-items: flex-start;
+  
+  align-items: center;
   gap: 8px;
-  font-size: 14px;
+  padding: 8px;
 }
 
+/* Blue checkbox when checked */
+.checklistItem input[type="checkbox"] {
+  accent-color: #2563eb;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+/* Submit Button */
 .submitButton {
   width: 100%;
   padding: 12px;
-  background-color: #3b82f6;
+  background-color: #5480EF;
   color: white;
   font-size: 16px;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-}
-
-/* Mobile first */
-@media (min-width: 768px) {
-  .title {
-    font-size: 28px;
-  }
-  .uploadFrame {
-    min-height: 300px;
-  }
-  .cameraIcon {
-    font-size: 48px;
-  }
-  .submitButton {
-    font-size: 18px;
-  }
+  margin-top: 40px;
+  margin-bottom: 20px;
 }

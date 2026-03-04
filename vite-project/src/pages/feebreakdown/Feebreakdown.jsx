@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
 import styles from "./Feebreakdown.module.css";
-import { FiArrowLeft, FiInfo } from "react-icons/fi";
+import { FiArrowLeft, FiInfo, FiHelpCircle } from "react-icons/fi";
 import { useNavigate, useLocation } from "react-router-dom";
+import Preview from '../../assets/Icon/TotalPreview.svg?react';
+import Security from '../../assets/Icon/247.svg?react';
 
 export default function TransparentFees() {
   const navigate = useNavigate();
@@ -54,9 +56,10 @@ export default function TransparentFees() {
   return (
     <div className={styles.container}>
       {/* Header */}
+       
       <div className={styles.header}>
-        <FiArrowLeft className={styles.backIcon} onClick={handleBack} />
-        <h2>Add New Property</h2>
+       <FiArrowLeft className={styles.backIcon} onClick={handleBack} />
+        <h2 className={styles.headertext} >Add New Property</h2>
       </div>
 
       {/* Step */}
@@ -89,7 +92,7 @@ export default function TransparentFees() {
 
       <div className={styles.inputGroup}>
         <label>
-          Caution Fee Deposit (Refundable) <FiInfo className={styles.infoIcon} />
+          Caution Fee Deposit (Refundable) <FiHelpCircle className={styles.infoIcon} />
         </label>
         <div className={styles.inputWrapper}>
           <span>₦</span>
@@ -99,7 +102,7 @@ export default function TransparentFees() {
 
       <div className={styles.row}>
         <div className={styles.half}>
-          <label>Legal Fee</label>
+          <label>Service Fee</label>
           <div className={styles.inputWrapper}>
             <span>₦</span>
             <input type="number" value={legalFee} onChange={(e) => setLegalFee(e.target.value)} />
@@ -116,22 +119,33 @@ export default function TransparentFees() {
 
       {/* Total Preview */}
       <div className={styles.previewCard}>
-        <p className={styles.previewTitle}>Total Preview</p>
-        <p className={styles.previewSub}>Tenant’s Initial Total</p>
-        <h1 className={styles.total}>₦ {formatCurrency(total)}</h1>
-        <div className={styles.previewBottom}>
+        <div className={styles.previewimg}  >
           <div>
-            <p>Move-In Cost</p>
-            <strong>₦{formatCurrency(total)}</strong>
+            <p className={styles.previewTitle}>Total Preview</p>
+            <p className={styles.previewSub}>Tenant’s Initial Total</p>
           </div>
-          <div>
-            <p>Monthly Est.</p>
+
+          <Preview />
+        </div>
+        <h1 className={styles.total}>₦ {formatCurrency(total)}</h1>
+         <div className={styles.calspace} ></div>
+        <div className={styles.previewBottom}>
+
+         
+          <div className={styles.previewtext}  >
+            <p>Move-In Cost</p>
+             <p>Monthly Est.</p>
+          </div>
+
+          <div className={styles.previewtext} >
+            <strong>₦{formatCurrency(total)}</strong>
             <strong>₦{formatCurrency(monthlyEstimate)}/mo</strong>
           </div>
         </div>
       </div>
 
       <div className={styles.notice}>
+        <Security/>
         HomeTrust ensures these fees are clearly explained to tenants.
       </div>
 

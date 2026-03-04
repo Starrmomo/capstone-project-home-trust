@@ -48,6 +48,8 @@ export default function PropertyCard({ property }) {
           <span className={styles.Beds}>{property.size}</span>
         </div>
 
+<div className={styles.spaceunder}></div>
+
         <div className={styles.priceRow}>
           <div>
             <h2>{property.price}</h2>

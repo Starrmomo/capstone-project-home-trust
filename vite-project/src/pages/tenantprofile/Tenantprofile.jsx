@@ -94,43 +94,51 @@ export default function Profile() {
       </div>
 
       {/* Bottom Navigation */}
-      <div className={styles.bottomNav}>
-        <div
-          className={styles.navItem}
-          onClick={() => navigate(routes.home)}
-        >
-          <span>🏠</span>
-          <p>Home</p>
-        </div>
-        <div
-          className={styles.navItem}
-          onClick={() => navigate(routes.search)}
-        >
-          <span>🔍</span>
-          <p>Search</p>
-        </div>
-        <div
-          className={styles.navItem}
-          onClick={() => navigate(routes.saved)}
-        >
-          <span>♡</span>
-          <p>Saved</p>
-        </div>
-        <div
-          className={styles.navItem}
-          onClick={() => navigate(routes.chat)}
-        >
-          <span>💬</span>
-          <p>Chat</p>
-        </div>
-        <div
-          className={`${styles.navItem} ${styles.active}`}
-          onClick={() => navigate(routes.profile)}
-        >
-          <span>👤</span>
-          <p>Profile</p>
-        </div>
+  
+    <div className={styles.bottomNav}>
+      <div
+        className={styles.navItem}
+        onClick={() => navigate("/home")}
+      >
+        <span>🏠</span>
+        <p>Home</p>
       </div>
+
+      <div
+        className={styles.navItem}
+        onClick={() => navigate("/search")}
+      >
+        <span>🔍</span>
+        <p>Search</p>
+      </div>
+
+      <div
+        className={styles.navItem}
+        onClick={() => navigate("/saved")}
+      >
+        <span>♡</span>
+        <p>Saved</p>
+      </div>
+
+      <div
+        className={styles.navItem}
+        onClick={() => navigate("/chat")}
+      >
+        <span>💬</span>
+        <p>Chat</p>
+      </div>
+
+      <div
+        className={styles.navItem}
+        onClick={() => navigate("/profile")}
+      >
+        <span>👤</span>
+        <p>Profile</p>
+      </div>
+    </div>
+
+         
     </div>
   );
 }
+

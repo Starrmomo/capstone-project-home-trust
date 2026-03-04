@@ -59,11 +59,17 @@
   gap: 16px;
   font-size: 12px;
   color: gray;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 
 }
+.spaceunder{
+  border-bottom: 1px solid #EFEEF0;
+}
+
+
 
 .priceRow {
+  margin-top: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -102,6 +108,7 @@ color: #EAB308;
    padding-right:9px ;
    padding-bottom:4px ;
    padding-top:4px ;
+   font-size: small;
 }
 
 

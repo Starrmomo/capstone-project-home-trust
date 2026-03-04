@@ -1,11 +1,14 @@
 /* FULL WIDTH RESPONSIVE VERSION */
+/* MOBILE FIRST CENTERED CARD */
 
 .wrapper {
-  min-height: 100vh;
   width: 100%;
-  background: #f8fafc;
-  padding: 40px 60px;
+  max-width: 430px;   /* 🔥 mobile card width */
+  min-height: 100vh;
+  margin: 0 auto;     /* 🔥 centers on desktop automatically */
+  padding: 20px;
   box-sizing: border-box;
+  background: #f8fafc;
   font-family: sans-serif;
 }
 

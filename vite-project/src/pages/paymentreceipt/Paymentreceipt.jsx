@@ -2,6 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import html2canvas from "html2canvas";
 import styles from "./Paymentreceipt.module.css";
+import { FiInfo } from "react-icons/fi";
+import Security from '../../assets/Icon/FundsShield.svg?react';
+import Location from '../../assets/Icon/location.svg?react';
+import CardPayment from '../../assets/Icon/CardPayment.svg?react';
+
+
+
+
 
 const PaymentReceipt = () => {
   const navigate = useNavigate();
@@ -31,38 +39,40 @@ const PaymentReceipt = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.card} id="receiptCard">
-        
-        {/* Header */}
-        <div className={styles.header}>
-          <span className={styles.backIcon} onClick={handleBack}>←</span>
-          <h2>Payment Receipt</h2>
-        </div>
+        <div className={styles.firstcard} >
+          {/* Header */}
+          <div className={styles.header}>
+            <span className={styles.backIcon} onClick={handleBack}>←</span>
+            <h2>Payment Receipt</h2>
+          </div>
 
-        {/* 🔥 HOUSE IMAGE (Top Banner) */}
-        <img
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
-          alt="House"
-          className={styles.bannerImage}
-        />
+          {/* 🔥 HOUSE IMAGE (Top Banner) */}
+          <img
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+            alt="House"
+            className={styles.bannerImage}
+          />
 
-        {/* Property Name */}
-        <div className={styles.propertyHeader}>
-          <h3>Greenview Estate, Lekki</h3>
-          <p className={styles.location}>📍 Lekki Phase 1, Lagos</p>
-        </div>
+          {/* Property Name */}
+          <div className={styles.propertyHeader}>
+            <h3>Greenview Estate, Lekki</h3>
+            <p className={styles.location}><Location /> Lekki Phase 1, Lagos</p>
+          </div>
 
-        {/* 🔥 Caution Deposit Protected Box */}
-        <div className={styles.protectedBox}>
-          <span className={styles.shield}>🛡</span>
-          <div>
-            <h4>Caution Deposit Protected</h4>
-            <p>
-              Your caution deposit of ₦250,000 is fully protected by HomeTrust Escrow.
-            </p>
+          {/* 🔥 Caution Deposit Protected Box */}
+          <div className={styles.protectedBox}>
+            <span className={styles.shield}></span>
+            <div className={styles.text}  >
+              <div className={styles.shieldimg}  > <Security /> <h4>Caution Deposit Protected</h4></div>
+
+              <p>
+                Your caution deposit of ₦250,000 is fully protected by HomeTrust Escrow.
+              </p>
+            </div>
           </div>
         </div>
-
         {/* Property Card With Small Image */}
+
         <div className={styles.propertyCard}>
           <img
             src="https://images.unsplash.com/photo-1600585154526-990dced4db0d"
@@ -71,7 +81,7 @@ const PaymentReceipt = () => {
           />
           <div>
             <h4>3‑Bedroom Apartment</h4>
-            <p className={styles.location}>📍 Lekki Phase 1, Lagos</p>
+            <p className={styles.location}><Location /> Lekki Phase 1, Lagos</p>
           </div>
         </div>
 
@@ -91,9 +101,9 @@ const PaymentReceipt = () => {
           <div className={styles.rowBetween}>
             <div>
               <span className={styles.label}>Payment Method</span>
-              <p className={styles.value}>💳 Mastercard **** 4242</p>
+              <p className={styles.value}> <CardPayment className={styles.icon} /> Mastercard **** 4242</p>
             </div>
-            <div>
+            <div className={styles.rowBetween2} >
               <span className={styles.label}>Status</span>
               <span className={styles.paidBadge}>Paid</span>
             </div>
@@ -103,7 +113,7 @@ const PaymentReceipt = () => {
         {/* Payment Breakdown */}
         <div className={styles.breakdown}>
           <div className={styles.row}>
-            <span>
+            <span className={styles.rowBetween2}>
               Caution Deposit
               <span className={styles.escrowTag}>● Held in Escrow</span>
             </span>
@@ -123,24 +133,29 @@ const PaymentReceipt = () => {
 
         {/* Total */}
         <div className={styles.totalBox}>
-          <span>Total Amount Paid</span>
+          <span className={styles.totalAmount2}>Total Amount Paid</span>
           <span className={styles.totalAmount}>₦14,000.00</span>
         </div>
 
+
+
         {/* Buttons At Bottom */}
-        <button 
+        <button
           className={styles.primaryButton}
           onClick={handleDownload}
         >
           ⬇ Download PDF Receipt
         </button>
 
-        <button 
+        <button
           className={styles.secondaryButton}
           onClick={handleDone}
         >
           Done
         </button>
+        
+        <p className={styles.lasttext} > <FiInfo/> Issues with this transaction? Contact<span>Support</span>within 24
+          hours.</p>
 
       </div>
     </div>
