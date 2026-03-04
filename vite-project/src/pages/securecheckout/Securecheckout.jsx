@@ -4,7 +4,7 @@ import styles from "./Securecheckout.module.css";
 import Banktransfer from '../../assets/Icon/BankTransfer.svg?react';
 import CardPayment from '../../assets/Icon/CardPayment.svg?react';
 import Fundsheild from '../../assets/Icon/FundsShield.svg?react';
-import Flutterwave from '../../assets/Icon/FlutterWave.svg?react';
+import Flutterwave from '../../assets/Icon/Flutterwave.svg?react';
 import Padlock from '../../assets/Icon/PadlockWhite.svg?react';
 import Green from '../../assets/Icon/VerifiedGreen.svg?react';
 
