@@ -45,18 +45,33 @@ export default function Uploadid() {
         body: formData,
       });
 
+      // Backend may return 200 OK but indicate failure in the body (e.g. status: "failed")
+      const contentType = response.headers.get("content-type");
+      let data = null;
+      if (contentType && contentType.includes("application/json")) {
+        const text = await response.text();
+        if (text) {
+          try {
+            data = JSON.parse(text);
+          } catch {
+            data = { message: "Invalid response from server." };
+          }
+        }
+      }
+
       if (!response.ok) {
-        let errorMessage = "Verification failed.";
-        try {
-          const errorData = await response.json();
-          errorMessage = errorData.message || errorMessage;
-        } catch { }
+        const errorMessage = data?.message || "Verification failed.";
         throw new Error(errorMessage);
       }
 
-      const data = await response.json();
+      // Treat as success if backend indicates it (support common response shapes)
+      const isSuccess =
+        data?.status === "success" ||
+        data?.verified === true ||
+        data?.success === true ||
+        data?.status === "verified";
 
-      if (data.status === "success") {
+      if (isSuccess) {
         setMessage("Verification Successful ✅");
 
         const role = localStorage.getItem("role");
@@ -67,7 +82,8 @@ export default function Uploadid() {
           else navigate("/");
         }, 1500);
       } else {
-        setMessage(data.message || "Verification Failed ❌");
+        // 200 OK but verification failed (e.g. unclear document)
+        setMessage(data?.message || "Verification Failed ❌");
       }
 
     } catch (error) {
