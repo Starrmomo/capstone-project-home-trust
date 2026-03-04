@@ -231,7 +231,7 @@ import styles from "./propertydetails.module.css";
 import Check from "../../assets/Icon/checkicon.svg?react";
 import Lockicon from "../../assets/Icon/lock icon.svg?react";
 import Location from "../../assets/Icon/location.svg?react";
-import Bath from "../../assets/Icon/2BATHS.svg?react";
+import Bath from "../../assets/Icon/2Baths.svg?react";
 import Bed from "../../assets/Icon/2Beds.svg?react";
 import Cm from "../../assets/Icon/120m.svg?react";
 import Message from "../../assets/Icon/Message.svg?react";
