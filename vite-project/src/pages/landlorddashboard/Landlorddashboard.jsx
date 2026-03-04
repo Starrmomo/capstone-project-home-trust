@@ -11,7 +11,7 @@ import Chat from '../../assets/Icon/chat icon.svg?react';
 import Properties from '../../assets/Icon/properties.svg?react';
 import Home from '../../assets/Icon/dashboard.svg?react';
 
-import Postsearch from '../../assets/Icon/postSearch.svg?react';
+import Postsearch from '../../assets/Icon/PostSearch.svg?react';
 import Managepayment from '../../assets/Icon/ManagePayments.svg?react';
 
 import Homeicon from '../../assets/Icon/homeicon.svg?react';
@@ -110,9 +110,7 @@ const Dashboard = () => {
 
                 <div className={styles.headerIcons}>
                     <span><Bell /></span>
-                    <span className={styles.profileCircle}>
-                        {landlord?.name?.charAt(0) || "L"}
-                    </span>
+
                 </div>
             </header>
 
@@ -143,26 +141,19 @@ const Dashboard = () => {
             {/* ================= QUICK ACTIONS ================= */}
             <section className={styles.section}>
                 <h4>Quick Actions</h4>
-
                 <div className={styles.actions}>
-                    <button
-                        className={`${styles.actionBtn} ${styles.primary}`}
-                        onClick={() => navigate("/properties")}
-                    >
-                        Inspect Property
-                    </button>
-
-                    <button
-                        className={styles.actionBtn}
-                        onClick={() => navigate("/post-listing")}
-                    >
+                    <button className={styles.actionBtn} onClick={() => navigate("/basicinfo")}>
+                        <Homeicon />
                         Post New Listing
                     </button>
 
-                    <button
-                        className={styles.actionBtn}
-                        onClick={() => navigate("/payments")}
-                    >
+                    <button className={`${styles.actionBtn} ${styles.primary}`} onClick={() => navigate("/properties")}>
+                        <Postsearch />
+                        Inspect Property
+                    </button>
+
+                    <button className={styles.actionBtn} onClick={() => navigate("/properties")}>
+                        <Managepayment />
                         Manage Payments
                     </button>
                 </div>
@@ -174,21 +165,26 @@ const Dashboard = () => {
                     <h4>Recent Activity</h4>
                 </div>
 
-                <div className={styles.activityList}>
-                    {notifications.length === 0 ? (
-                        <p>No recent activity.</p>
-                    ) : (
-                        notifications.map((note, index) => (
-                            <div key={index} className={styles.activityItem}>
-                                <div className={styles.iconBlue}>🔔</div>
-                                <div>
-                                    <strong>{note.title}</strong>
-                                    <p>{note.message}</p>
-                                </div>
+                 <div className={styles.activityList}>
+                    {notifications.map((note, index) => (
+                        <div key={index} className={styles.activityItem}>
+
+                            <div className={styles.iconBlue}>
+                                {note.type === "application" && <Newinquiry />}
+                                {note.type === "payment" && <Paymenticon />}
+                                {note.type === "alert" && <Alerticon />}
                             </div>
-                        ))
-                    )}
+
+                            <div className={styles.notifytext}>
+                                <h4>{note.title}</h4>
+                                <p>{note.message}</p>
+                            </div>
+
+                        </div>
+                    ))}
                 </div>
+
+
             </section>
 
             {/* ================= BOTTOM NAV ================= */}
@@ -625,157 +621,157 @@ export default Dashboard;
 
 
 // export default function Dashboard() {
-//   const navigate = useNavigate();
+//     const navigate = useNavigate();
 
-//   // ✅ Dummy landlord
-//   const [landlord] = useState({
-//     name: "John Doe",
-//     profilePicture: null,
-//   });
+//     // ✅ Dummy landlord
+//     const [landlord] = useState({
+//         name: "John Doe",
+//         profilePicture: null,
+//     });
 
-//   // ✅ Dummy properties/payments/notifications
-//   const [properties] = useState([
-//     { id: 1, name: "3 Bedroom House", location: "Ikoyi" },
-//     { id: 2, name: "2 Bedroom Apartment", location: "Lekki" },
-//     { id: 3, name: "Studio Flat", location: "Victoria Island" },
-//   ]);
+//     // ✅ Dummy properties/payments/notifications
+//     const [properties] = useState([
+//         { id: 1, name: "3 Bedroom House", location: "Ikoyi" },
+//         { id: 2, name: "2 Bedroom Apartment", location: "Lekki" },
+//         { id: 3, name: "Studio Flat", location: "Victoria Island" },
+//     ]);
 
-//   const [payments] = useState([
-//     { id: 1, amount: 200000 },
-//     { id: 2, amount: 150000 },
-//     { id: 3, amount: 180000 },
-//   ]);
+//     const [payments] = useState([
+//         { id: 1, amount: 200000 },
+//         { id: 2, amount: 150000 },
+//         { id: 3, amount: 180000 },
+//     ]);
 
-//   const [notifications] = useState([
-//     { title: "New Application", message: "You have a new applicant", type: "application" },
-//     { title: "Payment Received", message: "₦200,000 payment has been confirmed", type: "payment" },
-//     { title: "Maintenance Alert", message: "Plumbing issue reported", type: "alert" },
-//   ]);
+//     const [notifications] = useState([
+//         { title: "New Application", message: "You have a new applicant", type: "application" },
+//         { title: "Payment Received", message: "₦200,000 payment has been confirmed", type: "payment" },
+//         { title: "Maintenance Alert", message: "Plumbing issue reported", type: "alert" },
+//     ]);
 
-//   const totalRent = payments.reduce((acc, item) => acc + item.amount, 0);
+//     const totalRent = payments.reduce((acc, item) => acc + item.amount, 0);
 
-//   const profileImage = landlord.profilePicture
-//     ? landlord.profilePicture
-//     : `https://ui-avatars.com/api/?name=${encodeURIComponent(landlord.name)}&background=0D8ABC&color=fff`;
+//     const profileImage = landlord.profilePicture
+//         ? landlord.profilePicture
+//         : `https://ui-avatars.com/api/?name=${encodeURIComponent(landlord.name)}&background=0D8ABC&color=fff`;
 
-//   return (
-//     <div className={styles.page}>
-//       {/* Header */}
-//       <header className={styles.header}>
-//         <div className={styles.userInfo}>
-//           <img src={profileImage} alt="user" className={styles.avatar} />
-//           <div>
-//             <p className={styles.welcome}>Welcome back,</p>
-//             <h3>{landlord.name}</h3>
-//           </div>
+//     return (
+//         <div className={styles.page}>
+//             {/* Header */}
+//             <header className={styles.header}>
+//                 <div className={styles.userInfo}>
+//                     <img src={profileImage} alt="user" className={styles.avatar} />
+//                     <div>
+//                         <p className={styles.welcome}>Welcome back,</p>
+//                         <h3>{landlord.name}</h3>
+//                     </div>
+//                 </div>
+//                 <div className={styles.headerIcons}>
+//                     <span><Bell /></span>
+
+//                 </div>
+//             </header>
+
+//             {/* Stats */}
+//             <section className={styles.stats}>
+//                 <div className={styles.statCard}>
+//                     <Landlordhouse />
+//                     <p>Active Listings</p>
+//                     <h2>{properties.length}</h2>
+//                 </div>
+//                 <div className={styles.statCard}>
+//                     <Pendingapp />
+//                     <p>Pending Apps</p>
+//                     <h2>
+//                         {notifications.filter(n => n.type === "application").length}
+//                         <span className={styles.dot}></span>
+//                     </h2>
+//                 </div>
+//                 <div className={styles.statCard}>
+//                     <Landlorddollar />
+//                     <p>Rent Collected</p>
+//                     <h2>₦{totalRent.toLocaleString()}</h2>
+//                 </div>
+//             </section>
+
+//             {/* Quick Actions */}
+//             <section className={styles.section}>
+//                 <h4>Quick Actions</h4>
+//                 <div className={styles.actions}>
+//                     <button className={styles.actionBtn} onClick={() => navigate("/basicinfo")}>
+//                         <Homeicon />
+//                         Post New Listing
+//                     </button>
+
+//                     <button className={`${styles.actionBtn} ${styles.primary}`} onClick={() => navigate("/properties")}>
+//                         <Postsearch />
+//                         Inspect Property
+//                     </button>
+
+//                     <button className={styles.actionBtn} onClick={() => navigate("/properties")}>
+//                         <Managepayment />
+//                         Manage Payments
+//                     </button>
+//                 </div>
+//             </section>
+
+//             {/* Recent Activity */}
+//             <section className={styles.section}>
+//                 <div className={styles.sectionHeader}>
+//                     <h4>Recent Activity</h4>
+//                 </div>
+
+//                 <div className={styles.activityList}>
+//                     {notifications.map((note, index) => (
+//                         <div key={index} className={styles.activityItem}>
+
+//                             <div className={styles.iconBlue}>
+//                                 {note.type === "application" && <Newinquiry />}
+//                                 {note.type === "payment" && <Paymenticon />}
+//                                 {note.type === "alert" && <Alerticon />}
+//                             </div>
+
+//                             <div className={styles.notifytext}>
+//                                 <h4>{note.title}</h4>
+//                                 <p>{note.message}</p>
+//                             </div>
+
+//                         </div>
+//                     ))}
+//                 </div>
+
+
+//             </section>
+
+//             {/* Bottom Nav */}
+//             <nav className={styles.bottomNav}>
+//                 <div className={styles.bottomdiv} onClick={() => navigate("/landlorddashboard")}>
+//                     <Home />
+//                     <button className={styles.activeNav}>Dashboard</button>
+//                 </div>
+//                 <div className={styles.bottomdiv} onClick={() => navigate("/properties")}>
+//                     <Properties />
+//                     <button>Properties</button>
+//                 </div>
+//                 <div className={styles.bottomdiv} onClick={() => navigate("/chat")}>
+//                     <Chat />
+//                     <button>Chat</button>
+//                 </div>
+//                 <div className={styles.bottomdiv} onClick={() => navigate("/profile")}>
+//                     <Profile />
+//                     <button>Profile</button>
+//                 </div>
+//             </nav>
 //         </div>
-//         <div className={styles.headerIcons}>
-//           <span><Bell /></span>
-
-//         </div>
-//       </header>
-
-//       {/* Stats */}
-//       <section className={styles.stats}>
-//         <div className={styles.statCard}>
-//           <Landlordhouse />
-//           <p>Active Listings</p>
-//           <h2>{properties.length}</h2>
-//         </div>
-//         <div className={styles.statCard}>
-//           <Pendingapp />
-//           <p>Pending Apps</p>
-//           <h2>
-//             {notifications.filter(n => n.type === "application").length}
-//             <span className={styles.dot}></span>
-//           </h2>
-//         </div>
-//         <div className={styles.statCard}>
-//           <Landlorddollar />
-//           <p>Rent Collected</p>
-//           <h2>₦{totalRent.toLocaleString()}</h2>
-//         </div>
-//       </section>
-
-//       {/* Quick Actions */}
-//       <section className={styles.section}>
-//         <h4>Quick Actions</h4>
-//         <div className={styles.actions}>
-//           <button className={styles.actionBtn} onClick={() => navigate("/basicinfo")}>
-//             <Homeicon />
-//             Post New Listing
-//           </button>
-
-//           <button className={`${styles.actionBtn} ${styles.primary}`} onClick={() => navigate("/properties")}>
-//             <Postsearch />
-//             Inspect Property
-//           </button>
-
-//           <button className={styles.actionBtn} onClick={() => navigate("/properties")}>
-//             <Managepayment />
-//             Manage Payments
-//           </button>
-//         </div>
-//       </section>
-
-//       {/* Recent Activity */}
-//       <section className={styles.section}>
-//         <div className={styles.sectionHeader}>
-//           <h4>Recent Activity</h4>
-//         </div>
-
-//         <div className={styles.activityList}>
-//           {notifications.map((note, index) => (
-//             <div key={index} className={styles.activityItem}>
-
-//               <div className={styles.iconBlue}>
-//                 {note.type === "application" && <Newinquiry />}
-//                 {note.type === "payment" && <Paymenticon />}
-//                 {note.type === "alert" && <Alerticon />}
-//               </div>
-
-//               <div className={styles.notifytext}>
-//                 <h4>{note.title}</h4>
-//                 <p>{note.message}</p>
-//               </div>
-
-//             </div>
-//           ))}
-//         </div>
-
-
-//       </section>
-
-//       {/* Bottom Nav */}
-//       <nav className={styles.bottomNav}>
-//         <div className={styles.bottomdiv} onClick={() => navigate("/landlorddashboard")}>
-//           <Home />
-//           <button className={styles.activeNav}>Dashboard</button>
-//         </div>
-//         <div className={styles.bottomdiv} onClick={() => navigate("/properties")}>
-//           <Properties />
-//           <button>Properties</button>
-//         </div>
-//         <div className={styles.bottomdiv} onClick={() => navigate("/chat")}>
-//           <Chat />
-//           <button>Chat</button>
-//         </div>
-//         <div className={styles.bottomdiv} onClick={() => navigate("/profile")}>
-//           <Profile />
-//           <button>Profile</button>
-//         </div>
-//       </nav>
-//     </div>
-//   );
+//     );
 // }
 
 // {/* Bottom Nav */ }
 // <nav className={styles.bottomNav}>
-//   <div className={styles.bottomdiv} onClick={() => navigate("/landlorddashboard")}>
-//     <Home />
-//     <button className={styles.activeNav}>Dashboard</button>        </div>
+//     <div className={styles.bottomdiv} onClick={() => navigate("/landlorddashboard")}>
+//         <Home />
+//         <button className={styles.activeNav}>Dashboard</button>        </div>
 
-//   /       <div className={styles.bottomdiv} onClick={() => navigate("/properties")}>
+//     /       <div className={styles.bottomdiv} onClick={() => navigate("/properties")}>
 // //           <Properties />
 // //           <button>Properties</button>
 // //         </div>
