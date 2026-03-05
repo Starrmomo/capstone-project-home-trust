@@ -74,11 +74,11 @@ export default function Uploadid() {
       if (isSuccess) {
         setMessage("Verification Successful ✅");
 
-        const role = localStorage.getItem("role");
+        const role = localStorage.getItem("userRole");
 
         setTimeout(() => {
-          if (role === "tenant") navigate("/tenant/dashboard");
-          else if (role === "landlord") navigate("/landlord/dashboard");
+          if (role === "tenant") navigate("/landingpage");
+          else if (role === "landlord") navigate("/landlorddashboard");
           else navigate("/");
         }, 1500);
       } else {
