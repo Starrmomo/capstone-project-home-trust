@@ -6,6 +6,14 @@ import { API } from "../../config"; // ✅ added API import from config
 import Cover from "../../assets/Icon/SetCover.svg?react";
 import Verify from "../../assets/Icon/Verification.svg?react";
 
+// Limits to avoid 413 Payload Too Large (backend may have a lower limit)
+const MAX_IMAGE_SIZE_MB = 2;
+const MAX_UTILITY_SIZE_MB = 5;
+const MAX_IMAGE_SIZE_BYTES = MAX_IMAGE_SIZE_MB * 1024 * 1024;
+const MAX_UTILITY_SIZE_BYTES = MAX_UTILITY_SIZE_MB * 1024 * 1024;
+const MAX_TOTAL_SIZE_MB = 15;
+const MAX_TOTAL_SIZE_BYTES = MAX_TOTAL_SIZE_MB * 1024 * 1024;
+
 export default function AddPropertyCombined() {
   const imageInputRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -26,6 +34,7 @@ export default function AddPropertyCombined() {
     exteriorShot: false,
   });
   const [status, setStatus] = useState("idle"); // idle | pending | verified | error
+  const [fileSizeWarning, setFileSizeWarning] = useState("");
 
   // -------------------------
   // Image Handlers
@@ -33,26 +42,43 @@ export default function AddPropertyCombined() {
   const handleImageClick = () => imageInputRef.current.click();
 
   const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
+    const files = Array.from(e.target.files || []);
+    setFileSizeWarning("");
     setImages((prev) => {
       const updated = [...prev];
+      let skipped = 0;
       files.forEach((file) => {
-        if (updated.length < 6) updated.push(file);
+        if (updated.length >= 6) return;
+        if (file.size > MAX_IMAGE_SIZE_BYTES) {
+          skipped++;
+          return;
+        }
+        updated.push(file);
       });
+      if (skipped > 0) {
+        setFileSizeWarning(`Some images were skipped (max ${MAX_IMAGE_SIZE_MB}MB per image).`);
+      }
       return updated;
     });
   };
 
   const handleRemove = (index) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
+    setFileSizeWarning("");
   };
 
   // -------------------------
   // Utility Bill Handler
   // -------------------------
   const handleUtilityChange = (e) => {
-    const file = e.target.files[0];
-    if (file) setUtilityBillFile(file);
+    const file = e.target.files?.[0];
+    setFileSizeWarning("");
+    if (!file) return;
+    if (file.size > MAX_UTILITY_SIZE_BYTES) {
+      setFileSizeWarning(`Utility bill must be under ${MAX_UTILITY_SIZE_MB}MB.`);
+      return;
+    }
+    setUtilityBillFile(file);
   };
 
   // -------------------------
@@ -68,7 +94,16 @@ export default function AddPropertyCombined() {
   const handleSubmit = async () => {
     if (images.length === 0 || !utilityBillFile || !checklist.exteriorShot) return;
 
+    // Check total size to avoid 413 (backend body limit)
+    const totalBytes = images.reduce((sum, f) => sum + (f?.size || 0), 0) + (utilityBillFile?.size || 0);
+    if (totalBytes > MAX_TOTAL_SIZE_BYTES) {
+      setFileSizeWarning(`Total files are too large (max ${MAX_TOTAL_SIZE_MB}MB). Use smaller images (under ${MAX_IMAGE_SIZE_MB}MB each).`);
+      alert(`Files are too large. Please keep property images under ${MAX_IMAGE_SIZE_MB}MB each and total under ${MAX_TOTAL_SIZE_MB}MB.`);
+      return;
+    }
+
     setStatus("pending");
+    setFileSizeWarning("");
 
     const formData = new FormData();
 
@@ -96,8 +131,20 @@ export default function AddPropertyCombined() {
         { method: "POST", body: formData }
       );
 
+      if (response.status === 413) {
+        setStatus("error");
+        alert("Upload rejected: files are too large. Use images under 2MB each and try again.");
+        return;
+      }
+
       if (!response.ok) {
-        throw new Error("Server error");
+        const errText = await response.text();
+        let errMsg = "Server error";
+        try {
+          const errJson = JSON.parse(errText);
+          errMsg = errJson.message || errMsg;
+        } catch { /* ignore */ }
+        throw new Error(errMsg);
       }
 
       const result = await response.json();
@@ -113,7 +160,13 @@ export default function AddPropertyCombined() {
     } catch (error) {
       console.error(error);
       setStatus("error");
-      alert("Verification failed. Please try again.");
+      // Network/CORS failure often happens when server returns 413 without CORS headers
+      const isNetworkError = error?.name === "TypeError" && (error?.message?.includes("fetch") || error?.message?.includes("network"));
+      if (isNetworkError) {
+        alert("Upload failed. The server may have rejected the request because files are too large. Please use images under 2MB each and try again.");
+      } else {
+        alert(error?.message || "Verification failed. Please try again.");
+      }
     }
   };
 
@@ -152,6 +205,14 @@ export default function AddPropertyCombined() {
       <p className={styles.sectionSub}>
         Upload at least 5 high-quality photos. Listings with clear images get up to 3x more interested renters.
       </p>
+      <p className={styles.sectionSub} style={{ marginTop: 4 }}>
+        Keep each image under {MAX_IMAGE_SIZE_MB}MB to avoid upload errors.
+      </p>
+      {fileSizeWarning && (
+        <p role="alert" style={{ color: "#c00", fontSize: 14, marginTop: 8 }}>
+          {fileSizeWarning}
+        </p>
+      )}
 
       <div className={styles.coverFrame} onClick={handleImageClick}>
         <Cover />
@@ -160,7 +221,7 @@ export default function AddPropertyCombined() {
             <FiCamera size={26} />
           </div>
           <p className={styles.coverText}>Set Cover Image</p>
-          <span className={styles.coverSub}>PNG, JPG up to 10MB</span>
+          <span className={styles.coverSub}>PNG, JPG up to {MAX_IMAGE_SIZE_MB}MB each</span>
         </div>
       </div>
 
