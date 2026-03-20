@@ -10,7 +10,7 @@ import Profile from '../../assets/Icon/profile icon.svg?react';
 import Chat from '../../assets/Icon/chat icon.svg?react';
 import Properties from '../../assets/Icon/properties.svg?react';
 import Home from '../../assets/Icon/dashboard.svg?react';
-import Postsearch from '../../assets/Icon/postSearch.svg?react';
+import Postsearch from '../../assets/Icon/PostSearch.svg?react';
 import Managepayment from '../../assets/Icon/ManagePayments.svg?react';
 
 import Homeicon from '../../assets/Icon/homeicon.svg?react';
