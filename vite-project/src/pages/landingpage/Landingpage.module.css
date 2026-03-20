@@ -2,7 +2,7 @@
 .container {
   width: 100%;
   max-width: 400px;
-  margin: auto;
+  margin: 0 auto ;
   background: white;
   font-family: "Inter", sans-serif;
   padding: 16px;
@@ -291,9 +291,3 @@ font-size: small;
 }
 
 /* ================= Center Only (Like The Others) ================= */
-@media (min-width: 400px) {
-  .container {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-}
