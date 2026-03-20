@@ -1,13 +1,23 @@
-/* ================= Container ================= */
+/* 
+================= Container ================= */
+/* Prevent sideways movement */
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+
 .container {
   width: 100%;
   max-width: 400px;
-  margin: 0 auto ;
+  min-height: 100vh;   /* 🔥 ADD THIS */
+  margin: 0 auto;
   background: white;
   font-family: "Inter", sans-serif;
   padding: 16px;
   padding-bottom: 80px;
   box-sizing: border-box;
+  overflow-x: hidden;  /* 🔥 ADD THIS */
 }
 
 /* ================= Header ================= */
@@ -265,19 +275,9 @@ font-size: small;
 }
 
 /* ================= Bottom Navigation ================= */
-.bottomNav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  max-width: 430px;
-  margin: auto;
-  display: flex;
-  justify-content: space-around;
-  background: white;
-  padding: 10px 0;
-  border-top: 1px solid #e5e7eb;
-}
+
+
+
 
 .navItem {
   text-align: center;
