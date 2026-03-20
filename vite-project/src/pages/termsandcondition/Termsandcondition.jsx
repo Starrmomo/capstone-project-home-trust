@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./termsandcondition.module.css";
+import styles from "./Termsandcondition.module.css";
 import { FiInfo } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
