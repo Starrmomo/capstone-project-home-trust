@@ -74,7 +74,8 @@
 }
 
 .option:hover {
-  border-color: #3b82f6;
+  border-color: #1E5EFE;
+  background-color:#EDF2FF ;
 }
 
 .active {
@@ -132,4 +133,10 @@
 .terms span {
   color: rgba(30, 94, 255, 1);
   cursor: pointer;
+}
+
+.link {
+  color: #0a52f0;
+  text-decoration: none;
+  font-weight: 500;
 }

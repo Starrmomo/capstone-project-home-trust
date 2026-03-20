@@ -1,6 +1,8 @@
 .page {
   width: 100%;
   min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
   background: #f5f6fa;
   display: flex;
   flex-direction: column;
@@ -158,8 +160,6 @@
 
 /* Footer */
 .footer {
-  position: fixed;
-  bottom: 0;
   width: 100%;
   background: #fff;
   padding: 16px;
@@ -184,7 +184,7 @@
 }
 
 /* Desktop */
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .card {
     margin: 24px;
   }
@@ -196,4 +196,4 @@
   .footer {
     padding: 20px 32px;
   }
-}
+} */

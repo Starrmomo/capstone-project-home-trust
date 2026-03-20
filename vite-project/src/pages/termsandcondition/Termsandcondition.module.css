@@ -1,120 +1,227 @@
-.wrapper {
-  background: #f5f6f8;
+.page {
+  width: 100%;
   min-height: 100vh;
+  background: #ffffff;
   display: flex;
   justify-content: center;
-  padding: 20px 15px;
-  font-family: "Inter", sans-serif;
 }
 
-.card {
+.container {
   width: 100%;
-  max-width: 390px;
-  background: #ffffff;
-  border-radius: 18px;
+  max-width: 430px;
   padding: 20px;
+  box-sizing: border-box;
 }
+
+/* Header */
 
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 25px;
+  gap: 25px;
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 
-.backIcon {
-  font-size: 18px;
+.back {
+  font-size: 20px;
   cursor: pointer;
 }
 
-.header h3 {
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  flex: 1;
-}
+/* Icon */
 
-.iconContainer {
+.iconWrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-}
-
-.shieldIcon {
-  font-size: 60px;
-}
-
-.title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.paragraph {
-  font-size: 14px;
-  color: #777;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.section {
-  margin-bottom: 25px;
-}
-
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   margin-bottom: 10px;
 }
 
-.numberBox {
-  width: 28px;
-  height: 28px;
-  background: #2f6df6;
-  color: white;
-  border-radius: 8px;
+.shield {
+  width: 20px;
+  font-size: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.shield img {
+  width: 120px;
+  height:120px ;
+}
+
+
+/* Text */
+
+.title {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.description {
   font-size: 14px;
-  font-weight: 600;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-bottom: 25px;
 }
 
-.section h4 {
-  font-size: 16px;
-  font-weight: 600;
+/* Section */
+
+.section {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
-.checkboxRow {
+.number {
+  min-width: 28px;
+  height: 28px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  font-size: 13px;
-  color: #555;
+  justify-content: center;
+  
 }
 
-.checkboxRow input {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
+.section h3 {
+  font-size: 16px;
+  margin-bottom: 16px;
 }
+
+.section p {
+  font-size: 13px;
+  color: #6b7280;
+}
+.sectionp {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.section ul {
+  padding-left: 18px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.sectiontext{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.strong{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2563eb;
+  margin-bottom: 10px;
+  
+}
+.strong2{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2563eb;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+/* Card */
+
+.card {
+  background: #eaf1ff;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+  border: 1px solid #D3DFFF ;
+
+  
+}
+.card2 {
+  background: #F9FBFD;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+  border: 1px solid #D3DFFF ;
+
+  
+}
+
+.obligation{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.obligation1{
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+
+/* Email */
+
+.email {
+  color: #2563eb;
+  margin-top: 6px;
+}
+
+/* Subtitle */
+
+.subtitle {
+  margin-top: 30px;
+  margin-bottom: 16px;
+}
+
+/* Table */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background: #f9fafb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table td {
+  padding: 10px;
+  font-size: 13px;
+  border-bottom: 1px solid #eee;
+}
+
+
+
+
+
+
+/* Agree */
+
+.agree {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-top: 50px;
+  
+}
+
+/* Button */
 
 .button {
   width: 100%;
+  margin-top: 14px;
   padding: 14px;
-  background: #cbd5f5;
   border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 600;
+  background: #2563eb;
   color: white;
-  cursor: not-allowed;
-  transition: 0.3s ease;
-}
-
-.activeButton {
-  background: linear-gradient(135deg, #4f7df3, #2f6df6);
+  border-radius: 10px;
+  font-size: 15px;
   cursor: pointer;
 }

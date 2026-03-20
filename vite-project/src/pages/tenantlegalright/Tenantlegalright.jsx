@@ -1,81 +1,73 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./Tenantlegalright.module.css";
-import {
-  ShieldCheck,
-  Volume2,
-  Calendar,
-  FileText,
-  AlertTriangle,
-  Receipt,
-  CreditCard,
-} from "lucide-react";
+import { FiArrowLeft, FiDownload } from "react-icons/fi";
+import { FiShield } from "react-icons/fi";
+import { FiBellOff } from "react-icons/fi";
+import { FiCheckCircle } from "react-icons/fi";
+import { FiFileText } from "react-icons/fi";
+import { FiActivity } from "react-icons/fi";
+import { FiAlertTriangle } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
+
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
+//import Homeicon from '../../assets/Icon/properties.svg?react';
+import Judge from '../../assets/Icon/judge.svg?react';
+//import Homeicon from '../../assets/Icon/properties.svg?react';
 
 export default function LegalRights() {
+
+  const pageRef = useRef();
   const navigate = useNavigate();
 
-  // 🔙 Back button navigation
-  const handleBack = () => {
-    navigate("/search"); // Replace with your desired back link
-  };
+  const handleDownload = async () => {
+    const element = pageRef.current;
 
-  // ⬇️ Download button functionality
-  const handleDownload = () => {
-    // Create a blob with your legal rights content
-    const content = `
-HomeTrust Tenancy Rights Guide
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
 
-1. Fundamental Protections
-- Exclusive Possession: You have the legal right to exclusive use of the rental premises during your lease period.
-- Quiet Enjoyment: Landlords cannot interfere with your peaceful possession and must give reasonable notice before entry.
+    const pdf = new jsPDF("p", "mm", "a4");
 
-2. Statutory Notice Periods
-- Weekly Tenant: 7 days notice
-- Monthly Tenant: 1 month notice
-- Half-Yearly Tenant: 3 months notice
-- Yearly Tenant: 6 months notice
+    const imgWidth = 210;
+    const pageHeight = 295;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-3. Rent & Receipts
-- A landlord is required to issue an official receipt for every rent payment.
-- Rent increases must be reasonable and agreed upon before implementation.
+    let heightLeft = imgHeight;
+    let position = 0;
 
-4. Fair Hearing & Eviction
-- Eviction Warning: Your landlord cannot forcefully evict you without a valid court order.
-`;
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
 
-    const blob = new Blob([content], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "HomeTrust_Legal_Rights.txt"; // file name for download
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
 
-  // ➡️ Proceed to Secure Checkout
-  const handleProceedToPayment = () => {
-    navigate("/securecheckout"); // Replace with your SecureCheckout route
+    pdf.save("HomeTrust-Tenant-Legal-Rights.pdf");
   };
 
   return (
-    <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <button className={styles.backBtn} onClick={handleBack}>
-          ←
-        </button>
-        <h3>Your Legal Rights</h3>
-        <button className={styles.downloadBtn} onClick={handleDownload}>
-          ⤓
-        </button>
-      </header>
+    <div className={styles.container} ref={pageRef}>
 
-      {/* Intro */}
-      <div className={styles.intro}>
-        <div className={styles.iconWrapper}>
-          <ShieldCheck size={28} />
+      {/* Header */}
+      <div className={styles.header}>
+        <FiArrowLeft size={20} />
+        <h3>Your Legal Rights</h3>
+        <FiDownload size={20} onClick={handleDownload} style={{ cursor: "pointer" }} />
+      </div>
+
+      {/* Title Section */}
+      <div className={styles.titleSection}>
+        <div className={styles.iconBox}>
+          <Judge />
         </div>
+
         <h1>HomeTrust Tenancy Rights Guide</h1>
+
         <p>
           Empowering Nigerian tenants with essential legal knowledge to ensure
           fair treatment, security, and peace of mind in every home.
@@ -83,40 +75,40 @@ HomeTrust Tenancy Rights Guide
       </div>
 
       {/* Section 1 */}
-      <section className={styles.section}>
+      <div className={styles.section}>
         <div className={styles.sectionTitle}>
           <span className={styles.badge}>1</span>
-          <h2>Fundamental Protections</h2>
+          <h4>Fundamental Protections</h4>
         </div>
 
         <div className={styles.card}>
-          <ShieldCheck size={20} />
+          <FiShield className={styles.cardIcon} />
           <div>
-            <h4>Exclusive Possession</h4>
+            <h5>Exclusive Possession</h5>
             <p>
-              You have the legal right to exclusive use of the rental premises
-              during your lease period.
+              You have the legal right to exclusive use of the rented premises
+              during your lease period, barring emergency access.
             </p>
           </div>
         </div>
 
         <div className={styles.card}>
-          <Volume2 size={20} />
+          <FiBellOff className={styles.cardIcon} />
           <div>
-            <h4>Quiet Enjoyment</h4>
+            <h5>Quiet Enjoyment</h5>
             <p>
-              Landlords cannot interfere with your peaceful possession and must
-              give reasonable notice before entry.
+              Landlords cannot interfere with your privacy or peace. Inspections
+              require valid legal notice (usually 24-48 hours).
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Section 2 */}
-      <section className={styles.section}>
+      <div className={styles.section}>
         <div className={styles.sectionTitle}>
           <span className={styles.badge}>2</span>
-          <h2>Statutory Notice Periods</h2>
+          <h4>Statutory Notice Periods</h4>
         </div>
 
         <div className={styles.noticeBox}>
@@ -125,76 +117,95 @@ HomeTrust Tenancy Rights Guide
             periods apply:
           </p>
 
-          <ul>
-            <li>
-              <strong>Weekly Tenant:</strong> 7 days notice
-            </li>
-            <li>
-              <strong>Monthly Tenant:</strong> 1 month notice
-            </li>
-            <li>
-              <strong>Half-Yearly Tenant:</strong> 3 months notice
-            </li>
-            <li>
-              <strong>Yearly Tenant:</strong> 6 months notice
-            </li>
-          </ul>
+          <div className={styles.noticetext} >
+            <strong><FiCheckCircle color="blue" size={13} /> Weekly Tenant:</strong>
+            <span>7 days' notice to quit.</span>
+          </div>
+
+          <div className={styles.noticetext} >
+            <strong><FiCheckCircle color="blue" size={13} /> Monthly Tenant:</strong>
+            <span>1 month's notice to quit.</span>
+          </div>
+
+          <div className={styles.noticetext}>
+            <strong><FiCheckCircle color="blue" size={13} /> Half-Yearly Tenant:</strong>
+            <span>3 months' notice to quit.</span>
+          </div>
+
+          <div className={styles.noticetext} >
+            <strong><FiCheckCircle color="blue" size={13} /> Yearly Tenant:</strong>
+            <span>6 months' notice to quit.</span>
+          </div>
+
         </div>
-      </section>
+      </div>
 
       {/* Section 3 */}
-      <section className={styles.section}>
+      <div className={styles.section}>
         <div className={styles.sectionTitle}>
           <span className={styles.badge}>3</span>
-          <h2>Rent & Receipts</h2>
+          <h4>Rent & Receipts</h4>
         </div>
 
-        <div className={styles.simpleItem}>
-          <Receipt size={18} />
+        <div className={styles.listItem}>
+          <FiFileText className={styles.cardIcon} />
           <p>
-            A landlord is required to issue an official receipt for every rent
-            payment.
+            It is your right to be issued an <b>official receipt</b> upon payment
+            of rent. The receipt must state the date, amount, premises, and
+            period covered.
           </p>
         </div>
 
-        <div className={styles.simpleItem}>
-          <FileText size={18} />
+        <div className={styles.listItem}>
+          <FiActivity className={styles.cardIcon} />
           <p>
-            Rent increases must be reasonable and agreed upon before
-            implementation.
+            Rent increases must be <b>reasonable</b> and agreed upon. Landlords
+            cannot unilaterally double rent without proper negotiation and
+            notice.
           </p>
         </div>
-      </section>
+      </div>
 
       {/* Section 4 */}
-      <section className={styles.section}>
+      <div className={styles.section}>
         <div className={styles.sectionTitle}>
           <span className={styles.badge}>4</span>
-          <h2>Fair Hearing & Eviction</h2>
+          <h4>Fair Hearing & Eviction</h4>
         </div>
 
         <div className={styles.warningBox}>
-          <AlertTriangle size={20} />
-          <div>
-            <h4>Eviction Warning</h4>
-            <p>
-              Your landlord cannot forcefully evict you without a valid court
-              order.
-            </p>
+          <div className={styles.warningHeader}>
+            <FiAlertTriangle />
+            <span>Crucial Protection</span>
+          </div>
+
+          <p>
+            "Self-help" is illegal. A landlord cannot forcefully eject you,
+            remove your roof, or lock you out without a court order.
+          </p>
+
+          <div className={styles.subWarning}>
+            Even after a notice to quit expires, a landlord must still serve a
+            "7-day notice of owner's intention to apply to court" before legal
+            proceedings begin.
           </div>
         </div>
-      </section>
-
-      {/* Bottom Button */}
-      <div className={styles.bottom}>
-        <button
-          className={styles.paymentBtn}
-          onClick={handleProceedToPayment}
-        >
-          <CreditCard size={18} />
-          Proceed to Payment
-        </button>
       </div>
+
+      {/* Disclaimer */}
+      <p className={styles.disclaimer}>
+        Disclaimer: The information provided in this guide is for educational
+        purposes only and does not constitute formal legal advice. While we
+        strive for accuracy, laws may vary by state and specific
+        circumstances. Please consult a qualified legal professional for your
+        specific case.
+      </p>
+
+      {/* Button */}
+      <button className={styles.button} onClick={() => navigate(-1)}>
+        <FiLock /> Proceed to Payment
+      </button>
+
     </div>
   );
 }

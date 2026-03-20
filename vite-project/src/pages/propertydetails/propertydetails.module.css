@@ -242,10 +242,8 @@ border-bottom: 1px solid #F4F4F4;
 /* ============================= */
 
 .bottomActions {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  
+  
 
   width: 100%;
   max-width: 430px;   /* 🔥 Match container */

@@ -1,5 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Tenantprofile.module.css";
+import Chat from '../../assets/Icon/chat icon.svg?react';
+import Properties from '../../assets/Icon/profile icon.svg?react';
+import Home from '../../assets/Icon/dashboard.svg?react';
+import Postsearch from '../../assets/Icon/postSearch.svg?react';
+import Savedicon from '../../assets/Icon/savedicon.svg?react';
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -98,9 +103,9 @@ export default function Profile() {
     <div className={styles.bottomNav}>
       <div
         className={styles.navItem}
-        onClick={() => navigate("/home")}
+        onClick={() => navigate("/landingpage")}
       >
-        <span>🏠</span>
+        <span><Home/></span>
         <p>Home</p>
       </div>
 
@@ -108,7 +113,7 @@ export default function Profile() {
         className={styles.navItem}
         onClick={() => navigate("/search")}
       >
-        <span>🔍</span>
+        <span><Postsearch/></span>
         <p>Search</p>
       </div>
 
@@ -116,23 +121,23 @@ export default function Profile() {
         className={styles.navItem}
         onClick={() => navigate("/saved")}
       >
-        <span>♡</span>
+        <span><Savedicon/></span>
         <p>Saved</p>
       </div>
 
       <div
         className={styles.navItem}
-        onClick={() => navigate("/chat")}
+        onClick={() => navigate("/chatbox")}
       >
-        <span>💬</span>
+        <span><Chat/></span>
         <p>Chat</p>
       </div>
 
       <div
         className={styles.navItem}
-        onClick={() => navigate("/profile")}
+        onClick={() => navigate("/tenantprofile")}
       >
-        <span>👤</span>
+        <span><Properties/></span>
         <p>Profile</p>
       </div>
     </div>

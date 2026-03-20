@@ -62,10 +62,11 @@ const AddProperty = () => {
   };
 
   return (
-    <div className={styles.container}>
+<div  className={styles.container} >
+    <div >
       {/* Header */}
       <div className={styles.header}>
-        <span className={styles.backArrow} onClick={handleBack}> <FiArrowLeft/></span>
+        <span className={styles.backArrow} onClick={handleBack}> <FiArrowLeft /></span>
         <h2>Add New Property</h2>
       </div>
 
@@ -132,52 +133,52 @@ const AddProperty = () => {
 
       {/* Amenities */}
       <h4 className={styles.sectionTitle}>Common Amenities</h4>
-<div className={styles.card}>
-  {Object.entries({
-    power: {
-      icon: <Powersupply />,
-      name: "24/7 Power Supply",
-      desc: "Generator or Solar Backup",
-    },
-    water: {
-      icon: <Borehole />,
-      name: "Borehole Water",
-      desc: "Treated constant water",
-    },
-    wifi: {
-      icon: <Wifi />,
-      name: "High-speed WiFi",
-      desc: "Fiber optics available",
-    },
-    security: {
-      icon: <Security />,
-      name: "24/7 Gated Security",
-      desc: "CCTV and Uniformed Guards",
-    },
-  }).map(([key, val]) => (
-    <div className={`${styles.amenityCard} ${styles[key]}`} key={key}>
-      <div className={styles.amenityRow}>
-        <div className={styles.leftGroup}>
-          <div className={styles.iconBox}>{val.icon}</div>
-          <div>
-            <p>{val.name}</p>
-            <small>{val.desc}</small>
-          </div>
-        </div>
+      <div className={styles.card}>
+        {Object.entries({
+          power: {
+            icon: <Powersupply />,
+            name: "24/7 Power Supply",
+            desc: "Generator or Solar Backup",
+          },
+          water: {
+            icon: <Borehole />,
+            name: "Borehole Water",
+            desc: "Treated constant water",
+          },
+          wifi: {
+            icon: <Wifi />,
+            name: "High-speed WiFi",
+            desc: "Fiber optics available",
+          },
+          security: {
+            icon: <Security />,
+            name: "24/7 Gated Security",
+            desc: "CCTV and Uniformed Guards",
+          },
+        }).map(([key, val]) => (
+          <div className={`${styles.amenityCard} ${styles[key]}`} key={key}>
+            <div className={styles.amenityRow}>
+              <div className={styles.leftGroup}>
+                <div className={styles.iconBox}>{val.icon}</div>
+                <div>
+                  <p>{val.name}</p>
+                  <small>{val.desc}</small>
+                </div>
+              </div>
 
-        <label className={styles.switch}>
-          <input
-            type="checkbox"
-            checked={amenities[key]}
-            onChange={() => toggleAmenity(key)}
-          />
-          <span className={styles.slider}></span>
-        </label>
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  checked={amenities[key]}
+                  onChange={() => toggleAmenity(key)}
+                />
+                <span className={styles.slider}></span>
+              </label>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-      
+
       {/* Location / Description */}
       <h4 className={styles.sectionTitle}>Location</h4>
       <textarea
@@ -201,6 +202,7 @@ const AddProperty = () => {
           Continue
         </button>
       </div>
+    </div>
     </div>
   );
 };

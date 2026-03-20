@@ -1,5 +1,15 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  background: #f4f6f8;
+}
+
+
 .container {
   width: 100%;
+   max-width: 480px;   /* keeps it mobile width */
+  margin: 0 auto; 
   min-height: 100vh;
   padding: 20px 16px 40px 16px;
   box-sizing: border-box;

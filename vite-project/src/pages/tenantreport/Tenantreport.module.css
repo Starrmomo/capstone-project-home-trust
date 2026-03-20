@@ -1,6 +1,8 @@
 .container {
   width: 100%;
   min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
   padding: 20px 16px 40px 16px;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;

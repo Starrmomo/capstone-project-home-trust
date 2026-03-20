@@ -1,18 +1,22 @@
+
+
+
 .container {
   width: 100%;
+  max-width: 680px;
   padding: 16px;
-  font-family:  "Inter" sans-serif;
+  font-family: "Inter", sans-serif;
   background: #ffffff;
   min-height: 100vh;
   box-sizing: border-box;
-  margin: 0 auto; /* ensures it's centered */
+  margin: 0 auto;
 }
 
 /* Header */
 .header {
   display: flex;
   align-items: center;
-  gap: 100px;
+gap: 50px;
   margin-bottom: 16px;
 }
 
@@ -156,7 +160,7 @@ font-size: small;
 .leftGroup {
   display: flex;
   align-items: center;
-  gap: 12px; /* space between icon and text */
+  gap: 12px;
 }
 
 .amenityRow p {
@@ -269,7 +273,6 @@ font-size: small;
   border-radius: 8px;
 }
 
-/* Individual designs */
 .power {
   background-color: white;
 }
@@ -284,12 +287,4 @@ font-size: small;
 
 .security {
   background-color: white;
-}
-
-/* Media Query - Center on wider screens */
-@media (min-width: 568px) {
-  .container {
-    max-width: 450px;
-    margin: 0 auto; /* centers the container */
-  }
 }
