@@ -13,7 +13,7 @@ body {
 /* MAIN CONTAINER */
 .container {
   width: 100%;
-  max-width: 430px; /* mobile card width */
+  max-width: 400px; /* mobile card width */
   background: #fff;
   border-radius: 20px;
   padding: 20px;

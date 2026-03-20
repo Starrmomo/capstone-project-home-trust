@@ -212,9 +212,9 @@
 }
 
 /* Media Query - Center the page for wider screens */
-@media (min-width: 568px) {
+@media (min-width: 500px) {
     .page {
-        max-width: 500px;
+        max-width: 400px;
         margin: 0 auto;
     }
 }

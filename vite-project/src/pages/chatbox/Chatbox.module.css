@@ -18,7 +18,7 @@
 /* CARD - MOBILE FIRST */
 .card {
   width: 100%;
-  max-width: 430px;   /* Mobile width */
+  max-width: 400px;   /* Mobile width */
   height: 100vh;
   max-height: 900px;  /* Prevent too tall on desktop */
   background: #fff;

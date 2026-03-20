@@ -2,7 +2,7 @@
 
 .container {
   width: 100%;
-  max-width: 530px;   /* 🔥 Mobile card width */
+  max-width: 400px;   /* 🔥 Mobile card width */
   min-height: 100vh;
   margin: 0 auto;     /* 🔥 Centers on bigger screens */
   padding: 16px;

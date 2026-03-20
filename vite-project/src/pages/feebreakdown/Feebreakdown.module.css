@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  max-width: 430px; /* mobile screen width */
+  max-width: 400px; /* mobile screen width */
   min-height: 100vh;
   margin: 0 auto; /* center on screen */
   padding: 16px;

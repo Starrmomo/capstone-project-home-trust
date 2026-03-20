@@ -13,7 +13,7 @@ body {
 /* WRAPPER */
 .wrapper {
   width: 100%;
-  max-width: 430px;
+  max-width: 400px;
   /* mobile width */
   display: flex;
   justify-content: center;

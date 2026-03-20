@@ -3,7 +3,7 @@
 
 .wrapper {
   width: 100%;
-  max-width: 430px;   /* 🔥 mobile card width */
+  max-width: 400px;   /* 🔥 mobile card width */
   min-height: 100vh;
   margin: 0 auto;     /* 🔥 centers on desktop automatically */
   padding: 20px;

@@ -7,7 +7,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 480px;   /* mobile width */
+  max-width: 400px;   /* mobile width */
   margin: 0 auto;
   min-height: 100vh;
   padding: 20px 16px 16px;
