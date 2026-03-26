@@ -38,6 +38,7 @@ export default function Signup() {
     termsAccepted &&
     isPasswordValid(formData.password);
 
+    
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isFormValid) {
@@ -66,6 +67,15 @@ export default function Signup() {
       const data = await response.json();
 
       if (response.ok) {
+        // 🔥 ADDED: Trigger email OTP request
+        await fetch(`${API}/phone-verification/request`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: formData.email,
+          }),
+        });
+
         navigate("/verify-email", { state: { email: formData.email } });
       } else {
         setErrorMessage(data.message || "Signup failed. Please try again.");
@@ -179,8 +189,8 @@ export default function Signup() {
             {loading
               ? "Creating Account..."
               : role === "tenant"
-              ? "Create Tenant Account"
-              : "Create Landlord Account"}
+                ? "Create Tenant Account"
+                : "Create Landlord Account"}
           </button>
         </form>
 

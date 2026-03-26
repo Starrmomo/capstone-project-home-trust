@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiInfo} from "react-icons/fi";
+import { FiInfo } from "react-icons/fi";
 import styles from "./propertydetails.module.css";
 import Check from "../../assets/Icon/checkicon.svg?react";
 import Lockicon from "../../assets/Icon/lock icon.svg?react";
@@ -13,8 +13,6 @@ import Padlock from "../../assets/Icon/Padlock.svg?react";
 import Trust from "../../assets/Icon/TrustScore.svg?react";
 import Verified from "../../assets/Icon/Verified.svg?react";
 import Backicon from "../../assets/Icon/backicon.svg?react";
-
-
 
 export default function PropertyDetails() {
   const navigate = useNavigate();
@@ -69,13 +67,12 @@ export default function PropertyDetails() {
     property.legalFee +
     property.caution;
 
-  // 🔹 Navigate to Payment Page (replace "/payment-page" with your link)
   const handlePayment = () => {
     setPaymentProcessing(true);
     setTimeout(() => {
       setPaymentProcessing(false);
-      navigate("/securecheckout"); // <-- PUT YOUR PAYMENT PAGE LINK HERE
-    }, 500); // processing delay
+      navigate("/securecheckout"); // tenant-only payment page
+    }, 500);
   };
 
   const goToChat = () => {
@@ -114,22 +111,16 @@ export default function PropertyDetails() {
         <div className={styles.topIcons}>
           <button
             className={styles.backBtn}
-            onClick={() => navigate("/search")} // <-- back to home route
+            onClick={() => navigate("/search")}
           >
-            <Backicon/>
+            <Backicon />
           </button>
 
           <div className={styles.rightIcons}>
-            <button
-              className={styles.shareBtn}
-              onClick={() => alert("Shared!")}
-            >
+            <button className={styles.shareBtn} onClick={() => alert("Shared!")}>
               🔗
             </button>
-            <button
-              className={styles.loveBtn}
-              onClick={() => alert("Added to favorites!")}
-            >
+            <button className={styles.loveBtn} onClick={() => alert("Added to favorites!")}>
               ❤️
             </button>
           </div>
@@ -144,69 +135,69 @@ export default function PropertyDetails() {
         </p>
 
         {property.verified && (
-          <span className={styles.verified}> <Verified/> Verified Landlord</span>
+          <span className={styles.verified}>
+            <Verified /> Verified Landlord
+          </span>
         )}
 
-        <span className={styles.trustScore}> <Trust/> Trust Score 92/100</span>
+        <span className={styles.trustScore}>
+          <Trust /> Trust Score 92/100
+        </span>
 
         <div className={styles.propertyInfo}>
           <div className={styles.infoItem}>
-            <span className={styles.icon}><Bed/></span>
+            <span className={styles.icon}><Bed /></span>
             <span className={styles.text}>{property.beds} Bed</span>
           </div>
 
           <div className={styles.infoItem}>
-            <span className={styles.icon}><Bath/></span>
+            <span className={styles.icon}><Bath /></span>
             <span className={styles.text}>{property.baths} Bath</span>
           </div>
 
           <div className={styles.infoItem}>
-            <span className={styles.icon}> <Cm/> </span>
+            <span className={styles.icon}><Cm /></span>
             <span className={styles.text}>{property.size} m²</span>
           </div>
         </div>
 
-        <div className={styles.breaktext} > <h4>Total Cost Breakdown</h4> 
-        <p>Why these fees? <FiInfo style={{ color: "#5484FD", fontSize: "14px" }} /></p>  
+        <div className={styles.breaktext}>
+          <h4>Total Cost Breakdown</h4>
+          <p>
+            Why these fees? <FiInfo style={{ color: "#5484FD", fontSize: "14px" }} />
+          </p>
         </div>
- 
- 
 
         <div className={styles.breakdown}>
-         
-
           <p className={styles.row}>
             <span>Annual Rent</span>
-            <span>₦{property.price.toLocaleString()}</span> 
+            <span>₦{property.price.toLocaleString()}</span>
           </p>
-
           <p className={styles.row}>
             <span>Agency Fee (10%)</span>
             <span>₦{property.agencyFee.toLocaleString()}</span>
           </p>
-
           <p className={styles.row}>
             <span>Legal Fee (10%)</span>
             <span>₦{property.legalFee.toLocaleString()}</span>
           </p>
-
           <p className={styles.row}>
             <span>Caution Deposit</span>
             <span>₦{property.caution.toLocaleString()}</span>
           </p>
-           <div className={styles.totalRowspace} ></div>
+
+          <div className={styles.totalRowspace}></div>
           <h3 className={styles.totalRow}>
             <span>Total Move-in Cost</span>
-            <span>₦{total.toLocaleString()}</span> 
+            <span>₦{total.toLocaleString()}</span>
           </h3>
 
           <div className={styles.lockicon}>
-          
-          <p> <Padlock width={24} height={24} />Payment is held in escrow until you move in.  </p>
+            <p>
+              <Padlock width={24} height={24} /> Payment is held in escrow until you move in.
+            </p>
+          </div>
         </div>
-        </div>
-
-        
 
         <div className={styles.about}>
           <h4>About this home</h4>
@@ -225,27 +216,29 @@ export default function PropertyDetails() {
         </div>
       </div>
 
+      {/* ================= Bottom Actions ================= */}
       <div className={styles.bottomActions}>
         <button className={styles.messageBtn} onClick={goToChat}>
-          <Message/>
+          <Message />
         </button>
 
-        <button className={styles.payBtn} onClick={handlePayment}>
-          {paymentProcessing ? (
-            "Processing..."
-          ) : (
-            <>
-              <Check className={styles.icon} />
-              Secure Payment
-            </>
-          )}
-        </button>
+        {/* ✅ Secure Payment button for tenants only */}
+        {JSON.parse(localStorage.getItem("user"))?.role === "tenant" && (
+          <button className={styles.payBtn} onClick={handlePayment}>
+            {paymentProcessing ? (
+              "Processing..."
+            ) : (
+              <>
+                <Check className={styles.icon} />
+                Secure Payment
+              </>
+            )}
+          </button>
+        )}
       </div>
     </div>
   );
 }
-
-
 
 
 // import { useState } from "react";

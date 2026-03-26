@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navhome from '../../assets/Icon/navhome.png';
 import Logo from "../../assets/Icon/logo.svg?react";
-
+import Chatbot from "../../components/Chatbot/Chatbot";
 import Greendot from '../../assets/Icon/greendot.svg?react';
 import Bluedot from '../../assets/Icon/bluedot.svg?react';
 import Searchicon from '../../assets/Icon/searchicon.svg?react';
@@ -90,7 +90,7 @@ export default function Landingpage() {
         </button>
 
         <button className={styles.secondary} onClick={() => navigate("/search")}>
-          <Houseicon /> List a Property
+          <Houseicon /> List of Properties
         </button>
       </div>
 
@@ -113,6 +113,8 @@ export default function Landingpage() {
           <div><h4>Secure Deposits</h4><p>Your money is carefully held in escrow until you successfully move in.</p></div>
         </div>
       </div>
+
+<Chatbot/>
 
       <div className={styles.popularHeader}>
         <h3>Popular Areas</h3>

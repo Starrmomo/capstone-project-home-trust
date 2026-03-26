@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
+import Chatbot from "./components/Chatbot/Chatbot";
 import Landingpage from "./pages/landingpage/Landingpage";
 import Login from "./pages/login/Login";
 import Signup from "./pages/signup/Signup";
@@ -38,6 +39,7 @@ function App() {
   return (
     <>
       <Navbar />
+      
       <Routes>
         {/* Default route "/" now redirects to SecureRental */}
         <Route path="/" element={<Navigate to="/secureRental" replace />} />
@@ -71,6 +73,7 @@ function App() {
         <Route path="/kycverifycation" element={<Kycverifycation />} />
         <Route path="/paymentdetail" element={< Paymentdetail/>} />
 <Route path="/banktransfer" element={< Banktransferdetail/>} />
+<Route path="/chatbot" element={< Chatbot/>} />
 
 
 

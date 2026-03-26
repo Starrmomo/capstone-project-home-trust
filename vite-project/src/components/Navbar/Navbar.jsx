@@ -39,7 +39,7 @@ export default function Navbar() {
                     <li><Link to="/kycverifycation">Kycverifycation</Link></li>
                     <li><Link to="/paymentdetail">Paymentdetail</Link></li>
                     <li><Link to="/banktransfer">Banktransferdetail</Link></li>
-                    
+                     <li><Link to="/chatbot">chatbot</Link></li>
 
 
 

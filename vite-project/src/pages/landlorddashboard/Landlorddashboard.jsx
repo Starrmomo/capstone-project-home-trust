@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Landlorddashboard.module.css";
-
+import Chatbot from "../../components/Chatbot/Chatbot";
 import Bell from '../../assets/Icon/bell.svg?react';
 import Landlordhouse from '../../assets/Icon/landlordhouse.svg?react';
 import Pendingapp from '../../assets/Icon/pendinngapp.svg?react';
@@ -18,10 +18,14 @@ import Newinquiry from '../../assets/Icon/NewInquiry.svg?react';
 import Paymenticon from '../../assets/Icon/PaymentReceived.svg?react';
 import Alerticon from '../../assets/Icon/VerificationSuccess.svg?react';
 
-
-
 export default function Dashboard() {
     const navigate = useNavigate();
+
+    // ✅ Logout function (ADDED)
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate("/signup");
+    };
 
     // ✅ Dummy landlord
     const [landlord] = useState({
@@ -65,9 +69,14 @@ export default function Dashboard() {
                         <h3>{landlord.name}</h3>
                     </div>
                 </div>
+
                 <div className={styles.headerIcons}>
                     <span><Bell /></span>
 
+                    {/* ✅ Logout button (ADDED BESIDE BELL) */}
+                    <button className={styles.signup} onClick={handleLogout}>
+                        Log out
+                    </button>
                 </div>
             </header>
 
@@ -139,7 +148,7 @@ export default function Dashboard() {
                     ))}
                 </div>
 
-
+                <Chatbot/>
             </section>
 
             {/* Bottom Nav */}
@@ -164,26 +173,3 @@ export default function Dashboard() {
         </div>
     );
 }
-
-{/* Bottom Nav */ }
-<nav className={styles.bottomNav}>
-    <div className={styles.bottomdiv} onClick={() => navigate("/landlorddashboard")}>
-        <Home />
-        <button className={styles.activeNav}>Dashboard</button>        </div>
-
-    <div className={styles.bottomdiv} onClick={() => navigate("/properties")}>
-        <Properties />
-        <button>Properties</button>
-    </div>
-
-    <div className={styles.bottomdiv} onClick={() => navigate("/chat")}>
-        <Chat />
-        <button>Chat</button>
-    </div>
-
-    <div className={styles.bottomdiv} onClick={() => navigate("/profile")}>
-        <Profile />
-        <button>Profile</button>
-    </div>
-</nav>
-   // </div >

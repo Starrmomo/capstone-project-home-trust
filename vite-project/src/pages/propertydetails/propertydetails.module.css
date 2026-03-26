@@ -44,7 +44,7 @@
 .backBtn {
   background: rgba(255, 255, 255, 0.7);
   border: none;
-  padding: 8px;
+  padding: 0px;
   border-radius: 50%;
   cursor: pointer;
 }

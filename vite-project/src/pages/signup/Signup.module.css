@@ -3,14 +3,14 @@
   box-sizing: border-box; /* <-- prevents input from overflowing the card */
 }
 
-.wrapper {
-  background: rgb(156, 149, 149);
+/* .wrapper {
+  background: #ffffff;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-}
+} */
 
 .card {
   background: #ffffff;

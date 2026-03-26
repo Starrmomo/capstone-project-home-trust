@@ -9,7 +9,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   min-height: 100vh;   /* 🔥 ADD THIS */
   margin: 0 auto;
   background: white;
@@ -291,3 +291,10 @@ font-size: small;
 }
 
 /* ================= Center Only (Like The Others) ================= */
+
+@media (min-width: 500px) {
+    .page {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}

@@ -281,3 +281,24 @@ body{
   margin-top: 40px;
   margin-bottom: 20px;
 }
+
+
+
+
+
+
+.uploadFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* keeps it inside without stretching */
+  border-radius: 12px; /* optional, matches your UI */
+}
+
+
+.uploadFrame {
+  width: 100%;
+  height: 180px; /* or whatever height your design uses */
+  overflow: hidden; /* prevents image from spilling out */
+  position: relative;
+  border-radius: 12px;
+}
