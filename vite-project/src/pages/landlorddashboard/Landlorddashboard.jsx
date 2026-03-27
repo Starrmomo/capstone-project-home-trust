@@ -111,7 +111,7 @@ export default function Dashboard() {
                         Post New Listing
                     </button>
 
-                    <button className={`${styles.actionBtn} ${styles.primary}`} onClick={() => navigate("/propertydetails")}>
+                    <button className={`${styles.actionBtn} ${styles.primary}`} onClick={() => navigate("/reviewmoveout")}>
                         <Postsearch />
                         Inspect Property
                     </button>
